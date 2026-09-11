@@ -3558,7 +3558,8 @@
       border-radius: 10px;
       padding: 10px 12px;
       text-align: center;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
     .home-whoop-metric-tile:hover {
       transform: translateY(-2px);
@@ -3576,6 +3577,17 @@
       font-weight: 900;
       margin-top: 3px;
       color: var(--text-heading);
+      display: inline-block;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+      will-change: transform;
+    }
+    .home-whoop-m-value.number-animating {
+      animation: numberPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes numberPopIn {
+      0% { transform: scale(0.7); opacity: 0.4; filter: blur(2px); }
+      60% { transform: scale(1.15); opacity: 1; filter: blur(0); }
+      100% { transform: scale(1); opacity: 1; filter: blur(0); }
     }
     .home-whoop-m-sub {
       font-size: 10px;
@@ -3610,6 +3622,8 @@
       line-height: 1.65;
       color: var(--text);
     }
+
+
 
   </style>
 </head>
@@ -3915,7 +3929,7 @@
         </div>
         <div>
           <div class="home-whoop-name-row">
-            <span class="home-whoop-name" id="homeWhoopUserName">Major Vikramaditya Rathore</span>
+            <span class="home-whoop-name" id="homeWhoopUserName">Prafull</span>
             <span class="tag cyan" id="homeWhoopCompanyTag">Alpha Assault</span>
             <span class="combat-badge ready" id="homeWhoopReadinessTag">🟢 Combat Tier 1</span>
           </div>
@@ -3926,9 +3940,9 @@
             <span>·</span>
             <span class="home-whoop-device-badge">
               <svg class="icon" style="width:12px;height:12px;color:var(--cyan);"><use href="#bluetooth"/></svg>
-              <span id="homeWhoopBleName">WHOOP 5B00348148</span>
+              <span>Bluetooth Device: <b id="homeWhoopBleName" style="color:var(--cyan);font-family:monospace;">WHOOP 5B00348148</b></span>
               <span class="ble-dot" id="homeWhoopBleDot" style="background:var(--primary);width:7px;height:7px;"></span>
-              <span id="homeWhoopBleStatusText" style="color:var(--primary);font-weight:800;">Online</span>
+              <span id="homeWhoopBleStatusText" style="color:var(--primary);font-weight:800;">Connected</span>
             </span>
           </div>
         </div>
@@ -3943,8 +3957,8 @@
       </div>
     </div>
 
-    <!-- Live Telemetry Vitals Grid -->
-    <div class="home-whoop-metrics-grid">
+    <!-- Live Telemetry Vitals Grid (Click to re-animate numbers) -->
+    <div class="home-whoop-metrics-grid" onclick="animateHomeWhoopCounters()" title="Click to re-animate live telemetry numbers">
       <div class="home-whoop-metric-tile">
         <div class="home-whoop-m-label" data-i18n="whoop_m_pulse">PULSE (LIVE)</div>
         <div class="home-whoop-m-value" style="color:var(--rose);"><span id="homeWhoopBpm">74</span> <small style="font-size:11px;color:var(--muted)">BPM</small></div>
@@ -3977,6 +3991,8 @@
       </div>
     </div>
 
+
+
     <!-- AI Clinical & Operational Readiness Analysis -->
     <div class="home-whoop-ai-card">
       <div class="home-whoop-ai-head">
@@ -3987,7 +4003,7 @@
         <span class="tag green" style="font-size:10px;padding:2px 8px;" id="homeWhoopAiClearanceTag">✓ Warfront Cleared</span>
       </div>
       <div class="home-whoop-ai-text" id="homeWhoopAiAnalysis">
-        <b>Physiological Assessment:</b> Parasympathetic equilibrium fully restored following 7.8h regenerative sleep. Resting HRV is tracking +4 ms above 30-day baseline with zero acute hypoxia markers (SpO2 98%). Autonomic nervous system demonstrates exceptional cardiovascular reserve with minimal cumulative sleep debt (0.4h). Cleared for Tier 1 combat sortie, high-tempo tactical maneuvers, and prolonged operational command.
+        <b>Physiological Assessment (WHOOP 5B00348148):</b> Parasympathetic equilibrium fully restored following 7.8h regenerative sleep. Resting HRV is tracking +4 ms above 30-day baseline with zero acute hypoxia markers (SpO2 98%). Autonomic nervous system demonstrates exceptional cardiovascular reserve with minimal cumulative sleep debt (0.4h). Cleared for Tier 1 combat sortie, high-tempo tactical maneuvers, and prolonged operational command.
       </div>
     </div>
   </section>
@@ -4255,18 +4271,6 @@
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
         <button class="btn green" onclick="downloadBattalionGoogleSheetCSV()" style="font-size:11px;padding:6px 11px;" title="Download complete Battalion data as Google Sheet CSV">
           <svg class="icon" style="width:13px;height:13px;"><use href="#download"/></svg> 📥 Download Sheet
-        </button>
-        <button class="btn cyan" onclick="runAiBattalionCombatAnalysis()" style="font-size:11px;padding:6px 11px;" title="AI Combat Clearance Analysis">
-          <svg class="icon" style="width:13px;height:13px;"><use href="#spark"/></svg> ✦ AI War Triage
-        </button>
-        <button class="btn danger" onclick="openEmergencyDeployModal()" title="1-Click Emergency Combat Sortie Generator">
-          <svg class="icon" style="width:13px;height:13px;"><use href="#zap"/></svg> ⚡ Emergency Sortie
-        </button>
-        <button class="btn" onclick="openWhoopGatewayModal()" title="Inspect Multi-Device WHOOP Gateway Network">
-          <svg class="icon" style="width:13px;height:13px;"><use href="#cpu"/></svg> Gateway Hub (40)
-        </button>
-        <button class="btn primary" onclick="openAddSoldierModal()" title="Enroll Soldier &amp; Pair WHOOP Band">
-          <svg class="icon" style="width:13px;height:13px;"><use href="#users"/></svg> + Add
         </button>
       </div>
     </header>
@@ -5760,7 +5764,7 @@ function unlockApp(role) {
     if ($('homeWhoopUserId')) $('homeWhoopUserId').textContent = 'KV-106';
     if ($('homeWhoopUserRole')) $('homeWhoopUserRole').textContent = 'Scout / Pointman';
   } else {
-    if ($('homeWhoopUserName')) $('homeWhoopUserName').textContent = 'Major Vikramaditya Rathore';
+    if ($('homeWhoopUserName')) $('homeWhoopUserName').textContent = 'Prafull';
     if ($('homeWhoopCompanyTag')) $('homeWhoopCompanyTag').textContent = 'Alpha Assault';
     if ($('homeWhoopUserId')) $('homeWhoopUserId').textContent = 'KV-101';
     if ($('homeWhoopUserRole')) $('homeWhoopUserRole').textContent = 'Company Commander';
@@ -5773,7 +5777,7 @@ function unlockApp(role) {
   if (typeof playChime === 'function') {
     playChime(587, 0.25);
   }
-  notify(`Welcome, ${role === 'jawan' ? 'Jawan (Sepoy Pradeep)' : 'Officer (Major Vikramaditya)'}. Verified via Defense Biometric Gateway.`);
+  notify(`Welcome, ${role === 'jawan' ? 'Jawan (Sepoy Pradeep)' : 'Officer (Major Prafull)'}. Verified via Defense Biometric Gateway.`);
 }
 
 function switchAuthTab(tab) {
@@ -6346,6 +6350,7 @@ function renderKineticEkg() {
   // Update Real-Time Numeric Heart Rate Labels
   if ($('wireframeBpmVal')) $('wireframeBpmVal').textContent = currentBpm;
   if ($('ekgLiveVal')) $('ekgLiveVal').textContent = currentBpm;
+  if ($('homeWhoopBpm')) $('homeWhoopBpm').textContent = currentBpm;
 
   ekgAnimId = requestAnimationFrame(renderKineticEkg);
 }
@@ -6467,26 +6472,57 @@ function createCelebrationParticles(x, y, count = 28) {
   }
 }
 
-// Rolling Odometer Number Counter
+// Rolling Odometer Number Counter with dynamic animation
 function animateCountUp(elementId, targetVal, decimals = 0, suffix = '', duration = 950) {
   const el = $(elementId);
   if (!el) return;
+  const numVal = parseFloat(targetVal) || 0;
   const start = performance.now();
-  el.classList.add('counting');
+  el.classList.add('counting', 'number-animating');
 
   function tick(now) {
     const progress = Math.min((now - start) / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3);
-    const current = (ease * targetVal).toFixed(decimals);
+    const current = (ease * numVal).toFixed(decimals);
     el.innerHTML = `${current}${suffix}`;
 
     if (progress < 1) {
       requestAnimationFrame(tick);
     } else {
+      el.innerHTML = `${numVal.toFixed(decimals)}${suffix}`;
       el.classList.remove('counting');
+      setTimeout(() => el.classList.remove('number-animating'), 300);
     }
   }
   requestAnimationFrame(tick);
+}
+
+// Animate Home WHOOP 6-Metric Vitals Cards (Pulse, Recovery, HRV, SpO2, Sleep, Day Strain)
+function animateHomeWhoopCounters() {
+  const bpm = typeof liveBpmValue !== 'undefined' ? liveBpmValue : 74;
+  const recovery = typeof realRecoveryVal !== 'undefined' ? realRecoveryVal : 49;
+  const hrv = typeof liveHrvValue !== 'undefined' ? liveHrvValue : 65;
+  const sleepHours = typeof realSleepVal !== 'undefined' ? ((realSleepVal / 100) * 8.5) : 6.7;
+  const strain = typeof realStrainVal !== 'undefined' ? realStrainVal : 4.2;
+
+  animateCountUp('homeWhoopBpm', bpm, 0, '', 900);
+  animateCountUp('homeWhoopRecovery', recovery, 0, '', 950);
+  animateCountUp('homeWhoopHrv', hrv, 0, '', 950);
+  animateCountUp('homeWhoopSpo2', 98, 0, '', 900);
+  animateCountUp('homeWhoopSleep', sleepHours, 1, '', 950);
+  animateCountUp('homeWhoopStrain', strain, 1, '', 950);
+
+  // Trigger pulse effect on the parent tiles
+  document.querySelectorAll('.home-whoop-metric-tile').forEach((tile, i) => {
+    setTimeout(() => {
+      tile.style.transform = 'translateY(-3px) scale(1.02)';
+      tile.style.borderColor = 'var(--cyan)';
+      setTimeout(() => {
+        tile.style.transform = '';
+        tile.style.borderColor = '';
+      }, 500);
+    }, i * 70);
+  });
 }
 
 // SVG Trajectory Graph Line Drawing
@@ -6526,6 +6562,7 @@ function triggerViewEnterAnimations(view) {
     animateCountUp('kpiConnectedVal', 90.0, 1, '<small>%</small>');
     animateCountUp('donutValue', 74.9, 1, '');
     animateTrajectoryLines();
+    animateHomeWhoopCounters();
   } else {
     animateMetricCounters();
   }
@@ -6558,6 +6595,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Initial metric numbers
   animateMetricCounters();
+  animateHomeWhoopCounters();
 
   // Initialize Battalion Multi-Soldier Combat Table & KPIs
   if (typeof renderBattalionTable === 'function') renderBattalionTable();
@@ -6846,7 +6884,7 @@ async function syncLiveGoogleSheet() {
 
 const defaultBattalionRoster = [
   // Alpha Assault Co (8)
-  { id: 'KV-101', name: 'Major Vikramaditya Rathore', rank: 'Major', company: 'Alpha Assault', role: 'Company Commander', whoopId: 'WP-4-ALP-01', sync: 'synced', battery: 94, sleep: 7.8, sleepDebt: 0.4, spo2: 98, hrv: 74, recovery: 88, strain: 11.2, dutyDays: 14 },
+  { id: 'KV-101', name: 'Major Prafull', rank: 'Major', company: 'Alpha Assault', role: 'Company Commander', whoopId: 'WP-4-ALP-01', sync: 'synced', battery: 94, sleep: 7.8, sleepDebt: 0.4, spo2: 98, hrv: 74, recovery: 88, strain: 11.2, dutyDays: 14 },
   { id: 'KV-102', name: 'Captain Rohit Nair', rank: 'Captain', company: 'Alpha Assault', role: 'Assault Lead', whoopId: 'WP-4-ALP-02', sync: 'synced', battery: 88, sleep: 6.8, sleepDebt: 1.2, spo2: 97, hrv: 62, recovery: 76, strain: 13.5, dutyDays: 18 },
   { id: 'KV-103', name: 'Subedar Rajesh Sharma', rank: 'Subedar', company: 'Alpha Assault', role: 'Platoon 2IC', whoopId: 'WP-4-ALP-03', sync: 'synced', battery: 91, sleep: 7.6, sleepDebt: 0.5, spo2: 98, hrv: 71, recovery: 85, strain: 10.8, dutyDays: 12 },
   { id: 'KV-104', name: 'Havildar Devendra Negi', rank: 'Havildar', company: 'Alpha Assault', role: 'Section Commander', whoopId: 'WP-4-ALP-04', sync: 'synced', battery: 78, sleep: 7.2, sleepDebt: 0.8, spo2: 97, hrv: 66, recovery: 81, strain: 12.4, dutyDays: 16 },
@@ -8279,10 +8317,15 @@ function setBleStatus(status, label) {
       statusBadge.className = 'tag green';
     }
     if (homeBleName) homeBleName.textContent = activeName;
+    if ($('homeTrackerBleDevName')) $('homeTrackerBleDevName').textContent = activeName;
     if (homeBleDot) homeBleDot.style.background = 'var(--primary)';
     if (homeBleStatusText) {
       homeBleStatusText.textContent = 'Online / Synced';
       homeBleStatusText.style.color = 'var(--primary)';
+    }
+    if ($('homeTrackerRhythmBadge')) {
+      $('homeTrackerRhythmBadge').textContent = 'BLE SYNCED';
+      $('homeTrackerRhythmBadge').className = 'tag green';
     }
   } else if (status === 'failed') {
     if (badge) badge.className = 'ble-badge failed';
@@ -8292,10 +8335,15 @@ function setBleStatus(status, label) {
       statusBadge.className = 'tag rose';
     }
     if (homeBleName) homeBleName.textContent = activeName;
+    if ($('homeTrackerBleDevName')) $('homeTrackerBleDevName').textContent = activeName;
     if (homeBleDot) homeBleDot.style.background = 'var(--rose)';
     if (homeBleStatusText) {
       homeBleStatusText.textContent = label || 'Offline';
       homeBleStatusText.style.color = 'var(--rose)';
+    }
+    if ($('homeTrackerRhythmBadge')) {
+      $('homeTrackerRhythmBadge').textContent = 'DISCONNECTED';
+      $('homeTrackerRhythmBadge').className = 'tag rose';
     }
   } else {
     if (badge) badge.className = 'ble-badge';
@@ -8305,10 +8353,15 @@ function setBleStatus(status, label) {
       statusBadge.className = 'tag rose';
     }
     if (homeBleName) homeBleName.textContent = TARGET_WHOOP_NAME;
+    if ($('homeTrackerBleDevName')) $('homeTrackerBleDevName').textContent = TARGET_WHOOP_NAME;
     if (homeBleDot) homeBleDot.style.background = 'var(--primary)';
     if (homeBleStatusText) {
       homeBleStatusText.textContent = 'Online (Simulated)';
       homeBleStatusText.style.color = 'var(--primary)';
+    }
+    if ($('homeTrackerRhythmBadge')) {
+      $('homeTrackerRhythmBadge').textContent = 'SINUS OK';
+      $('homeTrackerRhythmBadge').className = 'tag green';
     }
   }
 
@@ -8632,7 +8685,7 @@ Provide:
           </div>
           <div style="background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;">
             <div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:800;">Sortie Commander</div>
-            <div style="font-size:13px;font-weight:900;color:var(--amber);margin-top:4px;" id="manifestLeadOfficer">Major Vikramaditya</div>
+            <div style="font-size:13px;font-weight:900;color:var(--amber);margin-top:4px;" id="manifestLeadOfficer">Major Prafull</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;">
             <div style="font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:800;">Physiological Safety</div>
@@ -8875,7 +8928,7 @@ Provide:
           <span class="whoop-device-pill" id="dossierWhoopPill">WP-4-ALP-01</span>
         </div>
         <h2 style="margin-top:6px;font-size:17px;" id="dossierSoldierTitle">
-          Soldier AI Combat Dossier — Major Vikramaditya
+          Soldier AI Combat Dossier — Major Prafull
         </h2>
         <p style="margin:0;" id="dossierSoldierSubtitle">Service ID: KV-101 · Role: Company Commander</p>
       </div>

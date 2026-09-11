@@ -203,9 +203,66 @@
       animation: gentlePulse 3.5s ease-in-out infinite;
       flex-shrink: 0;
     }
-    .brand b { font-size: 20px; letter-spacing: 0.8px; color: var(--text-heading); white-space: nowrap; }
-    .brand b span { color: var(--primary); }
-    .brand small {
+    .brand b, .brand-text b {
+      font-size: 20px;
+      letter-spacing: 0.8px;
+      color: var(--text-heading);
+      white-space: nowrap;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+    }
+    
+    /* ✦ Animated Multi-Color Gradient for KAVACH-AURA */
+    .brand-kavach-text {
+      background: linear-gradient(135deg, #078c66 0%, #06b6d4 35%, #10b981 70%, #38bdf8 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: kavachColorShift 6s ease infinite;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .brand-aura-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 25%, #ec4899 50%, #f59e0b 75%, #10b981 100%);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: auraColorRainbow 4.5s ease infinite;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      position: relative;
+      display: inline-block;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45));
+    }
+    .brand-aura-text::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #ec4899, #f59e0b, #10b981);
+      background-size: 300% 100%;
+      animation: auraColorRainbow 4.5s ease infinite;
+      opacity: 0.85;
+    }
+    
+    @keyframes kavachColorShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes auraColorRainbow {
+      0% { background-position: 0% 50%; filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5)); }
+      33% { background-position: 50% 100%; filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.55)); }
+      66% { background-position: 100% 50%; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5)); }
+      100% { background-position: 0% 50%; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5)); }
+    }
+
+    .brand small, .brand-text small {
       display: block;
       margin-top: 2px;
       color: var(--muted);
@@ -3585,7 +3642,7 @@
   <div class="auth-topbar">
     <div class="auth-brand-badge">
       <svg class="icon" style="color:var(--primary)"><use href="#shield"/></svg>
-      <span>KAVACH-AURA · SECURE GATEWAY</span>
+      <span><span class="brand-kavach-text">KAVACH</span>-<span class="brand-aura-text">AURA</span> · SECURE GATEWAY</span>
     </div>
     <!-- Light and Dark Mode toggle directly on Lock Screen -->
     <button id="lockThemeBtn" class="btn lock-theme-btn" onclick="toggleTheme()" title="Switch Light / Dark Theme">
@@ -3731,7 +3788,7 @@
     <div class="brand-cluster">
       <div class="mark"><svg class="icon"><use href="#shield"/></svg></div>
       <div class="brand-text">
-        <b>KAVACH-<span>AURA</span></b>
+        <b><span class="brand-kavach-text">KAVACH</span>-<span class="brand-aura-text">AURA</span></b>
         <small>TENSOR · Welfare Intelligence</small>
       </div>
       <!-- Dedicated Home Button -->

@@ -1171,22 +1171,65 @@
       border-color: var(--primary);
       box-shadow: 0 8px 30px color-mix(in srgb, var(--primary) 25%, transparent);
     }
+    /* =========================================================================
+       SPEC 4: CLINICAL CRT PHOSPHOR CARDIAC MONITOR & BEAM NODE ANIMATION (USER IMAGE SPEC)
+       - High-fidelity dark CRT phosphor tube monitor background with scanline mesh
+       - Vivid glowing multi-color EKG wave trace with P-Q-R-S-T cardiac complex
+       - Real-time leading electrical pulse node with laser trail
+       - Multi-color theme synchronized with website palette (Emerald, Cyan, Rose, Amber)
+       ========================================================================= */
+    .kinetic-ekg-strip {
+      background: #09090f;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 18px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .kinetic-ekg-strip:hover {
+      border-color: var(--primary);
+      box-shadow: 0 10px 32px color-mix(in srgb, var(--primary) 28%, transparent);
+    }
     .bpm-hero-panel {
-      background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--primary) 8%, var(--card)) 0%, var(--card) 100%);
+      background: radial-gradient(ellipse at 50% 50%, #10101c 0%, #06060c 100%);
+    }
+    body[data-theme="light"] .kinetic-ekg-strip {
+      background: #0c121e; /* Keep high-contrast medical CRT dark aesthetic in light mode */
+      border-color: #1e293b;
     }
 
     .bpm-stage-container {
       position: relative;
       width: 100%;
-      min-height: 140px;
+      min-height: 155px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       overflow: hidden;
-      padding: 6px 0;
+      padding: 4px 0;
+      border-radius: 12px;
+      background: 
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px);
     }
 
-    /* Continuous Flowing EKG Laser Wave (Behind & Flanking Heart) */
+    /* CRT Phosphor Screen Scanline Overlay Effect */
+    .bpm-stage-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      z-index: 2;
+      opacity: 0.65;
+    }
+
+    /* Continuous Flowing EKG Laser Wave */
     .bpm-wave-svg {
       position: absolute;
       left: 0;
@@ -1194,11 +1237,32 @@
       transform: translateY(-50%);
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 3;
       pointer-events: none;
     }
 
-    /* Central Wireframe Heart Box */
+    /* Primary CRT EKG Glow Trace */
+    .crt-ekg-glow-line {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.45;
+      filter: blur(4px);
+      transition: stroke 0.3s ease;
+    }
+    .crt-ekg-core-line {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px var(--primary));
+      transition: filter 0.3s ease;
+    }
+
+    /* Central Medical Pulse Indicator / Digital Cardiopulmonary Readout Hub */
     .wireframe-heart-box {
       position: absolute;
       left: 50%;
@@ -1206,81 +1270,36 @@
       transform: translate(-50%, -50%);
       width: 140px;
       height: 140px;
-      z-index: 3;
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
-      pointer-events: auto;
+      pointer-events: none;
     }
 
-    /* Ambient Pulsing Aura Glow Behind Polyhedral Heart */
+    /* Ambient Pulsing Aura Glow Behind Pulse Line */
     .wireframe-heart-glow {
       position: absolute;
-      width: 110px;
-      height: 110px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--primary) 0%, color-mix(in srgb, var(--primary) 40%, transparent) 40%, transparent 70%);
-      opacity: 0.45;
+      background: radial-gradient(circle, var(--primary) 0%, color-mix(in srgb, var(--primary) 40%, transparent) 45%, transparent 70%);
+      opacity: 0.35;
       filter: blur(14px);
       z-index: 1;
       pointer-events: none;
       animation: heartAuraPulse 0.82s infinite ease-in-out;
     }
 
-    /* Geometric Polyhedral Mesh SVG */
-    .wireframe-heart-svg {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      z-index: 2;
-      overflow: visible;
-      animation: heartMeshSystole 0.82s infinite ease-in-out;
-      transform-origin: 50% 50%;
-    }
-
-    /* Facet Triangles Styling */
-    .facet-tri {
-      fill: color-mix(in srgb, var(--primary) 14%, transparent);
-      stroke: var(--primary);
-      stroke-width: 1.2;
-      stroke-linejoin: round;
-      transition: fill 0.3s ease, stroke 0.3s ease;
-    }
-    .facet-tri:hover {
-      fill: color-mix(in srgb, var(--primary) 40%, transparent);
-      stroke: #ffffff;
-    }
-
-    /* Sparkling Nodes on Wireframe Vertices */
-    .node-sparkle {
-      fill: #ffffff;
-      opacity: 0.85;
-      filter: drop-shadow(0 0 3px #ffffff);
-      animation: nodeBlink 1.6s infinite alternate;
-    }
-
-    @keyframes heartMeshSystole {
-      0%, 100% { transform: scale(1); }
-      14% { transform: scale(1.18); }
-      28% { transform: scale(0.98); }
-      42% { transform: scale(1.12); }
-      60% { transform: scale(1); }
-    }
-
     @keyframes heartAuraPulse {
-      0%, 100% { opacity: 0.35; transform: scale(0.92); }
-      14% { opacity: 0.85; transform: scale(1.35); }
-      28% { opacity: 0.40; transform: scale(0.96); }
-      42% { opacity: 0.70; transform: scale(1.22); }
-      60% { opacity: 0.35; transform: scale(0.92); }
+      0%, 100% { opacity: 0.25; transform: scale(0.92); }
+      14% { opacity: 0.75; transform: scale(1.30); }
+      28% { opacity: 0.30; transform: scale(0.96); }
+      42% { opacity: 0.60; transform: scale(1.18); }
+      60% { opacity: 0.25; transform: scale(0.92); }
     }
 
-    @keyframes nodeBlink {
-      0% { opacity: 0.3; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1.25); }
-    }
-
-    /* Digital Hologram Overlay over Heart Center */
+    /* Digital Hologram Overlay over Pulse Line Center */
     .wireframe-bpm-readout {
       position: absolute;
       top: 50%;
@@ -1442,219 +1461,165 @@
       padding: 10px;
     }
     /* =========================================================================
-       SPEC 2: TACTICAL SQUARE BOX BREATHING WITH ANATOMICAL LUNGS ANIMATION
+       SPEC 2: TACTICAL BOX BREATHING - TIME CURVE & PHASE WAVE VISUALIZATION (USER IMAGE SPEC)
+       - Continuous curved trapezoid wave showing 0, 4, 8, 12, 16, 20, 24, 28 timeline
+       - Inhale (rise 0-4), Hold (plateau 4-8), Exhale (fall 8-12), Hold (baseline 12-16)
+       - Real-time animated breathing indicator traveling along the wave path
+       - Filled gradient underneath active wave cycle
        ========================================================================= */
-    .tactical-breath-box {
-      position: relative;
-      width: 250px;
-      height: 250px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .tactical-breath-box:hover {
-      transform: scale(1.02);
-    }
-    .tactical-breath-box:active {
-      transform: scale(0.98);
-    }
-
-    /* 4 Perimeter Phase Labels: HOLD (Top), EXHALE (Right), HOLD (Bottom), INHALE (Left) */
-    .tbb-label {
-      position: absolute;
+    .box-wave-card {
+      background: var(--card2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 10;
-      transition: all 0.35s ease;
-      opacity: 0.65;
+      gap: 12px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .tbb-label .tbb-txt {
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--text-heading);
+    .box-wave-card:hover {
+      border-color: var(--primary);
     }
-    .tbb-label .tbb-sec {
-      font-size: 9px;
+    .box-wave-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .box-wave-title {
+      font-size: 16px;
       font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+    }
+    .box-wave-sub {
+      font-size: 12px;
       color: var(--muted);
-      margin-top: 1px;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+    .box-wave-divider {
+      height: 2px;
+      width: 100%;
+      background: color-mix(in srgb, var(--primary) 65%, transparent);
+      border-radius: 2px;
+      margin-top: 4px;
+      transition: background 0.3s ease;
     }
 
-    /* Top: HOLD */
-    .tbb-label.top {
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Wave SVG Canvas Wrapper */
+    .box-wave-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 110px;
+      margin: 6px 0 2px;
+      user-select: none;
     }
-    /* Right: EXHALE */
-    .tbb-label.right {
-      right: 2px;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: right;
-    }
-    /* Bottom: HOLD */
-    .tbb-label.bottom {
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    /* Left: INHALE */
-    .tbb-label.left {
-      left: 2px;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: left;
-    }
-
-    /* Active Highlight on Current Side */
-    .tbb-label.active {
-      opacity: 1;
-      transform-origin: center;
-    }
-    .tbb-label.left.active {
-      transform: translateY(-50%) scale(1.12);
-    }
-    .tbb-label.left.active .tbb-txt {
-      color: var(--primary) !important;
-      text-shadow: 0 0 12px color-mix(in srgb, var(--primary) 70%, transparent);
-    }
-    .tbb-label.top.active {
-      transform: translateX(-50%) scale(1.12);
-    }
-    .tbb-label.top.active .tbb-txt {
-      color: var(--cyan) !important;
-      text-shadow: 0 0 12px color-mix(in srgb, var(--cyan) 70%, transparent);
-    }
-    .tbb-label.right.active {
-      transform: translateY(-50%) scale(1.12);
-    }
-    .tbb-label.right.active .tbb-txt {
-      color: var(--amber) !important;
-      text-shadow: 0 0 12px color-mix(in srgb, var(--amber) 70%, transparent);
-    }
-    .tbb-label.bottom.active {
-      transform: translateX(-50%) scale(1.12);
-    }
-    .tbb-label.bottom.active .tbb-txt {
-      color: var(--rose) !important;
-      text-shadow: 0 0 12px color-mix(in srgb, var(--rose) 70%, transparent);
-    }
-
-    /* SVG Track & Geometry */
-    .tbb-track-svg {
+    .box-wave-svg {
       width: 100%;
       height: 100%;
       overflow: visible;
     }
-    .tbb-border-bg {
-      fill: color-mix(in srgb, var(--card2) 65%, transparent);
+    .box-wave-axis {
       stroke: var(--line);
-      stroke-width: 2.5;
-      transition: stroke 0.3s ease, fill 0.3s ease;
-    }
-    .tactical-breath-box:hover .tbb-border-bg {
-      stroke: color-mix(in srgb, var(--primary) 50%, var(--line));
-    }
-
-    /* Active Highlighted Border Perimeter */
-    .tbb-border-active {
-      fill: none;
-      stroke: var(--primary);
-      stroke-width: 3.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0.85;
-      stroke-dasharray: 768;
-      stroke-dashoffset: 768;
-      transition: stroke 0.4s ease;
-      filter: drop-shadow(0 0 6px var(--primary-dim));
-    }
-
-    /* Perimeter Glowing Orbiting Tracer Dot */
-    .tbb-tracer-dot {
-      fill: var(--primary);
-      stroke: #ffffff;
-      stroke-width: 2;
-      transition: fill 0.4s ease, filter 0.4s ease;
-    }
-
-    /* Anatomical Lungs Display in Center */
-    .tbb-lungs-container {
-      transform-origin: 120px 125px;
-      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .tbb-lungs-base {
-      color: var(--muted);
-    }
-    .lung-base-lobe {
-      fill: color-mix(in srgb, var(--bg2) 80%, #000000);
-      stroke: color-mix(in srgb, var(--line) 80%, transparent);
       stroke-width: 1.5;
+    }
+    .box-wave-grid-tick {
+      stroke: var(--line-subtle);
+      stroke-width: 1;
+      stroke-dasharray: 2, 3;
+    }
+    .box-wave-tick-text {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 800;
+      text-anchor: middle;
+      fill: var(--muted);
       transition: fill 0.3s ease;
     }
-    body[data-theme="light"] .lung-base-lobe {
-      fill: color-mix(in srgb, var(--card2) 90%, #64748b);
-      stroke: var(--line);
+    .box-wave-tick-text.active-cycle {
+      fill: var(--primary);
+      font-weight: 900;
     }
 
-    /* Liquid Air Fill Animation Inside Lungs */
-    .lung-fill-rect {
-      transition: y 0.35s ease, height 0.35s ease;
+    /* Primary Active Wave & Background Curves */
+    .box-wave-bg-path {
+      fill: none;
+      stroke: color-mix(in srgb, var(--muted) 35%, transparent);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .box-wave-bg-fill {
+      fill: color-mix(in srgb, var(--muted) 8%, transparent);
+    }
+    .box-wave-active-fill {
+      fill: url(#boxWaveGradient);
+      opacity: 0.65;
+      transition: opacity 0.3s ease;
+    }
+    .box-wave-active-stroke {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 2.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--primary) 50%, transparent));
+      transition: stroke 0.3s ease;
     }
 
-    /* Center Floating HUD Text */
-    .tbb-hud-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
+    /* Moving Tracer Dot on the Wave Curve */
+    .box-wave-tracer-dot {
+      fill: #ffffff;
+      stroke: var(--primary);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 6px var(--primary));
+      transition: stroke 0.3s ease, filter 0.3s ease;
+    }
+
+    /* Floating Phase Pill over the Wave */
+    .box-wave-phase-badge {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 12;
-      text-align: center;
-    }
-    .tbb-phase-title {
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: 1.8px;
-      color: var(--text-heading);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-      transition: color 0.3s ease;
-    }
-    .tbb-phase-counter {
-      font-family: monospace;
-      font-size: 26px;
-      font-weight: 900;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
       color: var(--primary);
-      margin-top: 1px;
-      line-height: 1;
-      text-shadow: 0 0 16px color-mix(in srgb, var(--primary) 60%, transparent);
-      transition: color 0.3s ease;
-    }
-    .tbb-phase-sub {
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 800;
-      color: var(--muted);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin-top: 4px;
-      white-space: nowrap;
+      letter-spacing: 0.4px;
+      transition: all 0.3s ease;
     }
 
-    /* Backward compatibility fallback for .orb if referenced */
+    /* Tutorial & Quick Play Action */
+    .box-wave-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+    }
+    .box-wave-tutorial-link {
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .box-wave-tutorial-link:hover {
+      text-decoration: underline;
+      transform: translateY(-1px);
+    }
+
+    /* Backward compatibility fallback */
+    .tactical-breath-box { display: none; }
     .orb { display: none; }
     .breathside {
       display: flex;
@@ -3193,14 +3158,66 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 8px;
+    }
+    /* Language Dropdown Selector Styles */
+    .lang-dropdown-wrapper {
+      position: relative;
+    }
+    .lang-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      background: var(--card2);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .lang-toggle-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .lang-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 175px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 6px;
       box-shadow: 0 16px 45px rgba(0,0,0,0.35);
       z-index: 100;
       backdrop-filter: blur(16px);
       animation: slideDown 0.2s ease;
     }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
+    .lang-menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .lang-menu-item:hover {
+      background: var(--card2);
+      color: var(--primary);
+    }
+    .lang-menu-item.active {
+      background: var(--primary-dim);
+      color: var(--primary);
+      font-weight: 900;
     }
     .tools-menu-header {
       font-size: 10px;
@@ -3528,7 +3545,7 @@
       </div>
       <!-- Dedicated Home Button -->
       <button class="btn home-btn" onclick="goHome()" title="Go to Dashboard Overview (Top of Page)">
-        <svg class="icon"><use href="#home"/></svg><span>Home</span>
+        <svg class="icon"><use href="#home"/></svg><span data-i18n="nav_home">Home</span>
       </button>
     </div>
 
@@ -3536,12 +3553,12 @@
     <div class="header-role-center">
       <div class="view-switch-box">
         <button id="commanderNav" class="nav active" onclick="showView('commander')" title="Switch to Commander Force Intelligence view">
-          <span>◈ Commander</span>
-          <span class="role-badge">Force Data</span>
+          <span data-i18n="nav_commander">◈ Commander</span>
+          <span class="role-badge" data-i18n="role_force_data">Force Data</span>
         </button>
         <button id="jawanNav" class="nav" onclick="showView('jawan')" title="Switch to Private Jawan Self-Care view">
-          <span>◉ Jawan</span>
-          <span class="role-badge">Self-Care &amp; WHOOP</span>
+          <span data-i18n="nav_jawan">◉ Jawan</span>
+          <span class="role-badge" data-i18n="role_self_care">Self-Care &amp; WHOOP</span>
         </button>
       </div>
     </div>
@@ -3551,33 +3568,59 @@
       <!-- Tactical Tools Dropdown -->
       <div class="tools-dropdown-wrapper">
         <button class="btn tools-toggle-btn" onclick="toggleToolsMenu()" id="toolsBtn" title="Tactical Tools &amp; Modals">
-          <svg class="icon" style="color:var(--cyan)"><use href="#zap"/></svg><span>Tools ▾</span>
+          <svg class="icon" style="color:var(--cyan)"><use href="#zap"/></svg><span data-i18n="nav_tools">Tools ▾</span>
         </button>
         <div id="toolsMenuDropdown" class="tools-dropdown-menu hidden">
-          <div class="tools-menu-header">Tactical Utilities</div>
+          <div class="tools-menu-header" data-i18n="tools_header">Tactical Utilities</div>
           <button class="tools-menu-item" onclick="open365Calendar(); closeToolsMenu();">
             <svg class="icon"><use href="#calendar"/></svg>
-            <div><b>365-Day Calendar</b><small>Annual fatigue &amp; roster heatmap</small></div>
+            <div><b data-i18n="cal_365_title">365-Day Calendar</b><small data-i18n="cal_365_sub">Annual fatigue &amp; roster heatmap</small></div>
           </button>
           <button class="tools-menu-item" onclick="openBleModal(); closeToolsMenu();">
             <svg class="icon" style="color:var(--cyan)"><use href="#bluetooth"/></svg>
-            <div><b>WHOOP 4.0 BLE GATT</b><small>Live Bluetooth sensor telemetry</small></div>
+            <div><b data-i18n="whoop_ble_title">WHOOP 4.0 BLE GATT</b><small data-i18n="whoop_ble_sub">Live Bluetooth sensor telemetry</small></div>
           </button>
           <button class="tools-menu-item" onclick="toggleGeminiDrawer(); closeToolsMenu();">
             <svg class="icon" style="color:#38bdf8"><use href="#spark"/></svg>
-            <div><b>Google Gemini AI</b><small>Welfare AI reasoning assistant</small></div>
+            <div><b data-i18n="gemini_ai_title">Google Gemini AI</b><small data-i18n="gemini_ai_sub">Welfare AI reasoning assistant</small></div>
           </button>
           <a class="tools-menu-item" href="https://docs.google.com/spreadsheets/d/1smmWEZE4mCpOpP9ntrwO2usq70PGo9uJuNC0neOaQfU/edit?usp=sharing" target="_blank" rel="noopener noreferrer" onclick="closeToolsMenu();">
             <svg class="icon" style="color:var(--primary)"><use href="#chart"/></svg>
-            <div><b>Google Sheet Live</b><small>Source roster spreadsheet ↗</small></div>
+            <div><b data-i18n="sheet_live_title">Google Sheet Live</b><small data-i18n="sheet_live_sub">Source roster spreadsheet ↗</small></div>
           </a>
         </div>
       </div>
 
       <!-- Emergency Helpline 14416 button -->
       <button class="btn danger" onclick="openCallModal()" title="Direct emergency &amp; confidential call desk">
-        <svg class="icon"><use href="#phone"/></svg><span>14416</span>
+        <svg class="icon"><use href="#phone"/></svg><span data-i18n="nav_helpline">14416</span>
       </button>
+
+      <!-- Multi-Language Selector Dropdown (English, Hindi, Telugu, Kannada) -->
+      <div class="lang-dropdown-wrapper">
+        <button class="btn lang-toggle-btn" onclick="toggleLangMenu()" id="langBtn" title="Change Language / भाषा बदलें / భాష మార్చండి / ಭಾಷೆ ಬದಲಾಯಿಸಿ">
+          <span style="font-size:13px;">🌐</span> <span id="currentLangLabel">English</span> ▾
+        </button>
+        <div id="langMenuDropdown" class="lang-dropdown-menu hidden">
+          <div class="tools-menu-header" style="padding:4px 8px;" data-i18n="lang_select_title">Select Language</div>
+          <button class="lang-menu-item active" id="langOpt_en" onclick="setLanguage('en')">
+            <span>English</span>
+            <small style="color:var(--muted)">EN</small>
+          </button>
+          <button class="lang-menu-item" id="langOpt_hi" onclick="setLanguage('hi')">
+            <span>हिन्दी (Hindi)</span>
+            <small style="color:var(--primary)">HI</small>
+          </button>
+          <button class="lang-menu-item" id="langOpt_te" onclick="setLanguage('te')">
+            <span>తెలుగు (Telugu)</span>
+            <small style="color:var(--cyan)">TE</small>
+          </button>
+          <button class="lang-menu-item" id="langOpt_kn" onclick="setLanguage('kn')">
+            <span>ಕನ್ನಡ (Kannada)</span>
+            <small style="color:var(--amber)">KN</small>
+          </button>
+        </div>
+      </div>
 
       <!-- Theme Switcher -->
       <button id="theme" class="btn" title="Toggle light and dark theme" onclick="toggleTheme()">
@@ -3586,7 +3629,7 @@
 
       <!-- Lock Screen Button -->
       <button class="btn lock-btn" onclick="lockApp()" title="Lock Console &amp; Return to Biometric Login">
-        <svg class="icon"><use href="#lock"/></svg><span class="lock-label">Lock</span>
+        <svg class="icon"><use href="#lock"/></svg><span class="lock-label" data-i18n="nav_lock">Lock</span>
       </button>
     </div>
   </div>
@@ -3598,19 +3641,19 @@
 <main id="commanderView" class="app">
   <section class="intro">
     <div>
-      <span class="eyebrow"><svg class="icon" style="width:13px;height:13px"><use href="#shield"/></svg> Live Google Sheet Data Connected</span>
-      <h1>Command &amp; Welfare Readiness Console</h1>
-      <p>Force operational health, biometric telemetry &amp; welfare command console · Live sync with Google Sheets.</p>
+      <span class="eyebrow"><svg class="icon" style="width:13px;height:13px"><use href="#shield"/></svg> <span data-i18n="live_sheet_connected">Live Google Sheet Data Connected</span></span>
+      <h1 data-i18n="commander_title">Command &amp; Welfare Readiness Console</h1>
+      <p data-i18n="commander_subtitle">Force operational health, biometric telemetry &amp; welfare command console · Live sync with Google Sheets.</p>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
       <button class="btn green" onclick="downloadBattalionGoogleSheetCSV()" title="Download live Battalion Combat Readiness Google Sheet (CSV / Excel)">
-        <svg class="icon"><use href="#download"/></svg> 📥 Download Google Sheet
+        <svg class="icon"><use href="#download"/></svg> <span data-i18n="btn_download_sheet">📥 Download Google Sheet</span>
       </button>
       <a class="btn cyan" href="https://docs.google.com/spreadsheets/d/1smmWEZE4mCpOpP9ntrwO2usq70PGo9uJuNC0neOaQfU/edit?usp=sharing" target="_blank" rel="noopener noreferrer" title="Open Google Sheet in new tab">
-        <svg class="icon"><use href="#chart"/></svg> Open Source Sheet ↗
+        <svg class="icon"><use href="#chart"/></svg> <span data-i18n="btn_open_sheet">Open Source Sheet ↗</span>
       </a>
       <button class="btn" onclick="syncLiveGoogleSheet()" title="Fetch live rows and metrics directly from Google Sheet">
-        <svg class="icon"><use href="#zap"/></svg> <span id="sheetSyncBtnText">Sync Sheet</span>
+        <svg class="icon"><use href="#zap"/></svg> <span id="sheetSyncBtnText" data-i18n="btn_sync_sheet">Sync Sheet</span>
       </button>
     </div>
   </section>
@@ -3618,7 +3661,7 @@
   <!-- BATTALION COMMAND & RAPID EMERGENCY MOBILIZATION STRIP -->
   <div class="battalion-action-strip">
     <div class="battalion-badge-group">
-      <span class="tag gold" style="padding:6px 12px;font-size:12px;font-weight:900;letter-spacing:0.5px;">
+      <span class="tag gold" style="padding:6px 12px;font-size:12px;font-weight:900;letter-spacing:0.5px;" data-i18n="badge_unit_name">
         ⚔️ 9 PARA SPECIAL FORCES BATTALION
       </span>
       <span class="tag green" style="padding:6px 10px;font-size:11px;" id="battalionGatewayBadge">
@@ -3630,16 +3673,16 @@
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
       <button class="btn cyan" onclick="runAiBattalionCombatAnalysis()" title="Run Google Gemini AI Analysis on War Readiness & Detailed Exemption Reasons">
-        <svg class="icon" style="width:14px;height:14px;"><use href="#spark"/></svg> ✦ AI War Readiness Analysis
+        <svg class="icon" style="width:14px;height:14px;"><use href="#spark"/></svg> <span data-i18n="btn_ai_analysis">✦ AI War Readiness Analysis</span>
       </button>
       <button class="btn danger emergency-pulse-btn" onclick="openEmergencyDeployModal()" title="Instant Combat Readiness Sortie Generator for Emergencies">
-        <svg class="icon" style="width:14px;height:14px;"><use href="#zap"/></svg> ⚡ Mobilize Emergency Combat Roster
+        <svg class="icon" style="width:14px;height:14px;"><use href="#zap"/></svg> <span data-i18n="btn_emergency_deploy">⚡ Mobilize Emergency Combat Roster</span>
       </button>
       <button class="btn" onclick="openWhoopGatewayModal()" title="Inspect Battalion Multi-Device WHOOP Gateway Network">
-        <svg class="icon" style="width:14px;height:14px;"><use href="#cpu"/></svg> WHOOP Gateway Network (40)
+        <svg class="icon" style="width:14px;height:14px;"><use href="#cpu"/></svg> <span data-i18n="btn_gateway_network">WHOOP Gateway Network (40)</span>
       </button>
       <button class="btn" onclick="openAddSoldierModal()" title="Enroll New Soldier & Link WHOOP Band">
-        <svg class="icon" style="width:14px;height:14px;"><use href="#users"/></svg> + Add Personnel
+        <svg class="icon" style="width:14px;height:14px;"><use href="#users"/></svg> <span data-i18n="btn_add_personnel">+ Add Personnel</span>
       </button>
     </div>
   </div>
@@ -3649,9 +3692,9 @@
     <article class="panel kpi">
       <div class="kpihead">
         <span class="kicon"><svg class="icon"><use href="#shield"/></svg></span>
-        <span class="tag green" id="kpiReadinessTag">Combat Optimal</span>
+        <span class="tag green" id="kpiReadinessTag" data-i18n="kpi_tag_optimal">Combat Optimal</span>
       </div>
-      <div class="label">Battalion Combat Readiness</div>
+      <div class="label" data-i18n="kpi_readiness_label">Battalion Combat Readiness</div>
       <div class="value" id="kpiReadinessVal">76.2<small> / 100</small></div>
       <div class="detail"><b style="color:var(--primary)" id="kpiReadinessDelta">Battalion Aggregate</b> · 40 Monitored Personnel</div>
     </article>
@@ -3661,7 +3704,7 @@
         <span class="kicon" style="color:var(--cyan);background:var(--cyan-dim);border-color:color-mix(in srgb, var(--cyan) 40%, var(--line))"><svg class="icon"><use href="#users"/></svg></span>
         <span class="tag cyan">BLE Gateway</span>
       </div>
-      <div class="label">Connected WHOOP Strength</div>
+      <div class="label" data-i18n="kpi_connected_label">Connected WHOOP Strength</div>
       <div class="value" id="kpiConnectedVal">95.0<small>%</small></div>
       <div class="detail" id="kpiConnectedDetail">38 of 40 Bands Synced (2 Offline)</div>
     </article>
@@ -3669,9 +3712,9 @@
     <article class="panel kpi">
       <div class="kpihead">
         <span class="kicon" style="color:var(--primary);background:var(--primary-dim);border-color:color-mix(in srgb, var(--primary) 40%, var(--line))"><svg class="icon"><use href="#shield"/></svg></span>
-        <span class="tag green">Combat Tier 1</span>
+        <span class="tag green" data-i18n="kpi_tier1_tag">Combat Tier 1</span>
       </div>
-      <div class="label">Pre-Battle Combat Ready</div>
+      <div class="label" data-i18n="kpi_prebattle_label">Pre-Battle Combat Ready</div>
       <div class="value" id="kpiAlertsVal">30<small> cleared</small></div>
       <div class="detail" id="kpiDeployDetail">75.0% Frontline Cleared for Sortie</div>
     </article>
@@ -3679,11 +3722,11 @@
     <article class="panel kpi">
       <div class="kpihead">
         <span class="kicon" style="color:var(--rose);background:var(--rose-dim);border-color:color-mix(in srgb, var(--rose) 40%, var(--line))"><svg class="icon"><use href="#alert"/></svg></span>
-        <span class="tag rose">Fatigue Risk</span>
+        <span class="tag rose" data-i18n="kpi_fatigue_tag">Fatigue Risk</span>
       </div>
-      <div class="label">Combat Fatigue Restricted</div>
+      <div class="label" data-i18n="kpi_fatigue_label">Combat Fatigue Restricted</div>
       <div class="value" id="kpiRestBacklogVal">4<small> grounded</small></div>
-      <div class="detail">Non-deployable to prevent casualties</div>
+      <div class="detail" data-i18n="kpi_fatigue_sub">Non-deployable to prevent casualties</div>
     </article>
   </section>
 
@@ -3969,19 +4012,19 @@
 <main id="jawanView" class="app hidden">
   <section class="intro">
     <div>
-      <span class="eyebrow">Confidential &amp; Private to You</span>
-      <h1>My Confidential Self-Care</h1>
-      <p>Your personal recovery telemetry. Never accessible to officers or service records.</p>
+      <span class="eyebrow" data-i18n="jawan_eyebrow">Confidential &amp; Private to You</span>
+      <h1 data-i18n="jawan_title">My Confidential Self-Care</h1>
+      <p data-i18n="jawan_subtitle">Your personal recovery telemetry. Never accessible to officers or service records.</p>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
       <button class="btn cyan" onclick="openBleModal()" title="Pair WHOOP 4.0 or start GATT stream">
-        <svg class="icon"><use href="#bluetooth"/></svg> Connect My WHOOP
+        <svg class="icon"><use href="#bluetooth"/></svg> <span data-i18n="btn_connect_whoop">Connect My WHOOP</span>
       </button>
       <button class="btn" onclick="openCallModal()">
-        <svg class="icon"><use href="#phone"/></svg> Helplines
+        <svg class="icon"><use href="#phone"/></svg> <span data-i18n="btn_helplines">Helplines</span>
       </button>
       <button class="btn" onclick="toggleDeckFold()">
-        <span id="deckToggleBtnText">Stack Deck</span>
+        <span id="deckToggleBtnText" data-i18n="btn_stack_deck">Stack Deck</span>
       </button>
     </div>
   </section>
@@ -3990,17 +4033,17 @@
   <section class="kinetic-ekg-strip bpm-hero-panel" id="kineticEkgBox" onclick="cycleBpmColorTheme()" title="Click to cycle color theme (Emerald -> Cyan -> Rose -> Amber) · Double-click for cardiac spike event" ondblclick="triggerCardiacArrest()">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;position:relative;z-index:5;">
       <div style="display:flex;align-items:center;gap:8px;">
-        <span class="tag green" id="bpmThemeTag" style="font-size:10px;font-weight:900;">
+        <span class="tag green" id="bpmThemeTag" style="font-size:10px;font-weight:900;" data-i18n="bpm_badge">
           💓 LIVE WHOOP PULSE MONITOR
         </span>
-        <span style="font-size:11px;font-weight:900;color:var(--text-heading);letter-spacing:0.5px;">
-          Luminous Wireframe Geometric Heart
+        <span style="font-size:11px;font-weight:900;color:var(--text-heading);letter-spacing:0.5px;" data-i18n="bpm_title">
+          Real-Time CRT Pulse Telemetry
         </span>
       </div>
       <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-size:10px;color:var(--muted);" id="ekgStatusText">Normal Sinus Rhythm · Real-Time WHOOP GATT Sync</span>
+        <span style="font-size:10px;color:var(--muted);" id="ekgStatusText" data-i18n="bpm_status_normal">Normal Sinus Rhythm · Real-Time WHOOP GATT Sync</span>
         <button class="btn" style="padding:2px 8px;font-size:10px;" onclick="event.stopPropagation();cycleBpmColorTheme();" title="Cycle through website palette themes">
-          🎨 Theme: <span id="bpmActiveThemeName" style="color:var(--primary);font-weight:900;">Emerald</span>
+          🎨 <span data-i18n="bpm_theme_label">Theme</span>: <span id="bpmActiveThemeName" style="color:var(--primary);font-weight:900;">Emerald</span>
         </button>
       </div>
     </div>
@@ -4027,117 +4070,19 @@
         </defs>
         <!-- Background Grid Ticks -->
         <line x1="0" y1="60" x2="1000" y2="60" stroke="var(--line-subtle)" stroke-dasharray="4,6" stroke-width="1" opacity="0.4" />
-        <!-- Animated Wave Line -->
-        <path id="ekgPathLine" d="M0,60 L280,60 L310,60 L330,46 L345,78 L360,20 L375,95 L390,52 L410,60 L440,60 L720,60 L750,46 L765,78 L780,20 L795,95 L810,52 L830,60 L1000,60" fill="none" stroke="url(#bpmWaveGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#bpmWaveGlow)" />
+        <!-- Dual-Layer CRT Phosphor EKG Waveform (Glow Halo + Crisp White Inner Filament) -->
+        <path id="ekgGlowLine" d="M0,60 L280,60 L310,60 L330,46 L345,78 L360,20 L375,95 L390,52 L410,60 L440,60 L720,60 L750,46 L765,78 L780,20 L795,95 L810,52 L830,60 L1000,60" class="crt-ekg-glow-line" />
+        <path id="ekgPathLine" d="M0,60 L280,60 L310,60 L330,46 L345,78 L360,20 L375,95 L390,52 L410,60 L440,60 L720,60 L750,46 L765,78 L780,20 L795,95 L810,52 L830,60 L1000,60" class="crt-ekg-core-line" />
+        <!-- Traveling Phosphor Node Dot on the ECG Baseline (User Image Spec) -->
+        <circle id="ekgTracerBeam" cx="775" cy="74" r="4.5" fill="#ffffff" stroke="var(--primary)" stroke-width="2" filter="url(#bpmWaveGlow)" />
       </svg>
 
-      <!-- Central Luminous Poly-Wireframe Heart (SVG Facets) -->
+      <!-- Central Pulse Hub: Ambient Glow & Holographic Readout (No Wireframe Heart) -->
       <div class="wireframe-heart-box" id="wireframeHeartBox">
         <!-- Ambient Heart Pulse Glow Aura -->
         <div class="wireframe-heart-glow" id="wireframeHeartGlow"></div>
 
-        <svg class="wireframe-heart-svg" viewBox="0 0 200 200" aria-label="Luminous Geometric Heart">
-          <defs>
-            <filter id="wireframeGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="4.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <!-- Polyhedral Facet Meshes (Exact Anatomical Low-Poly Triangulation) -->
-          <g id="wireframeFacets" class="wireframe-facets" filter="url(#wireframeGlowFilter)">
-            <!-- Top Aorta / Vena Cava / Pulmonary Trunks -->
-            <polygon points="90,20 102,12 110,25" class="facet-tri" />
-            <polygon points="102,12 118,16 110,25" class="facet-tri" />
-            <polygon points="118,16 130,28 118,34" class="facet-tri" />
-            <polygon points="110,25 118,34 104,36" class="facet-tri" />
-            <polygon points="80,30 90,20 94,35" class="facet-tri" />
-            <polygon points="70,36 80,30 84,45" class="facet-tri" />
-            <polygon points="68,52 70,36 84,45" class="facet-tri" />
-
-            <!-- Superior Base of Heart -->
-            <polygon points="84,45 94,35 104,36" class="facet-tri" />
-            <polygon points="94,35 106,42 104,36" class="facet-tri" />
-            <polygon points="104,36 118,34 126,45" class="facet-tri" />
-            <polygon points="118,34 135,38 126,45" class="facet-tri" />
-            <polygon points="135,38 145,52 134,56" class="facet-tri" />
-            <polygon points="126,45 134,56 122,58" class="facet-tri" />
-
-            <!-- Left Ventricle (Viewer's Left - Anterior Face) -->
-            <polygon points="68,52 84,45 80,68" class="facet-tri" />
-            <polygon points="84,45 100,56 80,68" class="facet-tri" />
-            <polygon points="100,56 106,42 120,54" class="facet-tri" />
-            <polygon points="106,42 104,36 126,45" class="facet-tri" />
-            <polygon points="120,54 126,45 134,56" class="facet-tri" />
-            <polygon points="134,56 148,68 132,74" class="facet-tri" />
-            <polygon points="148,68 155,85 140,88" class="facet-tri" />
-
-            <!-- Mid Body Triangular Meshes -->
-            <polygon points="68,52 80,68 62,75" class="facet-tri" />
-            <polygon points="62,75 80,68 74,92" class="facet-tri" />
-            <polygon points="80,68 96,78 74,92" class="facet-tri" />
-            <polygon points="80,68 100,56 96,78" class="facet-tri" />
-            <polygon points="100,56 116,68 96,78" class="facet-tri" />
-            <polygon points="100,56 120,54 116,68" class="facet-tri" />
-            <polygon points="120,54 134,56 132,74" class="facet-tri" />
-            <polygon points="116,68 132,74 126,90" class="facet-tri" />
-            <polygon points="132,74 140,88 126,90" class="facet-tri" />
-            <polygon points="140,88 152,105 135,108" class="facet-tri" />
-
-            <!-- Lower Ventricular Walls -->
-            <polygon points="62,75 74,92 60,102" class="facet-tri" />
-            <polygon points="74,92 92,98 60,102" class="facet-tri" />
-            <polygon points="74,92 96,78 92,98" class="facet-tri" />
-            <polygon points="96,78 112,88 92,98" class="facet-tri" />
-            <polygon points="96,78 116,68 112,88" class="facet-tri" />
-            <polygon points="116,68 126,90 112,88" class="facet-tri" />
-            <polygon points="112,88 126,90 120,106" class="facet-tri" />
-            <polygon points="126,90 135,108 120,106" class="facet-tri" />
-            <polygon points="135,108 145,124 128,128" class="facet-tri" />
-            <polygon points="120,106 135,108 128,128" class="facet-tri" />
-
-            <!-- Anterior Septum & Interventricular Groove -->
-            <polygon points="60,102 92,98 84,122" class="facet-tri" />
-            <polygon points="92,98 108,110 84,122" class="facet-tri" />
-            <polygon points="92,98 112,88 108,110" class="facet-tri" />
-            <polygon points="112,88 120,106 108,110" class="facet-tri" />
-            <polygon points="108,110 120,106 116,130" class="facet-tri" />
-            <polygon points="120,106 128,128 116,130" class="facet-tri" />
-
-            <!-- Apical Cone (Tapering to Apex Point at 108, 168) -->
-            <polygon points="60,102 84,122 72,138" class="facet-tri" />
-            <polygon points="84,122 98,138 72,138" class="facet-tri" />
-            <polygon points="84,122 108,110 98,138" class="facet-tri" />
-            <polygon points="108,110 116,130 98,138" class="facet-tri" />
-            <polygon points="98,138 116,130 110,150" class="facet-tri" />
-            <polygon points="116,130 128,128 122,146" class="facet-tri" />
-            <polygon points="116,130 122,146 110,150" class="facet-tri" />
-            <polygon points="72,138 98,138 92,156" class="facet-tri" />
-            <polygon points="98,138 110,150 92,156" class="facet-tri" />
-            <polygon points="110,150 122,146 112,160" class="facet-tri" />
-            <polygon points="92,156 110,150 104,166" class="facet-tri" />
-            <polygon points="110,150 112,160 104,166" class="facet-tri" />
-            <!-- Final Apex Tip -->
-            <polygon points="92,156 104,166 100,174" class="facet-tri" />
-            <polygon points="104,166 112,160 100,174" class="facet-tri" />
-          </g>
-
-          <!-- Core Cardiac Node Sparkle Points -->
-          <g class="wireframe-nodes">
-            <circle cx="106" cy="42" r="2.2" class="node-sparkle" />
-            <circle cx="100" cy="56" r="2.5" class="node-sparkle" />
-            <circle cx="96" cy="78" r="2.5" class="node-sparkle" />
-            <circle cx="112" cy="88" r="2.2" class="node-sparkle" />
-            <circle cx="108" cy="110" r="2.6" class="node-sparkle" />
-            <circle cx="98" cy="138" r="2.2" class="node-sparkle" />
-            <circle cx="100" cy="174" r="2" class="node-sparkle" />
-          </g>
-        </svg>
-
-        <!-- Dynamic Holographic Heart Rate Counter Overlay -->
+        <!-- Dynamic Holographic Heart Rate Counter Overlay (Pure Pulse Telemetry) -->
         <div class="wireframe-bpm-readout">
           <span class="wireframe-bpm-val" id="wireframeBpmVal">74</span>
           <span class="wireframe-bpm-unit">BPM</span>
@@ -4399,106 +4344,106 @@
     <article class="panel" id="secBreathing">
       <header class="head">
         <div>
-          <h2>Tactical Box Breathing (Grounding)</h2>
-          <p>2-minute tactical breath regulator for operational focus.</p>
+          <h2 data-i18n="breath_panel_title">Tactical Box Breathing (Grounding)</h2>
+          <p data-i18n="breath_panel_sub">2-minute tactical breath regulator for operational focus.</p>
         </div>
       </header>
       <div class="breath">
-        <div class="orbwrap">
-          <!-- Tactical Square Breathing Box with Perimeter Tracer & Anatomical Lungs Display (Image 2 Spec) -->
-          <div id="tacticalBreathBox" class="tactical-breath-box" onclick="toggleBreathing()" title="Click to start, pause, or resume Tactical Box Breathing">
-            <!-- Perimeter Phase Indicators & Labels -->
-            <div class="tbb-label top" id="tbbTop">
-              <span class="tbb-txt">HOLD</span>
-              <span class="tbb-sec" id="tbbTopSec">4s</span>
-            </div>
-            <div class="tbb-label right" id="tbbRight">
-              <span class="tbb-txt">EXHALE</span>
-              <span class="tbb-sec" id="tbbRightSec">4s</span>
-            </div>
-            <div class="tbb-label bottom" id="tbbBottom">
-              <span class="tbb-txt">HOLD</span>
-              <span class="tbb-sec" id="tbbBottomSec">4s</span>
-            </div>
-            <div class="tbb-label left" id="tbbLeft">
-              <span class="tbb-txt">INHALE</span>
-              <span class="tbb-sec" id="tbbLeftSec">4s</span>
+        <div class="orbwrap" style="width:100%;padding:0;">
+          <!-- SPEC 2: Box Breathing Waveform Graph (Matching User Image Specification) -->
+          <div class="box-wave-card" id="tacticalBreathBox" onclick="toggleBreathing()" title="Click to start, pause, or resume Box Breathing">
+            <div class="box-wave-head">
+              <div>
+                <div class="box-wave-title" data-i18n="box_wave_title">Box breathing</div>
+                <div class="box-wave-sub" data-i18n="box_wave_sub">Focus &amp; composure</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span class="box-wave-phase-badge" id="boxWaveBadge">
+                  <span class="status-pulse-dot" style="width:6px;height:6px;"></span>
+                  <span id="boxWaveBadgeTxt">INHALE (0-4s)</span>
+                </span>
+                <span style="color:var(--cyan);cursor:pointer;" title="Tap to toggle tutorial details">
+                  <svg class="icon" style="width:16px;height:16px;"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
             </div>
 
-            <!-- SVG Square Track, Animated Perimeter Light Beam & Orbiting Glowing Dot -->
-            <svg class="tbb-track-svg" viewBox="0 0 240 240" aria-hidden="true">
-              <defs>
-                <!-- Dynamic Phase-Themed Gradients (Emerald Inhale, Cyan Hold Top, Amber Exhale, Rose Hold Bottom) -->
-                <linearGradient id="tbbTracerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="var(--primary)" stop-opacity="1" />
-                  <stop offset="50%" stop-color="var(--cyan)" stop-opacity="0.9" />
-                  <stop offset="100%" stop-color="var(--amber)" stop-opacity="0.8" />
-                </linearGradient>
+            <!-- Sleek Top Accent Divider Bar -->
+            <div class="box-wave-divider" id="boxWaveDivider"></div>
 
-                <linearGradient id="lungFillGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.95" id="lungStop1" />
-                  <stop offset="60%" stop-color="var(--cyan)" stop-opacity="0.75" id="lungStop2" />
-                  <stop offset="100%" stop-color="var(--amber)" stop-opacity="0.2" id="lungStop3" />
-                </linearGradient>
+            <!-- Waveform SVG with Time Curve 0, 4, 8, 12, 16, 20, 24, 28 -->
+            <div class="box-wave-canvas-wrap">
+              <svg class="box-wave-svg" viewBox="0 0 560 120" preserveAspectRatio="none">
+                <defs>
+                  <!-- Active Gradient Fill under Wave -->
+                  <linearGradient id="boxWaveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.45" id="waveGradStop0" />
+                    <stop offset="100%" stop-color="var(--primary)" stop-opacity="0.02" id="waveGradStop1" />
+                  </linearGradient>
+                  <!-- Glow filter for laser tracer dot -->
+                  <filter id="waveDotGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="glow" />
+                    <feMerge>
+                      <feMergeNode in="glow" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
 
-                <!-- Glow Filter -->
-                <filter id="tbbDotGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3.5" result="glow" />
-                  <feMerge>
-                    <feMergeNode in="glow" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
+                <!-- Baseline Horizontal Axis & Vertical Left Axis Bar -->
+                <line x1="20" y1="88" x2="540" y2="88" class="box-wave-axis" />
+                <line x1="20" y1="34" x2="20" y2="88" class="box-wave-axis" stroke-width="2" />
 
-                <!-- Anatomical Lungs Silhouette Clip Path -->
-                <clipPath id="lungsClipPath">
-                  <!-- Trachea / Bronchi stem -->
-                  <path d="M120 48 L120 78 M115 78 Q120 84 125 78" stroke-width="6" stroke-linecap="round" />
-                  <!-- Left Lung Lobe -->
-                  <path d="M116 80 C108 72, 94 65, 82 78 C70 92, 64 120, 68 148 C71 168, 80 180, 96 182 C108 184, 114 172, 117 156 C119 144, 118 96, 116 80 Z" />
-                  <!-- Right Lung Lobe -->
-                  <path d="M124 80 C132 72, 146 65, 158 78 C170 92, 176 120, 172 148 C169 168, 160 180, 144 182 C132 184, 126 172, 123 156 C121 144, 122 96, 124 80 Z" />
-                </clipPath>
-              </defs>
+                <!-- Timeline Grid Vertical Lines -->
+                <!-- 0s: x=20 -->
+                <line x1="20" y1="40" x2="20" y2="88" class="box-wave-grid-tick" />
+                <!-- 4s: x=90 -->
+                <line x1="90" y1="28" x2="90" y2="88" class="box-wave-grid-tick" />
+                <!-- 8s: x=160 -->
+                <line x1="160" y1="28" x2="160" y2="88" class="box-wave-grid-tick" />
+                <!-- 12s: x=230 -->
+                <line x1="230" y1="40" x2="230" y2="88" class="box-wave-grid-tick" />
+                <!-- 16s: x=300 -->
+                <line x1="300" y1="40" x2="300" y2="88" class="box-wave-grid-tick" />
+                <!-- 20s: x=370 -->
+                <line x1="370" y1="28" x2="370" y2="88" class="box-wave-grid-tick" />
+                <!-- 24s: x=440 -->
+                <line x1="440" y1="28" x2="440" y2="88" class="box-wave-grid-tick" />
+                <!-- 28s: x=510 -->
+                <line x1="510" y1="40" x2="510" y2="88" class="box-wave-grid-tick" />
 
-              <!-- Outer Square Track Box (192x192 from (24,24)) -->
-              <rect x="24" y="24" width="192" height="192" rx="14" class="tbb-border-bg" />
-              <!-- Highlighted Active Edge Path -->
-              <path id="tbbActiveBorder" d="M 24 216 L 24 24 L 216 24 L 216 216 Z" class="tbb-border-active" />
+                <!-- Timeline Numeric Labels (0, 4, 8, 12, 16, 20, 24, 28) -->
+                <text x="20" y="106" class="box-wave-tick-text active-cycle" id="tick0">0</text>
+                <text x="90" y="106" class="box-wave-tick-text active-cycle" id="tick4">4</text>
+                <text x="160" y="106" class="box-wave-tick-text active-cycle" id="tick8">8</text>
+                <text x="230" y="106" class="box-wave-tick-text active-cycle" id="tick12">12</text>
+                <text x="300" y="106" class="box-wave-tick-text active-cycle" id="tick16">16</text>
+                <text x="370" y="106" class="box-wave-tick-text" id="tick20">20</text>
+                <text x="440" y="106" class="box-wave-tick-text" id="tick24">24</text>
+                <text x="510" y="106" class="box-wave-tick-text" id="tick28">28</text>
 
-              <!-- Lungs Anatomical Visualization in Center of Box -->
-              <g class="tbb-lungs-container">
-                <!-- Base Dark Anatomical Lungs Silhouette Background -->
-                <g class="tbb-lungs-base">
-                  <!-- Trachea -->
-                  <path d="M120 50 L120 76 M113 77 C117 83, 123 83, 127 77" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" opacity="0.4" />
-                  <!-- Left Lobe Base -->
-                  <path d="M116 80 C108 72, 94 65, 82 78 C70 92, 64 120, 68 148 C71 168, 80 180, 96 182 C108 184, 114 172, 117 156 C119 144, 118 96, 116 80 Z" class="lung-base-lobe" />
-                  <!-- Right Lobe Base -->
-                  <path d="M124 80 C132 72, 146 65, 158 78 C170 92, 176 120, 172 148 C169 168, 160 180, 144 182 C132 184, 126 172, 123 156 C121 144, 122 96, 124 80 Z" class="lung-base-lobe" />
-                </g>
+                <!-- Cycle 2 (Muted Grey Cycle 16s-32s in Background) -->
+                <polygon points="300,88 320,88 350,34 440,34 470,88 510,88 540,88 540,88 300,88" class="box-wave-bg-fill" />
+                <path d="M300,88 C315,88 335,88 345,62 C355,34 365,34 380,34 L430,34 C445,34 455,34 465,62 C475,88 495,88 510,88 L540,88" class="box-wave-bg-path" />
 
-                <!-- Rising / Expanding Fluid Biological Air Fill (clipped to lungs shape) -->
-                <g clip-path="url(#lungsClipPath)">
-                  <rect id="lungFillLevel" x="60" y="150" width="120" height="40" fill="url(#lungFillGradient)" class="lung-fill-rect" />
-                </g>
+                <!-- Cycle 1 Active Curved Trapezoid Area (Inhale -> Hold -> Exhale -> Hold) -->
+                <polygon id="waveActivePolygon" points="20,88 20,88 35,88 65,34 160,34 190,88 230,88 300,88 300,88 20,88" class="box-wave-active-fill" />
+                <path id="waveActivePath" d="M20,88 C32,88 55,88 68,60 C78,34 88,34 100,34 L150,34 C162,34 172,34 182,60 C195,88 215,88 230,88 L300,88" class="box-wave-active-stroke" />
 
-                <!-- Bronchial Tree Fine Vessel Filaments -->
-                <g class="tbb-bronchial-vessels" opacity="0.35">
-                  <path d="M116 92 Q100 105 88 122 M104 110 Q94 130 92 146 M100 125 Q96 142 102 160" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                  <path d="M124 92 Q140 105 152 122 M136 110 Q146 130 148 146 M140 125 Q144 142 138 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.4" />
-                </g>
-              </g>
+                <!-- Live Animated Indicator Dot moving along trapezoid curve -->
+                <circle id="waveTracerDot" cx="20" cy="88" r="6" class="box-wave-tracer-dot" filter="url(#waveDotGlow)" />
+              </svg>
+            </div>
 
-              <!-- Orbiting Tactical Perimeter Particle Dot with Glow -->
-              <circle id="tbbTracerDot" cx="24" cy="216" r="6" class="tbb-tracer-dot" filter="url(#tbbDotGlow)" />
-            </svg>
-
-            <!-- Center Phase HUD Readout Floating Inside Box -->
-            <div class="tbb-hud-overlay">
-              <span id="tbbPhase" class="tbb-phase-title">READY</span>
-              <span id="tbbCount" class="tbb-phase-counter">TAP TO START</span>
-              <span id="tbbPhaseHint" class="tbb-phase-sub">4-4-4-4 Grounding</span>
+            <!-- Footer Tutorial Callout (Matching User Image Spec) -->
+            <div class="box-wave-footer">
+              <a class="box-wave-tutorial-link" onclick="event.stopPropagation();setBreathingProtocol('box');" title="Guided breathwork tutorial & vagal grounding drills">
+                <span>Tutorial</span>
+                <svg class="icon" style="width:12px;height:12px;"><use href="#zap"/></svg>
+              </a>
+              <div style="font-size:11px;font-weight:800;color:var(--muted);">
+                Phase: <b id="tbbPhase" style="color:var(--primary);">READY</b> · <span id="tbbCount" style="color:var(--text-heading);font-family:monospace;">TAP TO START</span>
+              </div>
             </div>
           </div>
         </div>
@@ -5001,11 +4946,397 @@ function closeToolsMenu() {
   $('toolsSheetBackdrop')?.classList.add('hidden');
 }
 
-// Close tools dropdown when clicking outside
+/* =========================================================================
+   🌐 MULTI-LANGUAGE LOCALIZATION (ENGLISH, HINDI, TELUGU, KANNADA)
+   ========================================================================= */
+const I18N_LANGUAGES = {
+  en: { name: 'English', label: 'English', code: 'EN' },
+  hi: { name: 'हिन्दी', label: 'हिन्दी (Hindi)', code: 'HI' },
+  te: { name: 'తెలుగు', label: 'తెలుగు (Telugu)', code: 'TE' },
+  kn: { name: 'ಕನ್ನಡ', label: 'ಕನ್ನಡ (Kannada)', code: 'KN' }
+};
+
+let currentLanguage = localStorage.getItem('kavach_lang') || 'en';
+
+const I18N_TRANSLATIONS = {
+  en: {
+    nav_home: 'Home',
+    nav_commander: '◈ Commander',
+    role_force_data: 'Force Data',
+    nav_jawan: '◉ Jawan',
+    role_self_care: 'Self-Care & WHOOP',
+    nav_tools: 'Tools ▾',
+    tools_header: 'Tactical Utilities',
+    cal_365_title: '365-Day Calendar',
+    cal_365_sub: 'Annual fatigue & roster heatmap',
+    whoop_ble_title: 'WHOOP 4.0 BLE GATT',
+    whoop_ble_sub: 'Live Bluetooth sensor telemetry',
+    gemini_ai_title: 'Google Gemini AI',
+    gemini_ai_sub: 'Welfare AI reasoning assistant',
+    sheet_live_title: 'Google Sheet Live',
+    sheet_live_sub: 'Source roster spreadsheet ↗',
+    nav_helpline: '14416',
+    lang_select_title: 'Select Language',
+    nav_lock: 'Lock',
+
+    // Commander Intro & Action Strip
+    live_sheet_connected: 'Live Google Sheet Data Connected',
+    commander_title: 'Command & Welfare Readiness Console',
+    commander_subtitle: 'Force operational health, biometric telemetry & welfare command console · Live sync with Google Sheets.',
+    btn_download_sheet: '📥 Download Google Sheet',
+    btn_open_sheet: 'Open Source Sheet ↗',
+    btn_sync_sheet: 'Sync Sheet',
+    badge_unit_name: '⚔️ 9 PARA SPECIAL FORCES BATTALION',
+    btn_ai_analysis: '✦ AI War Readiness Analysis',
+    btn_emergency_deploy: '⚡ Mobilize Emergency Combat Roster',
+    btn_gateway_network: 'WHOOP Gateway Network (40)',
+    btn_add_personnel: '+ Add Personnel',
+
+    // KPIs
+    kpi_tag_optimal: 'Combat Optimal',
+    kpi_readiness_label: 'Battalion Combat Readiness',
+    kpi_connected_label: 'Connected WHOOP Strength',
+    kpi_tier1_tag: 'Combat Tier 1',
+    kpi_prebattle_label: 'Pre-Battle Combat Ready',
+    kpi_fatigue_tag: 'Fatigue Risk',
+    kpi_fatigue_label: 'Combat Fatigue Restricted',
+    kpi_fatigue_sub: 'Non-deployable to prevent casualties',
+
+    // Jawan view
+    jawan_eyebrow: 'Confidential & Private to You',
+    jawan_title: 'My Confidential Self-Care',
+    jawan_subtitle: 'Your personal recovery telemetry. Never accessible to officers or service records.',
+    btn_connect_whoop: 'Connect My WHOOP',
+    btn_helplines: 'Helplines',
+    btn_stack_deck: 'Stack Deck',
+
+    // BPM Monitor
+    bpm_badge: '💓 LIVE WHOOP PULSE MONITOR',
+    bpm_title: 'Real-Time CRT Pulse Telemetry',
+    bpm_status_normal: 'Normal Sinus Rhythm · Real-Time WHOOP GATT Sync',
+    bpm_theme_label: 'Theme',
+
+    // Box Breathing
+    breath_panel_title: 'Tactical Box Breathing (Grounding)',
+    breath_panel_sub: '2-minute tactical breath regulator for operational focus.',
+    box_wave_title: 'Box breathing',
+    box_wave_sub: 'Focus & composure',
+    btn_start_breath: 'Start Breathing Cycle',
+    btn_reset: 'Reset',
+    phase_inhale: 'INHALE',
+    phase_hold: 'HOLD',
+    phase_exhale: 'EXHALE',
+    tbb_ready: 'READY',
+    tbb_tap: 'TAP TO START',
+
+    // Toast notices
+    lang_switched_notice: 'Language changed to English.'
+  },
+  hi: {
+    nav_home: 'होम',
+    nav_commander: '◈ कमांडर',
+    role_force_data: 'सैन्य डेटा',
+    nav_jawan: '◉ जवान',
+    role_self_care: 'आत्म-देखभाल और वूप',
+    nav_tools: 'उपकरण ▾',
+    tools_header: 'सामरिक उपयोगिताएं',
+    cal_365_title: '365-दिवसीय कैलेंडर',
+    cal_365_sub: 'वार्षिक थकान और रोस्टर हीटमैप',
+    whoop_ble_title: 'वूप 4.0 ब्लूटूथ GATT',
+    whoop_ble_sub: 'लाइव ब्लूटूथ सेंसर टेलीमेट्री',
+    gemini_ai_title: 'गूगल जेमिनी एआई',
+    gemini_ai_sub: 'कल्याण एआई तर्क सहायक',
+    sheet_live_title: 'गूगल शीट लाइव',
+    sheet_live_sub: 'स्रोत रोस्टर स्प्रेडशीट ↗',
+    nav_helpline: '14416 सहायता',
+    lang_select_title: 'भाषा चुनें',
+    nav_lock: 'सुरक्षा लॉक',
+
+    // Commander Intro & Action Strip
+    live_sheet_connected: 'लाइव गूगल शीट डेटा कनेक्टेड',
+    commander_title: 'कमांड और कल्याण तत्परता कंसोल',
+    commander_subtitle: 'सैन्य परिचालन स्वास्थ्य, बायोमेट्रिक टेलीमेट्री और कल्याण कमांड कंसोल · गूगल शीट्स के साथ लाइव सिंक।',
+    btn_download_sheet: '📥 गूगल शीट डाउनलोड करें',
+    btn_open_sheet: 'मूल शीट खोलें ↗',
+    btn_sync_sheet: 'शीट सिंक करें',
+    badge_unit_name: '⚔️ 9 पैरा स्पेशल फोर्सेज बटालियन',
+    btn_ai_analysis: '✦ एआई युद्ध तत्परता विश्लेषण',
+    btn_emergency_deploy: '⚡ आपातकालीन लड़ाकू रोस्टर जुटाएं',
+    btn_gateway_network: 'वूप गेटवे नेटवर्क (40)',
+    btn_add_personnel: '+ जवान जोड़ें',
+
+    // KPIs
+    kpi_tag_optimal: 'युद्ध अनुकूल',
+    kpi_readiness_label: 'बटालियन युद्ध तत्परता',
+    kpi_connected_label: 'कनेक्टेड वूप क्षमता',
+    kpi_tier1_tag: 'युद्ध श्रेणी 1',
+    kpi_prebattle_label: 'लड़ाई हेतु पूर्ण तैयार',
+    kpi_fatigue_tag: 'थकान जोखिम',
+    kpi_fatigue_label: 'थकान के कारण प्रतिबंधित',
+    kpi_fatigue_sub: 'हताहतों की रोकथाम हेतु गैर-तैनाती योग्य',
+
+    // Jawan view
+    jawan_eyebrow: 'आपके लिए गोपनीय और सुरक्षित',
+    jawan_title: 'मेरी गोपनीय आत्म-देखभाल',
+    jawan_subtitle: 'आपकी व्यक्तिगत रिकवरी टेलीमेट्री। अधिकारियों या सेवा रिकॉर्ड के लिए कभी सुलभ नहीं।',
+    btn_connect_whoop: 'मेरा वूप कनेक्ट करें',
+    btn_helplines: 'हेल्पलाइन',
+    btn_stack_deck: 'कार्ड स्टैक करें',
+
+    // BPM Monitor
+    bpm_badge: '💓 लाइव वूप पल्स मॉनिटर',
+    bpm_title: 'रीयल-टाइम सीआरटी पल्स टेलीमेट्री',
+    bpm_status_normal: 'सामान्य साइनस रिदम · रीयल-टाइम वूप गैट सिंक',
+    bpm_theme_label: 'थीम',
+
+    // Box Breathing
+    breath_panel_title: 'टैक्टिकल बॉक्स ब्रीदिंग (स्थिरता)',
+    breath_panel_sub: 'मानसिक एकाग्रता हेतु 2 मिनट का सामरिक श्वास नियामक।',
+    box_wave_title: 'बॉक्स ब्रीदिंग',
+    box_wave_sub: 'एकाग्रता और मानसिक शांति',
+    btn_start_breath: 'श्वास चक्र प्रारंभ करें',
+    btn_reset: 'रीसेट करें',
+    phase_inhale: 'श्वास लें (अंदर)',
+    phase_hold: 'रोकें',
+    phase_exhale: 'श्वास छोड़ें (बाहर)',
+    tbb_ready: 'तैयार',
+    tbb_tap: 'प्रारंभ करने के लिए टैप करें',
+
+    // Toast notices
+    lang_switched_notice: 'भाषा बदलकर हिन्दी कर दी गई है।'
+  },
+  te: {
+    nav_home: 'హోమ్',
+    nav_commander: '◈ కమాండర్',
+    role_force_data: 'సైనిక డేటా',
+    nav_jawan: '◉ జవాన్',
+    role_self_care: 'స్వీయ సంరక్షణ & వూప్',
+    nav_tools: 'టూల్స్ ▾',
+    tools_header: 'వ్యూహాత్మక సాధనాలు',
+    cal_365_title: '365-రోజుల క్యాలెండర్',
+    cal_365_sub: 'వార్షిక అలసట & రోస్టర్ హీట్‌మ్యాప్',
+    whoop_ble_title: 'వూప్ 4.0 బ్లూటూత్ GATT',
+    whoop_ble_sub: 'ప్రత్యక్ష బ్లూటూత్ సెన్సార్ టెలిమెట్రీ',
+    gemini_ai_title: 'గూగుల్ జెమిని ఏఐ',
+    gemini_ai_sub: 'సంక్షేమ ఏఐ సహాయకారి',
+    sheet_live_title: 'గూగుల్ షీట్ ప్రత్యక్షం',
+    sheet_live_sub: 'రోస్టర్ స్ప్రెడ్‌షీట్ చూడండి ↗',
+    nav_helpline: '14416 హెల్ప్‌లైన్',
+    lang_select_title: 'భాషను ఎంచుకోండి',
+    nav_lock: 'భద్రతా లాక్',
+
+    // Commander Intro & Action Strip
+    live_sheet_connected: 'లైవ్ గూగుల్ షీట్ డేటా అనుసంధానించబడింది',
+    commander_title: 'కమాండ్ & సంక్షేమ సన్నద్ధత కన్సోల్',
+    commander_subtitle: 'సైనిక ఆరోగ్య నిర్వహణ, బయోమెట్రిక్ టెలిమెట్రీ మరియు సంక్షేమ కమాండ్ డెస్క్ · గూగుల్ షీట్‌తో ప్రత్యక్ష సమకాలీకరణ.',
+    btn_download_sheet: '📥 గూగుల్ షీట్ డౌన్‌లోడ్ చేయండి',
+    btn_open_sheet: 'మూల షీట్ తెరవండి ↗',
+    btn_sync_sheet: 'షీట్ సింక్ చేయండి',
+    badge_unit_name: '⚔️ 9 పారా స్పెషల్ ఫోర్సెస్ బెటాలియన్',
+    btn_ai_analysis: '✦ ఏఐ యుద్ధ సన్నద్ధత విశ్లేషణ',
+    btn_emergency_deploy: '⚡ అత్యవసర యుద్ధ రోస్టర్ సమీకరణ',
+    btn_gateway_network: 'వూప్ గేట్‌వే నెట్‌వర్క్ (40)',
+    btn_add_personnel: '+ సిబ్బందిని చేర్చండి',
+
+    // KPIs
+    kpi_tag_optimal: 'యుద్ధానికి అనుకూలం',
+    kpi_readiness_label: 'బెటాలియన్ యుద్ధ సన్నద్ధత',
+    kpi_connected_label: 'కనెక్ట్ చేయబడిన వూప్ శక్తి',
+    kpi_tier1_tag: 'యుద్ధ శ్రేణి 1',
+    kpi_prebattle_label: 'యుద్ధానికి పూర్తి సిద్ధం',
+    kpi_fatigue_tag: 'అలసట ప్రమాదం',
+    kpi_fatigue_label: 'అలసట కారణంగా నియంత్రిత',
+    kpi_fatigue_sub: 'ప్రమాదాల నివారణకు రక్షణగా నిలిపివేయబడింది',
+
+    // Jawan view
+    jawan_eyebrow: 'మీకు మాత్రమే రహస్యమైనది & సురక్షితమైనది',
+    jawan_title: 'నా రహస్య స్వీయ సంరక్షణ',
+    jawan_subtitle: 'మీ వ్యక్తిగత రికవరీ సమాచారం. అధికారులకు లేదా సర్వీస్ రికార్డులకు ఎప్పటికీ అందుబాటులో ఉండదు.',
+    btn_connect_whoop: 'నా వూప్ కనెక్ట్ చేయండి',
+    btn_helplines: 'హెల్ప్‌లైన్లు',
+    btn_stack_deck: 'కార్డుల డెక్ స్టాక్',
+
+    // BPM Monitor
+    bpm_badge: '💓 ప్రత్యక్ష వూప్ పల్స్ మానిటర్',
+    bpm_title: 'రియల్-టైమ్ సిఆర్టి పల్స్ టెలిమెట్రీ',
+    bpm_status_normal: 'సాధారణ సైనస్ రిథమ్ · రియల్-టైమ్ వూప్ గేట్ సింక్',
+    bpm_theme_label: 'రంగు థీమ్',
+
+    // Box Breathing
+    breath_panel_title: 'టాక్టికల్ బాక్స్ బ్రీతింగ్ (స్థిరత్వం)',
+    breath_panel_sub: 'మానసిక ఏకాగ్రత కొరకు 2 నిమిషాల వ్యూహాత్మక శ్వాస ప్రక్రియ.',
+    box_wave_title: 'బాక్స్ బ్రీతింగ్',
+    box_wave_sub: 'ఏకాగ్రత మరియు ప్రశాంతత',
+    btn_start_breath: 'శ్వాస చక్రాన్ని ప్రారంభించండి',
+    btn_reset: 'రీసెట్ చేయండి',
+    phase_inhale: 'పీల్చండి (లోపలికి)',
+    phase_hold: 'బిగబట్టండి',
+    phase_exhale: 'వదలండి (బయటకు)',
+    tbb_ready: 'సిద్ధంగా ఉంది',
+    tbb_tap: 'ప్రారంభించడానికి నొక్కండి',
+
+    // Toast notices
+    lang_switched_notice: 'భాష తెలుగులోకి మార్చబడింది.'
+  },
+  kn: {
+    nav_home: 'ಮುಖಪುಟ',
+    nav_commander: '◈ ಕಮಾಂಡರ್',
+    role_force_data: 'ಪಡೆಗಳ ಮಾಹಿತಿ',
+    nav_jawan: '◉ ಜವಾನ್',
+    role_self_care: 'ಸ್ವಯಂ ಆರೈಕೆ & ವೂಪ್',
+    nav_tools: 'ಸಾಧನಗಳು ▾',
+    tools_header: 'ಕಾರ್ಯತಂತ್ರದ ಸಾಧನಗಳು',
+    cal_365_title: '365-ದಿನಗಳ ಕ್ಯಾಲೆಂಡರ್',
+    cal_365_sub: 'ವಾರ್ಷಿಕ ಆಯಾಸ ಮತ್ತು ರೋಸ್ಟರ್ ಹೀಟ್‌ಮ್ಯಾಪ್',
+    whoop_ble_title: 'ವೂಪ್ 4.0 ಬ್ಲೂಟೂತ್ GATT',
+    whoop_ble_sub: 'ಲೈವ್ ಬ್ಲೂಟೂತ್ ಸಂವೇದಕ ಟೆಲಿಮೆಟ್ರಿ',
+    gemini_ai_title: 'ಗೂಗಲ್ ಜೆಮಿನಿ ಎಐ',
+    gemini_ai_sub: 'ಕ್ಷೇಮಾಭಿವೃದ್ಧಿ ಎಐ ಸಹಾಯಕ',
+    sheet_live_title: 'ಗೂಗಲ್ ಶೀಟ್ ಲೈವ್',
+    sheet_live_sub: 'ರೋಸ್ಟರ್ ಸ್ಪ್ರೆಡ್‌ಶೀಟ್ ನೋಡಿ ↗',
+    nav_helpline: '14416 ಸಹಾಯವಾಣಿ',
+    lang_select_title: 'ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+    nav_lock: 'ಭದ್ರತಾ ಲಾಕ್',
+
+    // Commander Intro & Action Strip
+    live_sheet_connected: 'ಲೈವ್ ಗೂಗಲ್ ಶೀಟ್ ಡೇಟಾ ಸಂಪರ್ಕಗೊಂಡಿದೆ',
+    commander_title: 'ಕಮಾಂಡ್ ಮತ್ತು ಕ್ಷೇಮಾಭಿವೃದ್ಧಿ ಸನ್ನದ್ಧತೆ ಕನ್ಸೋಲ್',
+    commander_subtitle: 'ಕಾರ್ಯಾಚರಣೆ ಆರೋಗ್ಯ, ಬಯೋಮೆಟ್ರಿಕ್ ಟೆಲಿಮೆಟ್ರಿ ಮತ್ತು ಕಮಾಂಡ್ ಕನ್ಸೋಲ್ · ಗೂಗಲ್ ಶೀಟ್‌ಗಳೊಂದಿಗೆ ನೇರ ಸಿಂಕ್.',
+    btn_download_sheet: '📥 ಗೂಗಲ್ ಶೀಟ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ',
+    btn_open_sheet: 'ಮೂಲ ಶೀಟ್ ತೆರೆಯಿರಿ ↗',
+    btn_sync_sheet: 'ಶೀಟ್ ಸಿಂಕ್ ಮಾಡಿ',
+    badge_unit_name: '⚔️ 9 ಪ್ಯಾರಾ ಸ್ಪೆಷಲ್ ಫೋರ್ಸಸ್ ಬೆಟಾಲಿಯನ್',
+    btn_ai_analysis: '✦ ಎಐ ಯುದ್ಧ ಸನ್ನದ್ಧತೆ ವಿಶ್ಲೇಷಣೆ',
+    btn_emergency_deploy: '⚡ ತುರ್ತು ಯುದ್ಧ ರೋಸ್ಟರ್ ಸಜ್ಜುಗೊಳಿಸಿ',
+    btn_gateway_network: 'ವೂಪ್ ಗೇಟ್‌ವೇ ನೆಟ್‌ವರ್ಕ್ (40)',
+    btn_add_personnel: '+ ಯೋಧರನ್ನು ಸೇರಿಸಿ',
+
+    // KPIs
+    kpi_tag_optimal: 'ಯುದ್ಧಕ್ಕೆ ಸೂಕ್ತ',
+    kpi_readiness_label: 'ಬೆಟಾಲಿಯನ್ ಯುದ್ಧ ಸನ್ನದ್ಧತೆ',
+    kpi_connected_label: 'ಸಂಪರ್ಕಿತ ವೂಪ್ ಬಲ',
+    kpi_tier1_tag: 'ಯುದ್ಧ ಶ್ರೇಣಿ 1',
+    kpi_prebattle_label: 'ಯುದ್ಧಕ್ಕೆ ಸಂಪೂರ್ಣ ಸಿದ್ಧ',
+    kpi_fatigue_tag: 'ಆಯಾಸದ ಅಪಾಯ',
+    kpi_fatigue_label: 'ಆಯಾಸದಿಂದಾಗಿ ನಿರ್ಬಂಧಿತ',
+    kpi_fatigue_sub: 'ಅಪಾಯ ತಡೆಗಟ್ಟಲು ಕರ್ತವ್ಯದಿಂದ ಮುಕ್ತಿ',
+
+    // Jawan view
+    jawan_eyebrow: 'ನಿಮಗೆ ಮಾತ್ರ ಗೌಪ್ಯ ಮತ್ತು ಸುರಕ್ಷಿತ',
+    jawan_title: 'ನನ್ನ ಗೌಪ್ಯ ಸ್ವಯಂ ಆರೈಕೆ',
+    jawan_subtitle: 'ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಚೇತರಿಕೆಯ ಮಾಹಿತಿ. ಅಧಿಕಾರಿಗಳಿಗೆ ಅಥವಾ ಸೇವಾ ದಾಖಲೆಗಳಿಗೆ ಎಂದಿಗೂ ಲಭ್ಯವಿಲ್ಲ.',
+    btn_connect_whoop: 'ನನ್ನ ವೂಪ್ ಸಂಪರ್ಕಿಸಿ',
+    btn_helplines: 'ಸಹಾಯವಾಣಿಗಳು',
+    btn_stack_deck: 'ಕಾರ್ಡ್ ಡೆಕ್ ಜೋಡಿಸಿ',
+
+    // BPM Monitor
+    bpm_badge: '💓 ಲೈವ್ ವೂಪ್ ಪಲ್ಸ್ ಮಾನಿಟರ್',
+    bpm_title: 'ರಿಯಲ್-ಟೈಮ್ ಸಿಆರ್‌ಟಿ ಪಲ್ಸ್ ಟೆಲಿಮೆಟ್ರಿ',
+    bpm_status_normal: 'ಸಾಮಾನ್ಯ ಸೈನಸ್ ರಿದಮ್ · ರಿಯಲ್-ಟೈಮ್ ವೂಪ್ ಗ್ಯಾಟ್ ಸಿಂಕ್',
+    bpm_theme_label: 'ಬಣ್ಣದ ಥೀಮ್',
+
+    // Box Breathing
+    breath_panel_title: 'ಟ್ಯಾಕ್ಟಿಕಲ್ ಬಾಕ್ಸ್ ಬ್ರೀದಿಂಗ್ (ಸ್ಥಿರತೆ)',
+    breath_panel_sub: 'ಮಾನಸಿಕ ಗಮನ ಮತ್ತು ಶಾಂತತೆಗಾಗಿ 2 ನಿಮಿಷಗಳ ಉಸಿರಾಟದ ನಿಯಂತ್ರಣ.',
+    box_wave_title: 'ಬಾಕ್ಸ್ ಬ್ರೀದಿಂಗ್',
+    box_wave_sub: 'ಗಮನ ಮತ್ತು ಸಂಯಮ',
+    btn_start_breath: 'ಉಸಿರಾಟ ಚಕ್ರ ಪ್ರಾರಂಭಿಸಿ',
+    btn_reset: 'ಮರುಹೊಂದಿಸಿ',
+    phase_inhale: 'ಉಸಿರೆಳೆದುಕೊಳ್ಳಿ (ಒಳಗೆ)',
+    phase_hold: 'ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳಿ',
+    phase_exhale: 'ಉಸಿರು ಬಿಡಿ (ಹೊರಗೆ)',
+    tbb_ready: 'ಸಿದ್ಧವಾಗಿದೆ',
+    tbb_tap: 'ಪ್ರಾರಂಭಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ',
+
+    // Toast notices
+    lang_switched_notice: 'ಭಾಷೆಯನ್ನು ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಲಾಗಿದೆ.'
+  }
+};
+
+function toggleLangMenu() {
+  const dd = $('langMenuDropdown');
+  if (dd) dd.classList.toggle('hidden');
+}
+
+function closeLangMenu() {
+  $('langMenuDropdown')?.classList.add('hidden');
+}
+
+function setLanguage(langCode) {
+  if (!I18N_TRANSLATIONS[langCode]) langCode = 'en';
+  currentLanguage = langCode;
+  try {
+    localStorage.setItem('kavach_lang', langCode);
+  } catch (err) {
+    console.warn('LocalStorage not accessible for language persistence');
+  }
+
+  // Update button label
+  const langMeta = I18N_LANGUAGES[langCode] || I18N_LANGUAGES['en'];
+  if ($('currentLangLabel')) {
+    $('currentLangLabel').textContent = langMeta.name;
+  }
+
+  // Update active dropdown items
+  document.querySelectorAll('.lang-menu-item').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  const activeBtn = $(`langOpt_${langCode}`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // Translate all DOM elements with data-i18n
+  const dict = I18N_TRANSLATIONS[langCode] || I18N_TRANSLATIONS['en'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (key && dict[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.setAttribute('placeholder', dict[key]);
+      } else {
+        el.textContent = dict[key];
+      }
+    }
+  });
+
+  // Translate specific dynamic buttons and elements if needed
+  if ($('sheetSyncBtnText')) $('sheetSyncBtnText').textContent = dict['btn_sync_sheet'] || 'Sync Sheet';
+  if ($('deckToggleBtnText')) $('deckToggleBtnText').textContent = isDeckStacked ? (langCode === 'hi' ? 'कार्ड्स खोलें' : langCode === 'te' ? 'కార్డులు విప్పండి' : langCode === 'kn' ? 'ಕಾರ್ಡ್ ಬಿಡಿಸಿ' : 'Unfold Deck') : (dict['btn_stack_deck'] || 'Stack Deck');
+  if ($('breathBtnText')) {
+    const isRunning = window.breathInterval != null;
+    if (!isRunning) $('breathBtnText').textContent = dict['btn_start_breath'] || 'Start Breathing Cycle';
+  }
+
+  // Update breathing stepper labels
+  const phaseBoxes = document.querySelectorAll('.phase-box');
+  if (phaseBoxes.length === 4) {
+    const inhaleText = dict['phase_inhale'] || 'INHALE';
+    const holdText = dict['phase_hold'] || 'HOLD';
+    const exhaleText = dict['phase_exhale'] || 'EXHALE';
+    const p1 = phaseBoxes[0].querySelector('.phase-name');
+    const p2 = phaseBoxes[1].querySelector('.phase-name');
+    const p3 = phaseBoxes[2].querySelector('.phase-name');
+    const p4 = phaseBoxes[3].querySelector('.phase-name');
+    if (p1) p1.textContent = inhaleText;
+    if (p2) p2.textContent = holdText;
+    if (p3) p3.textContent = exhaleText;
+    if (p4) p4.textContent = holdText;
+  }
+
+  // Update document language attribute
+  document.documentElement.lang = langCode;
+
+  closeLangMenu();
+  notify(dict['lang_switched_notice'] || `Language updated to ${langMeta.name}.`);
+}
+
+// Close menus when clicking outside
 document.addEventListener('click', (e) => {
   const toolsWrap = document.querySelector('.tools-dropdown-wrapper');
   if (toolsWrap && !toolsWrap.contains(e.target)) {
     $('toolsMenuDropdown')?.classList.add('hidden');
+  }
+  const langWrap = document.querySelector('.lang-dropdown-wrapper');
+  if (langWrap && !langWrap.contains(e.target)) {
+    $('langMenuDropdown')?.classList.add('hidden');
   }
 });
 
@@ -5515,7 +5846,7 @@ function setBpmColorTheme(themeKey, btn) {
     $('bpmZoneText').style.color = theme.colorVar;
   }
 
-  // Update ECG Wave Gradient Stops
+  // Update ECG Wave Gradient & Line Colors
   const s0 = $('bpmWaveStop0');
   const s1 = $('bpmWaveStop1');
   const s2 = $('bpmWaveStop2');
@@ -5525,14 +5856,23 @@ function setBpmColorTheme(themeKey, btn) {
   if (s2) s2.setAttribute('stop-color', theme.hex);
   if (s3) s3.setAttribute('stop-color', theme.hex);
 
-  // Update Wireframe Heart Facets stroke and fill
-  const facets = document.querySelectorAll('#wireframeFacets .facet-tri');
-  facets.forEach(f => {
-    f.style.stroke = theme.hex;
-    f.style.fill = theme.dimHex;
-  });
+  // Update CRT Phosphor Glow Line & Traveling Tracer Node
+  const glowLine = $('ekgGlowLine');
+  if (glowLine) {
+    glowLine.style.stroke = theme.hex;
+    glowLine.style.filter = `drop-shadow(0 0 10px ${theme.hex}) blur(3px)`;
+  }
+  const coreLine = $('ekgPathLine');
+  if (coreLine) {
+    coreLine.style.filter = `drop-shadow(0 0 6px ${theme.hex})`;
+  }
+  const tracerBeam = $('ekgTracerBeam');
+  if (tracerBeam) {
+    tracerBeam.style.stroke = theme.hex;
+    tracerBeam.style.filter = `drop-shadow(0 0 10px ${theme.hex})`;
+  }
 
-  // Update Heart Glow Aura
+  // Update Glow Aura Pulse
   const glow = $('wireframeHeartGlow');
   if (glow) {
     glow.style.background = `radial-gradient(circle, ${theme.hex} 0%, ${theme.glowHex} 40%, transparent 70%)`;
@@ -5542,7 +5882,7 @@ function setBpmColorTheme(themeKey, btn) {
   const readoutVal = $('wireframeBpmVal');
   if (readoutVal) readoutVal.style.filter = `drop-shadow(0 0 10px ${theme.hex})`;
 
-  notify(`🎨 Switched BPM Heart animation palette to ${theme.name}.`);
+  notify(`🎨 Switched Pulse Monitor palette to ${theme.name}.`);
 }
 
 function cycleBpmColorTheme() {
@@ -5555,24 +5895,44 @@ function renderKineticEkg() {
   ekgOffset = (ekgOffset + 3.2) % 400;
   ekgInterference = Math.max(0, ekgInterference * 0.94);
 
-  // Continuous smooth ECG pulse waveform line
+  // Continuous smooth ECG pulse waveform line (Exact P-Q-R-S-T medical complexes)
   const baseLine = isCardiacArrest
     ? "M0,60 L200,60 L220,10 L235,110 L250,5 L265,115 L280,60 L700,60 L720,10 L735,110 L750,5 L765,115 L780,60 L1000,60"
     : `M0,60 L140,60 L160,${48 - ekgInterference} L175,${74 + ekgInterference} L190,${18 - ekgInterference} L205,${102 + ekgInterference} L220,60 L440,60 L460,${48 - ekgInterference} L475,${74 + ekgInterference} L490,${18 - ekgInterference} L505,${102 + ekgInterference} L520,60 L740,60 L760,${48 - ekgInterference} L775,${74 + ekgInterference} L790,${18 - ekgInterference} L805,${102 + ekgInterference} L820,60 L1000,60`;
 
   const path = $('ekgPathLine');
+  const glowPath = $('ekgGlowLine');
+  const tx = `translate(-${ekgOffset % 300}, 0)`;
   if (path) {
     path.setAttribute('d', baseLine);
-    path.setAttribute('transform', `translate(-${ekgOffset % 300}, 0)`);
+    path.setAttribute('transform', tx);
+  }
+  if (glowPath) {
+    glowPath.setAttribute('d', baseLine);
+    glowPath.setAttribute('transform', tx);
   }
 
-  // Dynamically scale wireframe heart pulse speed to match live pulse
+  // Update Traveling CRT Beam Node Indicator on the ECG line (User Image Spec)
+  const tracer = $('ekgTracerBeam');
+  if (tracer) {
+    const cycleX = (Date.now() / 4.5) % 1000;
+    // Calculate vertical Y based on phase of the ECG wave
+    const normX = (cycleX + (ekgOffset % 300)) % 300;
+    let beamY = 60;
+    if (normX >= 155 && normX < 170) beamY = 48; // P wave
+    else if (normX >= 170 && normX < 185) beamY = 74; // Q dip
+    else if (normX >= 185 && normX < 198) beamY = 18; // R spike peak
+    else if (normX >= 198 && normX < 212) beamY = 102; // S dip
+    else if (normX >= 212 && normX < 235) beamY = 52; // T wave
+    tracer.setAttribute('cx', cycleX.toFixed(1));
+    tracer.setAttribute('cy', beamY.toFixed(1));
+  }
+
+  // Dynamically scale pulse aura speed to match live pulse
   const currentBpm = typeof liveBpmValue !== 'undefined' ? liveBpmValue : 74;
   const pulsePeriod = (60 / currentBpm).toFixed(2);
 
-  const heartSvg = document.querySelector('.wireframe-heart-svg');
   const heartGlow = document.querySelector('.wireframe-heart-glow');
-  if (heartSvg) heartSvg.style.animationDuration = `${pulsePeriod}s`;
   if (heartGlow) heartGlow.style.animationDuration = `${pulsePeriod}s`;
 
   // Update Real-Time Numeric Heart Rate Labels
@@ -5798,6 +6158,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // Initialize Jitter Motion Engine
   initJitterMotionEngine();
   triggerViewEnterAnimations(currentRole);
+
+  // Initialize Language (English, Hindi, Telugu, or Kannada)
+  if (currentLanguage && currentLanguage !== 'en') {
+    setLanguage(currentLanguage);
+  }
 });
 
 document.addEventListener('keydown', e => {
@@ -5807,6 +6172,7 @@ document.addEventListener('keydown', e => {
     close365Calendar();
     closeBleModal();
     closeToolsMenu();
+    closeLangMenu();
     closeEmergencyDeployModal();
     closeWhoopGatewayModal();
     closeAddSoldierModal();
@@ -7021,11 +7387,11 @@ function toggleBreathing() {
     if (breathAnimFrame) cancelAnimationFrame(breathAnimFrame);
     box?.classList.remove('running');
     $('breathStatusPill')?.classList.add('paused');
-    if ($('breathHint')) $('breathHint').textContent = 'Tactical breathing paused — click to resume';
+    if ($('breathHint')) $('breathHint').textContent = 'Box breathing paused — click to resume';
     const btnText = $('breathBtnText');
     if (btnText) btnText.textContent = 'Resume Cycle';
     if ($('tbbCount')) $('tbbCount').textContent = 'PAUSED';
-    notify('Tactical box breathing paused.');
+    notify('Box breathing paused.');
     return;
   }
 
@@ -7037,83 +7403,66 @@ function toggleBreathing() {
   breathCycleStartTime = Date.now() - ((120 - breathTimeLeft) * 1000);
   breathTick();
   breathInterval = setInterval(breathTick, 1000);
-  startSmoothPerimeterAnimation();
+  startSmoothWaveAnimation();
   playChime(520, 0.2);
-  notify('Tactical 4-4-4-4 Box Breathing Active. Focus on the perimeter guide.');
+  notify('4-4-4-4 Box Breathing Wave Active. Focus on the trapezoid curve.');
 }
 
-function startSmoothPerimeterAnimation() {
+function startSmoothWaveAnimation() {
   if (breathAnimFrame) cancelAnimationFrame(breathAnimFrame);
 
-  function animatePerimeter() {
+  function animateWave() {
     if (!breathInterval) return;
 
     const now = Date.now();
     const elapsedSeconds = ((now - breathCycleStartTime) / 1000) % 16;
     const phaseFraction = (elapsedSeconds % 4) / 4; // 0.0 to 1.0 within 4s phase
-    const phaseIndex = Math.floor(elapsedSeconds / 4); // 0: Inhale, 1: Hold Top, 2: Exhale, 3: Hold Bottom
+    const phaseIndex = Math.floor(elapsedSeconds / 4); // 0: Inhale (0-4), 1: Hold (4-8), 2: Exhale (8-12), 3: Hold (12-16)
 
-    // Box perimeter coordinates: (24, 216) -> (24, 24) -> (216, 24) -> (216, 216) -> (24, 216)
-    let dotX = 24, dotY = 216;
-    let lungY = 150, lungHeight = 35;
-    let lungScale = 1.0;
+    // Timeline positions on SVG width (0 to 300):
+    // 0s: x=20, y=88 (Baseline)
+    // Inhale (0-4s): rises smoothly from x=20, y=88 to x=90, y=34
+    // Hold (4-8s): plateau from x=90, y=34 to x=160, y=34
+    // Exhale (8-12s): drops smoothly from x=160, y=34 to x=230, y=88
+    // Hold (12-16s): baseline pause from x=230, y=88 to x=300, y=88
+    let dotX = 20, dotY = 88;
 
     if (phaseIndex === 0) {
-      // Phase 1: INHALE (Left edge moving UP from (24, 216) to (24, 24))
-      dotX = 24;
-      dotY = 216 - (192 * phaseFraction);
-      // Lungs filling with oxygen from bottom up
-      lungY = 175 - (105 * phaseFraction);
-      lungHeight = 10 + (105 * phaseFraction);
-      lungScale = 0.95 + (0.15 * phaseFraction);
+      // Inhale: Ease curve rising to plateau
+      dotX = 20 + (70 * phaseFraction);
+      const ease = 0.5 - 0.5 * Math.cos(phaseFraction * Math.PI);
+      dotY = 88 - (54 * ease);
     } else if (phaseIndex === 1) {
-      // Phase 2: HOLD Top (Top edge moving RIGHT from (24, 24) to (216, 24))
-      dotX = 24 + (192 * phaseFraction);
-      dotY = 24;
-      // Lungs full with slight holding resonance pulse
-      lungY = 70;
-      lungHeight = 115;
-      lungScale = 1.10 + Math.sin(phaseFraction * Math.PI) * 0.02;
+      // Hold Plateau: gentle breathing hover
+      dotX = 90 + (70 * phaseFraction);
+      dotY = 34 + Math.sin(phaseFraction * Math.PI) * 1.5;
     } else if (phaseIndex === 2) {
-      // Phase 3: EXHALE (Right edge moving DOWN from (216, 24) to (216, 216))
-      dotX = 216;
-      dotY = 24 + (192 * phaseFraction);
-      // Lungs emptying downward
-      lungY = 70 + (95 * phaseFraction);
-      lungHeight = Math.max(15, 115 - (95 * phaseFraction));
-      lungScale = 1.10 - (0.15 * phaseFraction);
+      // Exhale: Ease curve descending to baseline
+      dotX = 160 + (70 * phaseFraction);
+      const ease = 0.5 - 0.5 * Math.cos(phaseFraction * Math.PI);
+      dotY = 34 + (54 * ease);
     } else {
-      // Phase 4: HOLD Bottom (Bottom edge moving LEFT from (216, 216) to (24, 216))
-      dotX = 216 - (192 * phaseFraction);
-      dotY = 216;
-      // Lungs relaxed / empty
-      lungY = 165;
-      lungHeight = 20;
-      lungScale = 0.95 + Math.sin(phaseFraction * Math.PI) * 0.015;
+      // Hold Baseline: resting lungs
+      dotX = 230 + (70 * phaseFraction);
+      dotY = 88;
     }
 
-    // Update Tracer Dot Position
-    const dot = $('tbbTracerDot');
+    // Update Wave Tracer Dot Position
+    const dot = $('waveTracerDot');
     if (dot) {
       dot.setAttribute('cx', dotX.toFixed(1));
       dot.setAttribute('cy', dotY.toFixed(1));
     }
 
-    // Update Anatomical Lung Fill & Scale
-    const fillRect = $('lungFillLevel');
-    if (fillRect) {
-      fillRect.setAttribute('y', lungY.toFixed(1));
-      fillRect.setAttribute('height', lungHeight.toFixed(1));
-    }
-    const lungContainer = document.querySelector('.tbb-lungs-container');
-    if (lungContainer) {
-      lungContainer.style.transform = `scale(${lungScale.toFixed(3)})`;
-    }
-
-    breathAnimFrame = requestAnimationFrame(animatePerimeter);
+    breathAnimFrame = requestAnimationFrame(animateWave);
   }
 
-  breathAnimFrame = requestAnimationFrame(animatePerimeter);
+  breathAnimFrame = requestAnimationFrame(animateWave);
+}
+
+// Backward compatibility alias
+function startSmoothPerimeterAnimation() {
+  startSmoothWaveAnimation();
 }
 
 function breathTick() {
@@ -7124,13 +7473,13 @@ function breathTick() {
     $('tacticalBreathBox')?.classList.remove('running');
     if ($('tbbPhase')) $('tbbPhase').textContent = 'COMPLETE';
     if ($('tbbCount')) $('tbbCount').textContent = 'WELL DONE';
-    if ($('tbbPhaseHint')) $('tbbPhaseHint').textContent = 'Autonomic Homeostasis Restored';
-    if ($('breathHint')) $('breathHint').textContent = 'Session complete · Parasympathetic vagal tone restored';
+    if ($('boxWaveBadgeTxt')) $('boxWaveBadgeTxt').textContent = 'Session Complete';
+    if ($('breathHint')) $('breathHint').textContent = 'Session complete · Parasympathetic composure restored';
     $('breathStatusPill')?.classList.remove('paused');
     const btnText = $('breathBtnText');
     if (btnText) btnText.textContent = 'Start New Cycle';
     playChime(660, 0.4);
-    notify('Tactical box breathing session finished. Autonomic balance restored.');
+    notify('Box breathing session finished. Autonomic balance restored.');
     return;
   }
 
@@ -7143,7 +7492,7 @@ function breathTick() {
   const curKey = phaseKeys[phaseIdx];
   const curTheme = PHASE_THEME_COLORS[curKey];
 
-  // Update Center HUD Readout
+  // Update Center & Wave Badge Text
   if ($('tbbPhase')) {
     $('tbbPhase').textContent = curTheme.label;
     $('tbbPhase').style.color = curTheme.color;
@@ -7152,11 +7501,33 @@ function breathTick() {
     $('tbbCount').textContent = `${phaseSecondsRemaining}s`;
     $('tbbCount').style.color = curTheme.color;
   }
-  if ($('tbbPhaseHint')) {
-    $('tbbPhaseHint').textContent = curTheme.sub;
+  if ($('boxWaveBadgeTxt')) {
+    const labels = ['INHALE (0-4s)', 'HOLD (4-8s)', 'EXHALE (8-12s)', 'HOLD (12-16s)'];
+    $('boxWaveBadgeTxt').textContent = `${labels[phaseIdx]} · ${phaseSecondsRemaining}s left`;
+  }
+  if ($('boxWaveBadge')) {
+    $('boxWaveBadge').style.borderColor = curTheme.color;
+    $('boxWaveBadge').style.color = curTheme.color;
+  }
+  if ($('boxWaveDivider')) {
+    $('boxWaveDivider').style.background = curTheme.color;
   }
 
-  // Backward compatibility labels for external checks
+  // Update Wave Active Stroke & Tracer Dot Colors
+  const waveStroke = $('waveActivePath');
+  const waveFill = $('waveActivePolygon');
+  const tracerDot = $('waveTracerDot');
+  const stop0 = $('waveGradStop0');
+  const stop1 = $('waveGradStop1');
+  if (waveStroke) waveStroke.style.stroke = curTheme.color;
+  if (tracerDot) {
+    tracerDot.style.stroke = curTheme.color;
+    tracerDot.style.filter = `drop-shadow(0 0 8px ${curTheme.color})`;
+  }
+  if (stop0) stop0.setAttribute('stop-color', curTheme.hex);
+  if (stop1) stop1.setAttribute('stop-color', curTheme.hex);
+
+  // Backward compatibility labels
   if ($('phase')) $('phase').textContent = curTheme.label;
   if ($('count')) $('count').textContent = `${phaseSecondsRemaining}s`;
 
@@ -7169,39 +7540,17 @@ function breathTick() {
   if ($('timer')) $('timer').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   if ($('progress')) $('progress').style.width = `${(elapsed / 120) * 100}%`;
 
-  // Highlight active perimeter label on the square (HOLD, EXHALE, HOLD, INHALE)
-  const labels = ['tbbLeft', 'tbbTop', 'tbbRight', 'tbbBottom'];
-  labels.forEach((id, idx) => {
-    const el = $(id);
-    if (el) el.classList.toggle('active', idx === phaseIdx);
-  });
-  if ($('tbbLeftSec')) $('tbbLeftSec').textContent = phaseIdx === 0 ? `${phaseSecondsRemaining}s` : '4s';
-  if ($('tbbTopSec')) $('tbbTopSec').textContent = phaseIdx === 1 ? `${phaseSecondsRemaining}s` : '4s';
-  if ($('tbbRightSec')) $('tbbRightSec').textContent = phaseIdx === 2 ? `${phaseSecondsRemaining}s` : '4s';
-  if ($('tbbBottomSec')) $('tbbBottomSec').textContent = phaseIdx === 3 ? `${phaseSecondsRemaining}s` : '4s';
-
   // Highlight Bottom 4-Phase Stepper Pills
   const phaseBoxes = document.querySelectorAll('#phases .phase-box');
   phaseBoxes.forEach((el, i) => {
     el.classList.toggle('active', i === phaseIdx);
   });
 
-  // Dynamic Theme Colors for the Active Border and Tracer Dot
-  const activeBorder = $('tbbActiveBorder');
-  const dot = $('tbbTracerDot');
-  if (activeBorder) {
-    activeBorder.style.stroke = curTheme.color;
-    activeBorder.style.filter = `drop-shadow(0 0 8px ${curTheme.color})`;
-  }
-  if (dot) {
-    dot.style.fill = curTheme.color;
-  }
-
-  // Update Lung Gradient Stop Colors
-  const stop1 = $('lungStop1');
-  const stop2 = $('lungStop2');
-  if (stop1) stop1.setAttribute('stop-color', curTheme.hex);
-  if (stop2) stop2.setAttribute('stop-color', curTheme.hex);
+  // Highlight Active Timeline Numbers (0, 4, 8, 12, 16)
+  ['tick0', 'tick4', 'tick8', 'tick12', 'tick16'].forEach((id, idx) => {
+    const el = $(id);
+    if (el) el.style.fill = idx === phaseIdx || idx === phaseIdx + 1 ? curTheme.hex : 'var(--muted)';
+  });
 
   // Phase transition harmonic chime
   if (elapsed % 4 === 0) {
@@ -7227,8 +7576,7 @@ function resetBreathing() {
     $('tbbCount').textContent = 'TAP TO START';
     $('tbbCount').style.color = 'var(--primary)';
   }
-  if ($('tbbPhaseHint')) $('tbbPhaseHint').textContent = '4-4-4-4 Grounding';
-
+  if ($('boxWaveBadgeTxt')) $('boxWaveBadgeTxt').textContent = 'READY (0-4s)';
   if ($('phase')) $('phase').textContent = 'READY';
   if ($('count')) $('count').textContent = 'Tap to Start';
   if ($('breathHint')) $('breathHint').textContent = 'One calming 4-4-4-4 cycle';
@@ -7238,28 +7586,18 @@ function resetBreathing() {
   if ($('timer')) $('timer').textContent = '02:00';
   if ($('progress')) $('progress').style.width = '0%';
 
-  // Reset tracer dot to starting position (24, 216)
-  const dot = $('tbbTracerDot');
+  // Reset tracer dot to starting position (20, 88)
+  const dot = $('waveTracerDot');
   if (dot) {
-    dot.setAttribute('cx', '24');
-    dot.setAttribute('cy', '216');
-    dot.style.fill = 'var(--primary)';
-  }
-  const fillRect = $('lungFillLevel');
-  if (fillRect) {
-    fillRect.setAttribute('y', '150');
-    fillRect.setAttribute('height', '35');
+    dot.setAttribute('cx', '20');
+    dot.setAttribute('cy', '88');
+    dot.style.stroke = 'var(--primary)';
   }
 
-  // Reset perimeter labels
-  ['tbbLeft', 'tbbTop', 'tbbRight', 'tbbBottom'].forEach((id, idx) => {
-    const el = $(id);
-    if (el) el.classList.toggle('active', idx === 0);
-  });
   document.querySelectorAll('#phases .phase-box').forEach((el, i) => {
     el.classList.toggle('active', i === 0);
   });
-  notify('Tactical box breathing reset to 02:00.');
+  notify('Box breathing reset to 02:00.');
 }
 
 function setBreathingProtocol(proto, btn) {

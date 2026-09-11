@@ -3396,6 +3396,164 @@
       margin: 0 auto 16px;
     }
 
+    /* =========================================================================
+       ACTIVE USER WHOOP TELEMETRY & AI REASONING WIDGET (HOME SCREEN)
+       ========================================================================= */
+    .home-whoop-card {
+      margin: 14px 0 20px 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .home-whoop-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--cyan), #6366f1);
+    }
+    .home-whoop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .home-whoop-identity {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .home-whoop-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 25%, transparent), color-mix(in srgb, var(--cyan) 20%, transparent));
+      border: 1.5px solid var(--primary-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex: none;
+    }
+    .home-whoop-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .home-whoop-name {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--text-heading);
+      letter-spacing: -0.2px;
+    }
+    .home-whoop-meta {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .home-whoop-device-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--card2);
+      border: 1px solid var(--line);
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .home-whoop-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+    @media (max-width: 900px) {
+      .home-whoop-metrics-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 540px) {
+      .home-whoop-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .home-whoop-metric-tile {
+      background: var(--card2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .home-whoop-metric-tile:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary-border);
+    }
+    .home-whoop-m-label {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .home-whoop-m-value {
+      font-size: 19px;
+      font-weight: 900;
+      margin-top: 3px;
+      color: var(--text-heading);
+    }
+    .home-whoop-m-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .home-whoop-ai-card {
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cyan-dim) 50%, var(--card2)), var(--card2));
+      border: 1px solid color-mix(in srgb, var(--cyan) 35%, var(--line));
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 12px;
+    }
+    .home-whoop-ai-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .home-whoop-ai-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--cyan);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.4px;
+    }
+    .home-whoop-ai-text {
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
   </style>
 </head>
 <body data-theme="dark">
@@ -3688,6 +3846,92 @@
       <button class="btn" onclick="syncLiveGoogleSheet()" title="Fetch live rows and metrics directly from Google Sheet">
         <svg class="icon"><use href="#zap"/></svg> <span id="sheetSyncBtnText" data-i18n="btn_sync_sheet">Sync Sheet</span>
       </button>
+    </div>
+  </section>
+
+  <!-- LIVE USER WHOOP 4.0 TELEMETRY, BLUETOOTH IDENTITY & AI ANALYSIS -->
+  <section class="home-whoop-card" id="homeWhoopCard">
+    <div class="home-whoop-header">
+      <div class="home-whoop-identity">
+        <div class="home-whoop-avatar">
+          <svg class="icon" style="width:24px;height:24px;"><use href="#shield"/></svg>
+        </div>
+        <div>
+          <div class="home-whoop-name-row">
+            <span class="home-whoop-name" id="homeWhoopUserName">Major Vikramaditya Rathore</span>
+            <span class="tag cyan" id="homeWhoopCompanyTag">Alpha Assault</span>
+            <span class="combat-badge ready" id="homeWhoopReadinessTag">🟢 Combat Tier 1</span>
+          </div>
+          <div class="home-whoop-meta">
+            <span>Force ID: <b style="color:var(--text)" id="homeWhoopUserId">KV-101</b></span>
+            <span>·</span>
+            <span>Role: <span id="homeWhoopUserRole">Company Commander</span></span>
+            <span>·</span>
+            <span class="home-whoop-device-badge">
+              <svg class="icon" style="width:12px;height:12px;color:var(--cyan);"><use href="#bluetooth"/></svg>
+              <span id="homeWhoopBleName">WHOOP 5B00348148</span>
+              <span class="ble-dot" id="homeWhoopBleDot" style="background:var(--primary);width:7px;height:7px;"></span>
+              <span id="homeWhoopBleStatusText" style="color:var(--primary);font-weight:800;">Online</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <button class="btn" onclick="openBleModal()" title="Manage or reconnect Bluetooth wearable">
+          <svg class="icon" style="color:var(--cyan);"><use href="#bluetooth"/></svg> <span data-i18n="btn_pair_device">Manage Bluetooth</span>
+        </button>
+        <button class="btn cyan" onclick="analyzeWhoopWithGemini()" title="Run deep AI analysis on live biometrics">
+          <svg class="icon"><use href="#spark"/></svg> <span data-i18n="btn_refresh_ai">✦ Run Deep AI Analysis</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Vitals Grid -->
+    <div class="home-whoop-metrics-grid">
+      <div class="home-whoop-metric-tile">
+        <div class="home-whoop-m-label" data-i18n="whoop_m_pulse">PULSE (LIVE)</div>
+        <div class="home-whoop-m-value" style="color:var(--rose);"><span id="homeWhoopBpm">74</span> <small style="font-size:11px;color:var(--muted)">BPM</small></div>
+        <div class="home-whoop-m-sub" id="homeWhoopBpmSub">Normal Sinus Rhythm</div>
+      </div>
+      <div class="home-whoop-metric-tile">
+        <div class="home-whoop-m-label" data-i18n="whoop_m_recovery">RECOVERY</div>
+        <div class="home-whoop-m-value" style="color:var(--primary);"><span id="homeWhoopRecovery">88</span>%</div>
+        <div class="home-whoop-m-sub" id="homeWhoopRecoverySub">Peak Autonomic Tone</div>
+      </div>
+      <div class="home-whoop-metric-tile">
+        <div class="home-whoop-m-label" data-i18n="whoop_m_hrv">RESTING HRV</div>
+        <div class="home-whoop-m-value" style="color:var(--cyan);"><span id="homeWhoopHrv">74</span> <small style="font-size:11px;color:var(--muted)">ms</small></div>
+        <div class="home-whoop-m-sub" id="homeWhoopHrvSub">+4 ms vs 30d baseline</div>
+      </div>
+      <div class="home-whoop-metric-tile">
+        <div class="home-whoop-m-label" data-i18n="whoop_m_spo2">SpO2 OXYGEN</div>
+        <div class="home-whoop-m-value" style="color:var(--primary);"><span id="homeWhoopSpo2">98</span>%</div>
+        <div class="home-whoop-m-sub" id="homeWhoopSpo2Sub">Hypoxia Protected</div>
+      </div>
+      <div class="home-whoop-metric-tile">
+        <div class="home-whoop-m-label" data-i18n="whoop_m_sleep">SLEEP DURATION</div>
+        <div class="home-whoop-m-value"><span id="homeWhoopSleep">7.8</span><small style="font-size:11px;color:var(--muted)">h</small></div>
+        <div class="home-whoop-m-sub" id="homeWhoopSleepSub">Debt: 0.4h (Optimal)</div>
+      </div>
+      <div class="home-whoop-metric-tile">
+        <div class="home-whoop-m-label" data-i18n="whoop_m_strain">DAY STRAIN</div>
+        <div class="home-whoop-m-value" style="color:var(--amber);"><span id="homeWhoopStrain">11.2</span> <small style="font-size:11px;color:var(--muted)">/ 21</small></div>
+        <div class="home-whoop-m-sub" id="homeWhoopStrainSub">Moderate Load</div>
+      </div>
+    </div>
+
+    <!-- AI Clinical & Operational Readiness Analysis -->
+    <div class="home-whoop-ai-card">
+      <div class="home-whoop-ai-head">
+        <span class="home-whoop-ai-title">
+          <svg class="icon" style="width:14px;height:14px;"><use href="#spark"/></svg>
+          <span data-i18n="ai_whoop_analysis_title">Google Gemini AI Biometric Analysis &amp; Operational Clearance</span>
+        </span>
+        <span class="tag green" style="font-size:10px;padding:2px 8px;" id="homeWhoopAiClearanceTag">✓ Warfront Cleared</span>
+      </div>
+      <div class="home-whoop-ai-text" id="homeWhoopAiAnalysis">
+        <b>Physiological Assessment:</b> Parasympathetic equilibrium fully restored following 7.8h regenerative sleep. Resting HRV is tracking +4 ms above 30-day baseline with zero acute hypoxia markers (SpO2 98%). Autonomic nervous system demonstrates exceptional cardiovascular reserve with minimal cumulative sleep debt (0.4h). Cleared for Tier 1 combat sortie, high-tempo tactical maneuvers, and prolonged operational command.
+      </div>
     </div>
   </section>
 
@@ -5062,6 +5306,17 @@ const I18N_TRANSLATIONS = {
     tbb_ready: 'READY',
     tbb_tap: 'TAP TO START',
 
+    // Home Screen WHOOP & AI Analysis Widget
+    btn_pair_device: 'Manage Bluetooth',
+    btn_refresh_ai: '✦ Run Deep AI Analysis',
+    whoop_m_pulse: 'PULSE (LIVE)',
+    whoop_m_recovery: 'RECOVERY',
+    whoop_m_hrv: 'RESTING HRV',
+    whoop_m_spo2: 'SpO2 OXYGEN',
+    whoop_m_sleep: 'SLEEP DURATION',
+    whoop_m_strain: 'DAY STRAIN',
+    ai_whoop_analysis_title: 'Google Gemini AI Biometric Analysis & Operational Clearance',
+
     // Toast notices
     lang_switched_notice: 'Language changed to English.'
   },
@@ -5134,6 +5389,17 @@ const I18N_TRANSLATIONS = {
     phase_exhale: 'श्वास छोड़ें (बाहर)',
     tbb_ready: 'तैयार',
     tbb_tap: 'प्रारंभ करने के लिए टैप करें',
+
+    // Home Screen WHOOP & AI Analysis Widget
+    btn_pair_device: 'ब्लूटूथ प्रबंधित करें',
+    btn_refresh_ai: '✦ गहरा एआई विश्लेषण चलाएं',
+    whoop_m_pulse: 'पल्स (लाइव)',
+    whoop_m_recovery: 'रिकवरी',
+    whoop_m_hrv: 'विश्राम एचआरवी',
+    whoop_m_spo2: 'SpO2 ऑक्सीजन',
+    whoop_m_sleep: 'नींद की अवधि',
+    whoop_m_strain: 'दैनिक तनाव',
+    ai_whoop_analysis_title: 'गूगल जेमिनी एआई बायोमेट्रिक विश्लेषण और परिचालन मंजूरी',
 
     // Toast notices
     lang_switched_notice: 'भाषा बदलकर हिन्दी कर दी गई है।'
@@ -5208,6 +5474,17 @@ const I18N_TRANSLATIONS = {
     tbb_ready: 'సిద్ధంగా ఉంది',
     tbb_tap: 'ప్రారంభించడానికి నొక్కండి',
 
+    // Home Screen WHOOP & AI Analysis Widget
+    btn_pair_device: 'బ్లూటూత్ నిర్వహించండి',
+    btn_refresh_ai: '✦ లోతైన ఏఐ విశ్లేషణను అమలు చేయండి',
+    whoop_m_pulse: 'పల్స్ (లైవ్)',
+    whoop_m_recovery: 'రికవరీ',
+    whoop_m_hrv: 'విశ్రాంతి HRV',
+    whoop_m_spo2: 'SpO2 ఆక్సిజన్',
+    whoop_m_sleep: 'నిద్ర సమయం',
+    whoop_m_strain: 'రోజువారీ భారం',
+    ai_whoop_analysis_title: 'గూగుల్ జెమిని ఏఐ బయోమెట్రిక్ విశ్లేషణ & కార్యాచరణ అనుమతి',
+
     // Toast notices
     lang_switched_notice: 'భాష తెలుగులోకి మార్చబడింది.'
   },
@@ -5280,6 +5557,17 @@ const I18N_TRANSLATIONS = {
     phase_exhale: 'ಉಸಿರು ಬಿಡಿ (ಹೊರಗೆ)',
     tbb_ready: 'ಸಿದ್ಧವಾಗಿದೆ',
     tbb_tap: 'ಪ್ರಾರಂಭಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ',
+
+    // Home Screen WHOOP & AI Analysis Widget
+    btn_pair_device: 'ಬ್ಲೂಟೂತ್ ನಿರ್ವಹಿಸಿ',
+    btn_refresh_ai: '✦ ಆಳವಾದ ಎಐ ವಿಶ್ಲೇಷಣೆ ರನ್ ಮಾಡಿ',
+    whoop_m_pulse: 'ನಾಡಿ ಬಡಿತ (ಲೈವ್)',
+    whoop_m_recovery: 'ಚೇತರಿಕೆ',
+    whoop_m_hrv: 'ವಿಶ್ರಾಂತಿ HRV',
+    whoop_m_spo2: 'SpO2 ಆಮ್ಲಜನಕ',
+    whoop_m_sleep: 'ನಿದ್ರೆಯ ಅವಧಿ',
+    whoop_m_strain: 'ದೈನಂದಿನ ಒತ್ತಡ',
+    ai_whoop_analysis_title: 'ಗೂಗಲ್ ಜೆಮಿನಿ ಎಐ ಬಯೋಮೆಟ್ರಿಕ್ ವಿಶ್ಲೇಷಣೆ ಮತ್ತು ಕಾರ್ಯಾಚರಣೆಯ ಅನುಮತಿ',
 
     // Toast notices
     lang_switched_notice: 'ಭಾಷೆಯನ್ನು ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಲಾಗಿದೆ.'
@@ -5407,13 +5695,28 @@ function unlockApp(role) {
   }
   sessionStorage.setItem('kavach_auth_state', 'unlocked');
   showView(role || 'commander');
+
+  // Update WHOOP Home Screen Card User Details based on active persona
+  if (role === 'jawan') {
+    if ($('homeWhoopUserName')) $('homeWhoopUserName').textContent = 'Sepoy Pradeep Rawat';
+    if ($('homeWhoopCompanyTag')) $('homeWhoopCompanyTag').textContent = 'Alpha Assault';
+    if ($('homeWhoopUserId')) $('homeWhoopUserId').textContent = 'KV-106';
+    if ($('homeWhoopUserRole')) $('homeWhoopUserRole').textContent = 'Scout / Pointman';
+  } else {
+    if ($('homeWhoopUserName')) $('homeWhoopUserName').textContent = 'Major Vikramaditya Rathore';
+    if ($('homeWhoopCompanyTag')) $('homeWhoopCompanyTag').textContent = 'Alpha Assault';
+    if ($('homeWhoopUserId')) $('homeWhoopUserId').textContent = 'KV-101';
+    if ($('homeWhoopUserRole')) $('homeWhoopUserRole').textContent = 'Company Commander';
+  }
+  updateWhoopDisplayMetrics();
+
   if (typeof createCelebrationParticles === 'function') {
     createCelebrationParticles(window.innerWidth / 2, window.innerHeight / 2, 36);
   }
   if (typeof playChime === 'function') {
     playChime(587, 0.25);
   }
-  notify(`Welcome, ${role === 'jawan' ? 'Jawan' : 'Officer'}. Verified via Defense Biometric Gateway.`);
+  notify(`Welcome, ${role === 'jawan' ? 'Jawan (Sepoy Pradeep)' : 'Officer (Major Vikramaditya)'}. Verified via Defense Biometric Gateway.`);
 }
 
 function switchAuthTab(tab) {
@@ -7726,8 +8029,63 @@ function updateWhoopDisplayMetrics() {
   if ($('recoveryVal')) $('recoveryVal').textContent = `${realRecoveryVal}%`;
   if ($('strainVal')) $('strainVal').textContent = realStrainVal;
   if ($('hrvVal')) $('hrvVal').textContent = `${liveHrvValue} ms`;
-  if ($('sleepVal')) $('sleepVal').textContent = `6.2`;
+  if ($('sleepVal')) $('sleepVal').textContent = `7.8`;
   if ($('ekgBpmPill')) $('ekgBpmPill').textContent = `${liveBpmValue} BPM`;
+  if ($('ekgLiveVal')) $('ekgLiveVal').textContent = liveBpmValue;
+  if ($('wireframeBpmVal')) $('wireframeBpmVal').textContent = liveBpmValue;
+
+  // Update HOME SCREEN Commander WHOOP Card
+  if ($('homeWhoopBpm')) $('homeWhoopBpm').textContent = liveBpmValue;
+  if ($('homeWhoopRecovery')) $('homeWhoopRecovery').textContent = realRecoveryVal;
+  if ($('homeWhoopHrv')) $('homeWhoopHrv').textContent = liveHrvValue;
+  if ($('homeWhoopSleep')) $('homeWhoopSleep').textContent = ((realSleepVal / 100) * 8.5).toFixed(1);
+  if ($('homeWhoopStrain')) $('homeWhoopStrain').textContent = realStrainVal;
+  if ($('homeWhoopSpo2')) $('homeWhoopSpo2').textContent = '98';
+
+  // Dynamic AI Assessment Update for Active User
+  updateHomeWhoopAiAnalysis();
+}
+
+function updateHomeWhoopAiAnalysis() {
+  const aiBox = $('homeWhoopAiAnalysis');
+  const tag = $('homeWhoopAiClearanceTag');
+  const readinessBadge = $('homeWhoopReadinessTag');
+  if (!aiBox) return;
+
+  const hoursSleep = ((realSleepVal / 100) * 8.5).toFixed(1);
+  const devName = (bleDevice && bleDevice.name) ? bleDevice.name : TARGET_WHOOP_NAME;
+
+  if (realRecoveryVal >= 67) {
+    if (tag) {
+      tag.textContent = '✓ Warfront Cleared';
+      tag.className = 'tag green';
+    }
+    if (readinessBadge) {
+      readinessBadge.textContent = '🟢 Combat Tier 1';
+      readinessBadge.className = 'combat-badge ready';
+    }
+    aiBox.innerHTML = `<b>Physiological Assessment (${devName}):</b> Parasympathetic equilibrium fully restored with pulse at ${liveBpmValue} BPM and resting HRV at ${liveHrvValue} ms following ${hoursSleep}h restorative sleep. Recovery score is optimal at <b>${realRecoveryVal}%</b> with zero acute hypoxia markers (SpO2 98%). Autonomic tone demonstrates superior neuromuscular reactivity and cardiovascular reserve under continuous WHOOP telemetry. <b>Readiness Verdict:</b> Fully cleared for frontline combat sortie, airborne insertions, and sustained high-tempo command.`;
+  } else if (realRecoveryVal >= 40) {
+    if (tag) {
+      tag.textContent = '⚡ Tactical Reserve';
+      tag.className = 'tag amber';
+    }
+    if (readinessBadge) {
+      readinessBadge.textContent = '🟡 Tactical Reserve';
+      readinessBadge.className = 'combat-badge reserve';
+    }
+    aiBox.innerHTML = `<b>Physiological Assessment (${devName}):</b> Moderate autonomic fatigue load detected. Current pulse is ${liveBpmValue} BPM, resting HRV at ${liveHrvValue} ms, and Recovery at <b>${realRecoveryVal}%</b> after ${hoursSleep}h sleep. Autonomic restoration is incomplete. <b>Readiness Verdict:</b> Retain in tactical reserve / secondary echelon. Recommend 90-minute circadian nap and 4-4-4-4 tactical box breathing before heavy kinetic engagement.`;
+  } else {
+    if (tag) {
+      tag.textContent = '⛔ Grounded / Fatigue Rest';
+      tag.className = 'tag rose';
+    }
+    if (readinessBadge) {
+      readinessBadge.textContent = '🔴 Combat Fatigue Exempt';
+      readinessBadge.className = 'combat-badge exempt';
+    }
+    aiBox.innerHTML = `<b>Physiological Assessment (${devName}):</b> Acute sympathetic exhaustion alert. Heart rate is ${liveBpmValue} BPM, resting HRV depressed to ${liveHrvValue} ms, and recovery compromised at <b>${realRecoveryVal}%</b>. <b>Readiness Verdict:</b> Strictly grounded from combat sortie to eliminate friendly casualty risk. Mandatory 48-hour recovery cycle with clinical oversight.`;
+  }
 }
 
 // Honest Bluetooth Connection function
@@ -7850,6 +8208,11 @@ function setBleStatus(status, label) {
   const badge = $('bleTopBtn');
   const txt = $('bleStatusText');
   const statusBadge = $('whoopConnStatusBadge');
+  const homeBleName = $('homeWhoopBleName');
+  const homeBleDot = $('homeWhoopBleDot');
+  const homeBleStatusText = $('homeWhoopBleStatusText');
+
+  const activeName = (bleDevice && bleDevice.name) ? bleDevice.name : TARGET_WHOOP_NAME;
 
   if (status === 'connected') {
     if (badge) badge.className = 'ble-badge connected';
@@ -7858,12 +8221,24 @@ function setBleStatus(status, label) {
       statusBadge.textContent = '🟢 Connected';
       statusBadge.className = 'tag green';
     }
+    if (homeBleName) homeBleName.textContent = activeName;
+    if (homeBleDot) homeBleDot.style.background = 'var(--primary)';
+    if (homeBleStatusText) {
+      homeBleStatusText.textContent = 'Online / Synced';
+      homeBleStatusText.style.color = 'var(--primary)';
+    }
   } else if (status === 'failed') {
     if (badge) badge.className = 'ble-badge failed';
     if (txt) txt.textContent = `WHOOP: ${label}`;
     if (statusBadge) {
       statusBadge.textContent = `🔴 ${label}`;
       statusBadge.className = 'tag rose';
+    }
+    if (homeBleName) homeBleName.textContent = activeName;
+    if (homeBleDot) homeBleDot.style.background = 'var(--rose)';
+    if (homeBleStatusText) {
+      homeBleStatusText.textContent = label || 'Offline';
+      homeBleStatusText.style.color = 'var(--rose)';
     }
   } else {
     if (badge) badge.className = 'ble-badge';
@@ -7872,7 +8247,15 @@ function setBleStatus(status, label) {
       statusBadge.textContent = '🔴 Not Connected';
       statusBadge.className = 'tag rose';
     }
+    if (homeBleName) homeBleName.textContent = TARGET_WHOOP_NAME;
+    if (homeBleDot) homeBleDot.style.background = 'var(--primary)';
+    if (homeBleStatusText) {
+      homeBleStatusText.textContent = 'Online (Simulated)';
+      homeBleStatusText.style.color = 'var(--primary)';
+    }
   }
+
+  updateHomeWhoopAiAnalysis();
 }
 
 // Backward compatibility alias

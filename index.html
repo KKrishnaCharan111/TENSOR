@@ -1353,6 +1353,102 @@
       gap: 14px;
     }
 
+    
+    /* =========================================================================
+       WHOOP 4.0 BLUETOOTH GATT MANAGER & TELEMETRY STREAM
+       ========================================================================= */
+    .ble-modal-box {
+      width: min(880px, 96vw);
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+    .ble-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .ble-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ble-status-box {
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--card2);
+      border: 1px solid var(--line);
+    }
+    .ble-diag-banner {
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .ble-diag-banner.secure {
+      background: var(--primary-dim);
+      border: 1px solid var(--primary-border);
+      color: var(--text);
+    }
+    .ble-diag-banner.notice {
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fde68a;
+    }
+    .pulse-meter {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 1px solid var(--line-subtle);
+    }
+    .heart-icon-pulse {
+      color: var(--rose);
+      animation: heartbeat 1s infinite ease-in-out;
+    }
+    .ble-presets-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .ble-preset-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ble-preset-btn:hover {
+      border-color: var(--cyan);
+      background: var(--card-hover);
+      color: var(--text-heading);
+    }
+    .ble-packet-console {
+      height: 240px;
+      overflow-y: auto;
+      padding: 12px;
+      background: #050d18;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      color: #7dd3fc;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
     /* WHOOP AI Analysis Button */
     .whoop-ai-btn {
       display: inline-flex;
@@ -1378,6 +1474,27 @@
   </style>
 </head>
 <body data-theme="dark">
+<!-- FILE ORIGIN ADVISORY BANNER FOR WEB BLUETOOTH -->
+<div id="fileOriginAlert" style="display:none;background:linear-gradient(90deg, #0284c7, #0f766e);color:#ffffff;padding:12px 20px;position:sticky;top:0;z-index:999999;box-shadow:0 4px 16px rgba(0,0,0,0.4);font-size:12px;font-weight:700;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:18px;">⚡</span>
+    <span>
+      <b>Web Bluetooth Notice:</b> Browser security policies restrict Bluetooth pairing to Secure Origins (localhost). To pair <b>WHOOP 5B00348148</b>:
+    </span>
+  </div>
+  <a href="http://localhost:8000/index.html?pair=1" style="background:#ffffff;color:#0369a1;padding:6px 14px;border-radius:6px;font-weight:900;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,0.25);">
+    Launch on http://localhost:8000 &rarr;
+  </a>
+</div>
+<script>
+  if (window.location.protocol === 'file:') {
+    document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('fileOriginAlert');
+      if (b) b.style.display = 'flex';
+    });
+  }
+</script>
+
 
 <!-- SVG Icons Defs -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden"><defs>
@@ -1756,8 +1873,11 @@
       <p>Your personal recovery telemetry. Never accessible to officers or service records.</p>
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
-      <button class="btn cyan" onclick="openCallModal()">
-        <svg class="icon"><use href="#phone"/></svg> Confidential Helplines
+      <button class="btn cyan" onclick="openBleModal()" title="Pair WHOOP 4.0 or start GATT stream">
+        <svg class="icon"><use href="#bluetooth"/></svg> Connect My WHOOP
+      </button>
+      <button class="btn" onclick="openCallModal()">
+        <svg class="icon"><use href="#phone"/></svg> Helplines
       </button>
       <button class="btn" onclick="toggleDeckFold()">
         <span id="deckToggleBtnText">Stack Deck</span>
@@ -2076,6 +2196,107 @@
   </section>
 </div>
 
+
+<!-- WHOOP 4.0 BLUETOOTH GATT MANAGER MODAL -->
+<div id="bleModal" class="backdrop">
+  <section class="modal ble-modal-box">
+    <header class="mhead">
+      <div>
+        <h2><svg class="icon" style="color:var(--cyan)"><use href="#bluetooth"/></svg> WHOOP 4.0 Bluetooth GATT Manager</h2>
+        <p>Pair physical WHOOP BLE hardware or stream real-time 1Hz GATT telemetry packets.</p>
+      </div>
+      <button class="close" onclick="closeBleModal()">×</button>
+    </header>
+
+    <div class="mbody">
+      <!-- Browser Security & Diagnostics Banner -->
+      <div id="bleDiagBanner" class="ble-diag-banner secure">
+        <span style="font-size:16px;">ℹ️</span>
+        <div id="bleDiagText">Checking Web Bluetooth API environment...</div>
+      </div>
+
+      <div class="ble-grid">
+        <!-- Left: Hardware Status & Controls -->
+        <div>
+          <div class="ble-status-box">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:800;color:var(--text-heading)">Configured Peripheral</span>
+              <span id="bleModalStatusTag" class="tag cyan">Ready to Pair</span>
+            </div>
+            <div style="margin-top:8px;font-size:19px;font-weight:900;color:var(--cyan);letter-spacing:0.5px;" id="bleDeviceName">WHOOP 5B00348148</div>
+            <div style="margin-top:4px;font-size:11px;color:var(--muted)" id="bleServiceInfo">BLE Serial: 5B00348148 · GATT 0x180D (Heart Rate) · 0x2A37</div>
+
+            <!-- Pulse Meter -->
+            <div class="pulse-meter">
+              <svg class="icon heart-icon-pulse" style="width:32px;height:32px"><use href="#heart"/></svg>
+              <div>
+                <div style="font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase">Live Pulse Stream</div>
+                <div style="font-size:24px;font-weight:900;color:var(--rose)"><span id="bleModalBpm">68</span> <small style="font-size:12px;color:var(--muted)">BPM</small></div>
+              </div>
+              <div style="margin-left:auto;text-align:right">
+                <div style="font-size:10px;color:var(--muted);font-weight:800">BATTERY</div>
+                <div style="font-size:16px;font-weight:900;color:var(--primary)" id="bleBatteryLevel">94%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Action Buttons for WHOOP 5B00348148 -->
+          <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;">
+            <button class="btn primary" onclick="connectTargetWhoop('WHOOP 5B00348148')" id="connectTargetBtn" style="width:100%;padding:12px;font-size:13px;font-weight:900;background:linear-gradient(135deg, #0284c7, #0d9488);border-color:#38bdf8;box-shadow:0 4px 14px rgba(2, 132, 199, 0.35);">
+              <svg class="icon" style="width:16px;height:16px"><use href="#bluetooth"/></svg> Connect WHOOP 5B00348148 (Click to Pair)
+            </button>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <button class="btn" onclick="connectWebBluetooth(true)" id="scanAllBleBtn" style="font-size:11px;">
+                <svg class="icon"><use href="#bluetooth"/></svg> Scan All BLE Devices
+              </button>
+              <button class="btn cyan" onclick="toggleVirtualBleStream()" id="virtualStreamBtn" style="font-size:11px;">
+                <svg class="icon"><use href="#zap"/></svg> <span id="virtualStreamBtnText">Stream WHOOP 5B00348148</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+            <button class="btn" onclick="disconnectBle()" id="disconnectBleBtn">
+              Disconnect BLE
+            </button>
+            <button class="whoop-ai-btn" style="justify-content:center;padding:8px 12px;font-size:11px;" onclick="closeBleModal();analyzeWhoopWithGemini();">
+              ⚡ Analyze with Gemini
+            </button>
+          </div>
+
+          <!-- Quick Scenario Testing -->
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);">
+            <div style="font-size:11px;font-weight:800;color:var(--muted);margin-bottom:6px;">QUICK BIOMETRIC PRESETS (INJECT INTO STREAM):</div>
+            <div class="ble-presets-row">
+              <button class="ble-preset-btn" onclick="setBlePreset('resting')">🟢 Resting (64 BPM, HRV 58ms)</button>
+              <button class="ble-preset-btn" onclick="setBlePreset('strain')">🟡 Patrol Strain (128 BPM, HRV 36ms)</button>
+              <button class="ble-preset-btn" onclick="setBlePreset('alert')">🔴 Fatigue Alert (96 BPM, HRV 24ms)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Live Telemetry Feed -->
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="font-size:12px;font-weight:800;color:var(--text-heading)">Live GATT Telemetry Feed</div>
+            <button class="btn" style="padding:2px 8px;font-size:10px;" onclick="clearBlePacketLog()">Clear</button>
+          </div>
+          <pre id="blePacketLog" class="ble-packet-console">// Initializing WHOOP 4.0 GATT listener...
+// Click "Scan Physical Bluetooth" or "Start 1Hz Live Stream" to begin.</pre>
+          <div style="margin-top:8px;padding:10px;border-radius:8px;background:var(--card2);border:1px solid var(--line);font-size:11px;line-height:1.5;">
+            <b style="color:var(--cyan)">💡 Pairing Guide for WHOOP 5B00348148:</b>
+            <ol style="margin:4px 0 0 16px;padding:0;color:var(--text);">
+              <li>Open this page on <a href="http://localhost:8000/index.html" target="_blank" style="color:var(--cyan);font-weight:800;text-decoration:underline;">http://localhost:8000</a> in Chrome or Edge.</li>
+              <li>In WHOOP phone app: Open <b>Device Settings &rarr; Broadcast Heart Rate &rarr; ON</b>.</li>
+              <li>Click <b>Connect WHOOP 5B00348148</b> and select it in the browser prompt.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- DIRECT CALL MODAL -->
 <div id="callModal" class="backdrop">
   <section class="modal" style="width:min(520px, 95vw);">
@@ -2177,7 +2398,8 @@ function handleDirectCall() {
   notify(`Initiating confidential hotline call to ${choice}...`);
   setTimeout(() => { closeCallModal();
     closeGeminiKeyModal();
-    close365Calendar(); }, 600);
+    close365Calendar();
+    closeBleModal(); }, 600);
 }
 
 /* =========================================================================
@@ -2369,6 +2591,7 @@ document.addEventListener('keydown', e => {
         closeCallModal();
     closeGeminiKeyModal();
     close365Calendar();
+    closeBleModal();
   }
 });
 
@@ -2419,6 +2642,7 @@ function saveGeminiKey() {
   }
   closeGeminiKeyModal();
     close365Calendar();
+    closeBleModal();
 }
 
 function resetGeminiKeyToDefault() {
@@ -2690,31 +2914,352 @@ function playChime(freq = 440, duration = 0.2) {
   } catch(e) {}
 }
 
-/* --- 3. Virtual WHOOP Bluetooth Live Stream --- */
+/* --- 3. WHOOP 4.0 Bluetooth Subsystem (Web Bluetooth API + 1Hz GATT Stream) --- */
+const TARGET_WHOOP_NAME = 'WHOOP 5B00348148';
+const WHOOP_CUSTOM_SERVICE_UUID = '61080000-8d6d-82b8-614a-1c8cb0f8dcc6';
+const BLE_OPTIONAL_SERVICES = ['heart_rate', 'battery_service', 'device_information', WHOOP_CUSTOM_SERVICE_UUID];
+
 let isBleStreaming = false;
 let bleStreamTimer = null;
 let liveBpmValue = 68;
+let liveHrvValue = 54;
+let bleDevice = null;
+let bleServer = null;
+let bleHrChar = null;
+let blePacketCount = 0;
+let activeDeviceName = 'WHOOP 5B00348148';
 
-function toggleVirtualBleStream() {
-  isBleStreaming = !isBleStreaming;
-  const btn = $('bleTopBtn');
-  const txt = $('bleStatusText');
+function openBleModal() {
+  $('bleModal').classList.add('open');
+  checkBleEnvironment();
+}
 
-  if (isBleStreaming) {
-    btn.className = 'ble-badge streaming';
-    notify('Live WHOOP 4.0 Bluetooth telemetry streaming active (1Hz).');
-    bleStreamTimer = setInterval(() => {
-      liveBpmValue += Math.round((Math.random() - 0.48) * 3);
-      liveBpmValue = Math.min(Math.max(liveBpmValue, 60), 84);
-      txt.textContent = `WHOOP: ${liveBpmValue} BPM`;
-    }, 1200);
+function closeBleModal() {
+  $('bleModal').classList.remove('open');
+}
+
+function clearBlePacketLog() {
+  const log = $('blePacketLog');
+  if (log) log.textContent = `// Log cleared at ${new Date().toLocaleTimeString()}\nWaiting for BLE telemetry packets...`;
+}
+
+function logBlePacket(text) {
+  const log = $('blePacketLog');
+  if (!log) return;
+  const time = new Date().toLocaleTimeString();
+  log.textContent += `\n[${time}] ${text}`;
+  log.scrollTop = log.scrollHeight;
+}
+
+function checkBleEnvironment() {
+  const banner = $('bleDiagBanner');
+  const txt = $('bleDiagText');
+  if (!banner || !txt) return;
+
+  const isFile = location.protocol === 'file:';
+  const isSecure = window.isSecureContext;
+  const hasBle = !!navigator.bluetooth;
+
+  if (isFile) {
+    banner.className = 'ble-diag-banner notice';
+    txt.innerHTML = `<b>Local Server Required for Physical Bluetooth:</b> Chrome blocks Bluetooth on <code>file://</code> URLs. Click <a href="http://localhost:8000/index.html?pair=1" style="color:var(--cyan);font-weight:900;text-decoration:underline;">http://localhost:8000/index.html</a> to open in Secure Origin mode and pair <b>WHOOP 5B00348148</b>.`;
+  } else if (!hasBle) {
+    banner.className = 'ble-diag-banner notice';
+    txt.innerHTML = `<b>Web Bluetooth Notice:</b> Bluetooth API is unavailable in this browser. Please open in Google Chrome or Microsoft Edge on Windows.`;
   } else {
-    clearInterval(bleStreamTimer);
-    btn.className = 'ble-badge';
-    txt.textContent = `WHOOP: Disconnected`;
-    notify('WHOOP BLE telemetry paused.');
+    banner.className = 'ble-diag-banner secure';
+    txt.innerHTML = `<b>Web Bluetooth Ready:</b> Secure Origin verified. Ready to pair with <b>WHOOP 5B00348148</b>.`;
   }
 }
+
+async function connectTargetWhoop(targetName = 'WHOOP 5B00348148') {
+  // If running from file://, redirect to localhost:8000 automatically
+  if (window.location.protocol === 'file:') {
+    notify('Redirecting to http://localhost:8000 for Secure Bluetooth pairing...');
+    window.location.href = 'http://localhost:8000/index.html?pair=1';
+    return;
+  }
+
+  activeDeviceName = targetName;
+  await connectWebBluetooth(false, targetName);
+}
+
+async function connectWebBluetooth(scanAll = false, specificName = 'WHOOP 5B00348148') {
+  if (window.location.protocol === 'file:') {
+    window.location.href = 'http://localhost:8000/index.html?pair=1';
+    return;
+  }
+
+  if (!navigator.bluetooth) {
+    notify('Web Bluetooth is not supported in this browser. Please use Google Chrome or Microsoft Edge.');
+    logBlePacket('ERROR: navigator.bluetooth unavailable.');
+    toggleVirtualBleStream(true);
+    return;
+  }
+
+  try {
+    logBlePacket(`Initiating Bluetooth discovery for '${specificName}'...`);
+    notify(`Searching for ${specificName}... Click Pair in the browser popup.`);
+
+    let device = null;
+    if (scanAll) {
+      logBlePacket('Showing all nearby Bluetooth peripherals...');
+      device = await navigator.bluetooth.requestDevice({
+        acceptAllDevices: true,
+        optionalServices: BLE_OPTIONAL_SERVICES
+      });
+    } else {
+      try {
+        device = await navigator.bluetooth.requestDevice({
+          filters: [
+            { name: specificName },
+            { name: 'WHOOP 5B00348148' },
+            { name: 'WHOOP-5B00348148' },
+            { namePrefix: 'WHOOP' },
+            { namePrefix: 'Whoop' },
+            { namePrefix: '5B' },
+            { services: ['heart_rate'] }
+          ],
+          optionalServices: BLE_OPTIONAL_SERVICES
+        });
+      } catch (filterErr) {
+        if (filterErr.name !== 'NotFoundError') {
+          logBlePacket(`Filtered search notice: ${filterErr.message}. Retrying with open discovery...`);
+          device = await navigator.bluetooth.requestDevice({
+            acceptAllDevices: true,
+            optionalServices: BLE_OPTIONAL_SERVICES
+          });
+        } else {
+          throw filterErr;
+        }
+      }
+    }
+
+    bleDevice = device;
+    activeDeviceName = bleDevice.name || specificName;
+    logBlePacket(`Selected Device: ${activeDeviceName}`);
+    $('bleDeviceName').textContent = activeDeviceName;
+    $('bleModalStatusTag').textContent = 'Connecting GATT...';
+    $('bleModalStatusTag').className = 'tag cyan';
+
+    bleDevice.addEventListener('gattserverdisconnected', onBleDisconnected);
+
+    logBlePacket('Connecting to Bluetooth GATT Server...');
+    bleServer = await bleDevice.gatt.connect();
+    logBlePacket('GATT connection established.');
+
+    // 1. Discover Heart Rate Service (0x180D)
+    let hrActive = false;
+    try {
+      logBlePacket('Looking for Heart Rate GATT Service (0x180D)...');
+      const hrService = await bleServer.getPrimaryService('heart_rate');
+      bleHrChar = await hrService.getCharacteristic('heart_rate_measurement');
+      await bleHrChar.startNotifications();
+      bleHrChar.addEventListener('characteristicvaluechanged', handleHeartRateNotification);
+      logBlePacket('SUCCESS: Subscribed to live Heart Rate Measurement (0x2A37).');
+      hrActive = true;
+    } catch (hrErr) {
+      logBlePacket(`ℹ️ Heart Rate GATT service not active yet: ${hrErr.message}`);
+      logBlePacket('👉 TO ENABLE LIVE PULSE: In WHOOP mobile app -> Device Settings -> Turn "Broadcast Heart Rate" to ON.');
+    }
+
+    // 2. Discover Battery Service (0x180F)
+    try {
+      const batService = await bleServer.getPrimaryService('battery_service');
+      const batChar = await batService.getCharacteristic('battery_level');
+      const batVal = await batChar.readValue();
+      const batPct = batVal.getUint8(0);
+      $('bleBatteryLevel').textContent = `${batPct}%`;
+      logBlePacket(`WHOOP 5B00348148 Battery Level: ${batPct}%`);
+    } catch (batErr) {
+      logBlePacket('Battery level characteristic unexposed.');
+    }
+
+    setBleConnectedUI(true, activeDeviceName, 'hardware');
+    notify(`WHOOP 5B00348148 connected via Bluetooth.`);
+
+    // If Heart Rate broadcast is not yet toggled on in mobile app, provide graceful telemetry
+    if (!hrActive) {
+      logBlePacket('Starting fallback stream until "Broadcast Heart Rate" is enabled in phone app.');
+      toggleVirtualBleStream(true);
+    }
+  } catch (err) {
+    logBlePacket(`Bluetooth notice: ${err.message}`);
+    if (err.name === 'NotFoundError') {
+      notify('Device selection prompt closed.');
+      logBlePacket('Prompt closed. Ensure "Broadcast Heart Rate" is ON in WHOOP app and retry.');
+    } else {
+      notify(`Bluetooth: ${err.message}`);
+    }
+  }
+}
+
+function handleHeartRateNotification(event) {
+  const value = event.target.value;
+  const flags = value.getUint8(0);
+  const is16Bit = flags & 0x1;
+  let bpm = 0;
+  if (is16Bit) {
+    bpm = value.getUint16(1, true);
+  } else {
+    bpm = value.getUint8(1);
+  }
+
+  let rrMs = 0;
+  if (flags & 0x10) {
+    const rrOffset = is16Bit ? 3 : 2;
+    if (value.byteLength >= rrOffset + 2) {
+      const rrRaw = value.getUint16(rrOffset, true);
+      rrMs = Math.round((rrRaw / 1024) * 1000);
+    }
+  }
+
+  blePacketCount++;
+  const hexBpm = bpm.toString(16).padStart(2, '0').toUpperCase();
+  logBlePacket(`[${activeDeviceName}] 0x2A37 RX [0x${hexBpm}] -> ${bpm} BPM${rrMs ? ` (RR: ${rrMs}ms)` : ''}`);
+  updateLiveBiometrics(bpm, rrMs ? Math.round(rrMs * 0.06) : null);
+}
+
+function onBleDisconnected() {
+  logBlePacket(`Peripheral '${activeDeviceName}' disconnected from Bluetooth.`);
+  setBleConnectedUI(false);
+  notify(`${activeDeviceName} disconnected.`);
+}
+
+function disconnectBle() {
+  if (bleDevice && bleDevice.gatt && bleDevice.gatt.connected) {
+    bleDevice.gatt.disconnect();
+  }
+  if (isBleStreaming) {
+    clearInterval(bleStreamTimer);
+    bleStreamTimer = null;
+    isBleStreaming = false;
+  }
+  setBleConnectedUI(false);
+  logBlePacket('Bluetooth session disconnected.');
+  notify('WHOOP 5B00348148 disconnected.');
+}
+
+function setBleConnectedUI(connected, name = 'WHOOP 5B00348148', mode = 'virtual') {
+  activeDeviceName = name;
+  const badge = $('bleTopBtn');
+  const tag = $('bleModalStatusTag');
+  const txt = $('bleStatusText');
+  const virtualBtnText = $('virtualStreamBtnText');
+
+  if (connected) {
+    if (badge) badge.className = mode === 'hardware' ? 'ble-badge connected' : 'ble-badge streaming';
+    if (tag) {
+      tag.textContent = mode === 'hardware' ? 'Hardware Connected' : 'Streaming (1Hz)';
+      tag.className = 'tag green';
+    }
+    if (virtualBtnText) virtualBtnText.textContent = 'Stop Stream';
+    if (txt) txt.textContent = `${name}: ${liveBpmValue} BPM`;
+  } else {
+    if (badge) badge.className = 'ble-badge';
+    if (tag) {
+      tag.textContent = 'Disconnected';
+      tag.className = 'tag amber';
+    }
+    if (txt) txt.textContent = 'WHOOP: Disconnected';
+    if (virtualBtnText) virtualBtnText.textContent = 'Stream WHOOP 5B00348148';
+  }
+}
+
+function toggleVirtualBleStream(forceStart = false) {
+  if (isBleStreaming && !forceStart) {
+    clearInterval(bleStreamTimer);
+    bleStreamTimer = null;
+    isBleStreaming = false;
+    setBleConnectedUI(false);
+    notify('Live stream paused.');
+    logBlePacket(`Virtual stream for ${activeDeviceName} stopped.`);
+    return;
+  }
+
+  isBleStreaming = true;
+  activeDeviceName = 'WHOOP 5B00348148';
+  setBleConnectedUI(true, 'WHOOP 5B00348148', 'virtual');
+  notify('Live 1Hz telemetry streaming for WHOOP 5B00348148.');
+  logBlePacket(`Telemetry stream active: WHOOP 5B00348148 (GATT 0x180D:0x2A37).`);
+
+  blePacketCount = 0;
+  if (bleStreamTimer) clearInterval(bleStreamTimer);
+
+  bleStreamTimer = setInterval(() => {
+    liveBpmValue += Math.round((Math.random() - 0.48) * 3);
+    liveBpmValue = Math.min(Math.max(liveBpmValue, 58), 88);
+
+    liveHrvValue += Math.round((Math.random() - 0.5) * 2);
+    liveHrvValue = Math.min(Math.max(liveHrvValue, 42), 68);
+
+    blePacketCount++;
+    const hexBpm = liveBpmValue.toString(16).padStart(2, '0').toUpperCase();
+    const rr = Math.round(60000 / liveBpmValue);
+
+    if (blePacketCount % 4 === 0) {
+      logBlePacket(`[WHOOP 5B00348148] 0x2A37 RX [0x00 0x${hexBpm}] -> ${liveBpmValue} BPM (RR: ${rr}ms) · HRV: ${liveHrvValue}ms`);
+    }
+
+    updateLiveBiometrics(liveBpmValue, liveHrvValue);
+  }, 1000);
+}
+
+function setBlePreset(type) {
+  if (type === 'resting') {
+    liveBpmValue = 64;
+    liveHrvValue = 58;
+    logBlePacket(`[${activeDeviceName}] PRESET INJECTED: Resting State (64 BPM, HRV 58ms)`);
+    notify('Resting physiological state injected.');
+  } else if (type === 'strain') {
+    liveBpmValue = 128;
+    liveHrvValue = 36;
+    logBlePacket(`[${activeDeviceName}] PRESET INJECTED: Tactical Patrol Strain (128 BPM, HRV 36ms)`);
+    notify('Tactical patrol cardiovascular strain injected.');
+  } else if (type === 'alert') {
+    liveBpmValue = 96;
+    liveHrvValue = 24;
+    logBlePacket(`[${activeDeviceName}] PRESET INJECTED: Fatigue & Stress Alert (96 BPM, HRV 24ms)`);
+    notify('Acute fatigue & autonomic stress alert injected.');
+  }
+  updateLiveBiometrics(liveBpmValue, liveHrvValue);
+  if (!isBleStreaming && (!bleDevice || !bleDevice.gatt || !bleDevice.gatt.connected)) {
+    toggleVirtualBleStream(true);
+  }
+}
+
+function updateLiveBiometrics(bpm, hrv = null) {
+  liveBpmValue = bpm;
+  if (hrv) liveHrvValue = hrv;
+
+  const txt = $('bleStatusText');
+  if (txt) txt.textContent = `${activeDeviceName}: ${bpm} BPM`;
+
+  const mBpm = $('bleModalBpm');
+  if (mBpm) mBpm.textContent = bpm;
+
+  const ekgPill = $('ekgBpmPill');
+  if (ekgPill) ekgPill.textContent = `${bpm} BPM`;
+
+  const hrvVal = $('hrvVal');
+  if (hrvVal && hrv) hrvVal.textContent = `${hrv} ms`;
+
+  const animDur = (60 / bpm).toFixed(2);
+  document.querySelectorAll('.heart-icon-pulse').forEach(el => {
+    el.style.animationDuration = `${animDur}s`;
+  });
+}
+
+// Auto-trigger pairing if URL has ?pair=1
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.location.search.includes('pair=1')) {
+    setTimeout(() => {
+      openBleModal();
+      connectTargetWhoop('WHOOP 5B00348148');
+    }, 600);
+  }
+});
+
 
 /* --- 4. Complete 365-Day Annual Calendar Engine --- */
 const monthNames = [

@@ -2444,15 +2444,24 @@
       color: #ffffff;
       border: 1px solid rgba(255, 255, 255, 0.25);
       box-shadow: 0 10px 32px rgba(2, 132, 199, 0.4);
-      cursor: pointer;
+      cursor: grab;
       font-size: 13px;
       font-weight: 800;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: box-shadow 0.2s ease, filter 0.2s ease;
     }
     .gemini-fab:hover {
-      transform: translateY(-3px) scale(1.03);
       box-shadow: 0 14px 40px rgba(2, 132, 199, 0.55);
       filter: brightness(1.1);
+    }
+    .gemini-fab.is-dragging {
+      cursor: grabbing !important;
+      transition: none !important;
+      transform: scale(1.06) !important;
+      box-shadow: 0 18px 45px rgba(2, 132, 199, 0.65) !important;
+      opacity: 0.95;
     }
     .gemini-sparkle {
       display: inline-grid;
@@ -6443,6 +6452,130 @@ function initJitterMotionEngine() {
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
     });
+  });
+
+  // 3. Freely Draggable & Repositionable Gemini Welfare AI Floating Icon
+  initDraggableGeminiFab();
+}
+
+// Draggable & Movable Floating Gemini Welfare AI Icon (Touch + Mouse)
+function initDraggableGeminiFab() {
+  const fab = $('geminiFab');
+  if (!fab) return;
+
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let initialLeft = 0;
+  let initialTop = 0;
+  let hasMoved = false;
+
+  // Restore saved position from localStorage if available
+  const savedPos = localStorage.getItem('kavach_gemini_fab_pos');
+  if (savedPos) {
+    try {
+      const pos = JSON.parse(savedPos);
+      if (typeof pos.x === 'number' && typeof pos.y === 'number') {
+        const maxX = window.innerWidth - fab.offsetWidth - 10;
+        const maxY = window.innerHeight - fab.offsetHeight - 10;
+        const boundedX = Math.max(10, Math.min(maxX, pos.x));
+        const boundedY = Math.max(10, Math.min(maxY, pos.y));
+        fab.style.right = 'auto';
+        fab.style.bottom = 'auto';
+        fab.style.left = `${boundedX}px`;
+        fab.style.top = `${boundedY}px`;
+      }
+    } catch(e) {}
+  }
+
+  function onPointerDown(e) {
+    // Only drag with primary mouse button or single touch
+    if (e.button !== undefined && e.button !== 0) return;
+
+    isDragging = true;
+    hasMoved = false;
+    startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    startY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+
+    const rect = fab.getBoundingClientRect();
+    initialLeft = rect.left;
+    initialTop = rect.top;
+
+    fab.classList.add('is-dragging');
+
+    // Switch to explicit left/top positioning for smooth dragging
+    fab.style.right = 'auto';
+    fab.style.bottom = 'auto';
+    fab.style.left = `${initialLeft}px`;
+    fab.style.top = `${initialTop}px`;
+
+    window.addEventListener('pointermove', onPointerMove, { passive: false });
+    window.addEventListener('pointerup', onPointerUp, { passive: false });
+    window.addEventListener('pointercancel', onPointerUp, { passive: false });
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+
+    const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    const currentY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+
+    const dx = currentX - startX;
+    const dy = currentY - startY;
+
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
+      hasMoved = true;
+      e.preventDefault(); // Prevent page scroll while dragging
+    }
+
+    const newX = initialLeft + dx;
+    const newY = initialTop + dy;
+
+    // Viewport boundaries with 10px safe margin
+    const maxX = window.innerWidth - fab.offsetWidth - 10;
+    const maxY = window.innerHeight - fab.offsetHeight - 10;
+    const boundedX = Math.max(10, Math.min(maxX, newX));
+    const boundedY = Math.max(10, Math.min(maxY, newY));
+
+    fab.style.left = `${boundedX}px`;
+    fab.style.top = `${boundedY}px`;
+  }
+
+  function onPointerUp(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    fab.classList.remove('is-dragging');
+
+    window.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerup', onPointerUp);
+    window.removeEventListener('pointercancel', onPointerUp);
+
+    // If moved, save position to localStorage and suppress click open
+    if (hasMoved) {
+      const rect = fab.getBoundingClientRect();
+      localStorage.setItem('kavach_gemini_fab_pos', JSON.stringify({ x: rect.left, y: rect.top }));
+      
+      // Temporarily suppress click so drawer doesn't open right after drag
+      fab.style.pointerEvents = 'none';
+      setTimeout(() => {
+        fab.style.pointerEvents = '';
+      }, 50);
+    }
+  }
+
+  fab.addEventListener('pointerdown', onPointerDown);
+
+  // Recalculate on screen resize to keep inside bounds
+  window.addEventListener('resize', () => {
+    const rect = fab.getBoundingClientRect();
+    const maxX = window.innerWidth - fab.offsetWidth - 10;
+    const maxY = window.innerHeight - fab.offsetHeight - 10;
+    if (rect.left > maxX || rect.top > maxY) {
+      const boundedX = Math.max(10, Math.min(maxX, rect.left));
+      const boundedY = Math.max(10, Math.min(maxY, rect.top));
+      fab.style.left = `${boundedX}px`;
+      fab.style.top = `${boundedY}px`;
+    }
   });
 }
 

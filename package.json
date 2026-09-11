@@ -1,28 +1,16 @@
 {
-  "name": "kavach-aura-tensor",
+  "name": "tensor-3d-visualizations",
   "version": "1.0.0",
-  "description": "KAVACH-AURA — TENSOR Ethical Welfare Intelligence, WHOOP 4.0 BLE GATT Stream, Google Gemini AI & 365-Day Roster Heatmap",
-  "main": "index.html",
-  "scripts": {
-    "start": "python -m http.server 8000",
-    "serve": "npx serve -l 8000 .",
-    "dev": "python -m http.server 8000"
-  },
-  "keywords": [
-    "defense",
-    "welfare-intelligence",
-    "whoop-ble",
-    "bluetooth-gatt",
-    "gemini-ai",
-    "health-tech",
-    "zero-pii",
-    "threejs",
-    "gsap"
-  ],
-  "author": "K Krishna Charan",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-username/kavach-aura-tensor.git"
+  "description": "High-fidelity 3D scroll-driven data visualization sequence, R3F raymarched doughnut, and kinetic typography for TENSOR Welfare Intelligence",
+  "main": "Tensor3DVisualizations.jsx",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/drei": "^9.114.0",
+    "@react-three/postprocessing": "^2.16.3",
+    "gsap": "^3.12.5",
+    "@gsap/react": "^2.1.1"
   }
 }

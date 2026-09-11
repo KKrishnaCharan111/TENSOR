@@ -1059,58 +1059,7 @@
     #secVitals > article.panel:first-child {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      justify-content: flex-start;
-      height: 100%;
-    }
-    .jawan-strain-gauge-box {
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .jawan-vitals-matrix-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin: 4px 0;
-    }
-    @media (max-width: 600px) {
-      .jawan-vitals-matrix-grid { grid-template-columns: 1fr; }
-    }
-    .jawan-matrix-tile {
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 8px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .jawan-matrix-tile-head {
-      font-size: 9.5px;
-      font-weight: 800;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .jawan-matrix-tile-val {
-      font-size: 14px;
-      font-weight: 900;
-      color: var(--text-heading);
-    }
-    .jawan-matrix-tile-sub {
-      font-size: 9px;
-      color: var(--primary);
-      font-weight: 700;
     }
     .vitals-footer-deck {
       margin: 4px 10px 10px;
@@ -3876,602 +3825,7 @@
       color: var(--text);
     }
 
-  
-    /* =========================================================================
-       WHOOP AUTHENTIC PALETTE TOKENS (LIGHT & DARK ADAPTIVE)
-       ========================================================================= */
-    :root {
-      --whoop-blue: #38bdf8;
-      --whoop-blue-glow: rgba(56, 189, 248, 0.4);
-      --whoop-green: #2dd4a1;
-      --whoop-green-glow: rgba(45, 212, 161, 0.4);
-      --whoop-amber: #fbbf24;
-      --whoop-amber-glow: rgba(251, 191, 36, 0.4);
-      --whoop-rose: #fb7185;
-      --whoop-rose-glow: rgba(251, 113, 133, 0.4);
-      --whoop-purple: #c084fc;
-      --whoop-purple-glow: rgba(192, 132, 252, 0.4);
-      --gauge-track: #183353;
-    }
-
-    body[data-theme="light"] {
-      --whoop-blue: #0284c7;
-      --whoop-blue-glow: rgba(2, 132, 199, 0.25);
-      --whoop-green: #059669;
-      --whoop-green-glow: rgba(5, 150, 105, 0.25);
-      --whoop-amber: #d97706;
-      --whoop-amber-glow: rgba(217, 119, 6, 0.25);
-      --whoop-rose: #e11d48;
-      --whoop-rose-glow: rgba(225, 29, 72, 0.25);
-      --whoop-purple: #7c3aed;
-      --whoop-purple-glow: rgba(124, 58, 237, 0.25);
-      --gauge-track: #dbe7f2;
-    }
-
-    /* Judge Demo Accounts Box */
-    .judge-demo-card {
-      background: color-mix(in srgb, var(--primary) 10%, var(--card2));
-      border: 1px solid var(--primary-border);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-top: 14px;
-    }
-    .judge-demo-title {
-      font-size: 10.5px;
-      font-weight: 900;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-    .judge-account-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      margin-bottom: 6px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .judge-account-row:hover {
-      border-color: var(--primary);
-      transform: translateY(-1.5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .judge-badge-cmd {
-      color: var(--primary);
-      font-weight: 900;
-      font-size: 11px;
-    }
-    .judge-badge-jwn {
-      color: var(--cyan);
-      font-weight: 900;
-      font-size: 11px;
-    }
-    .judge-pw-pill {
-      font-family: monospace;
-      font-size: 11px;
-      background: var(--card2);
-      padding: 2px 7px;
-      border-radius: 6px;
-      border: 1px solid var(--line-subtle);
-      color: var(--text-heading);
-    }
-
-    /* Active User Topbar Badge */
-    .active-user-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: var(--card2);
-      border: 1px solid var(--primary-border);
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--text-heading);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-    .active-user-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 8px var(--primary);
-    }
-
-    /* =========================================================================
-       WHOOP LIVE STRESS/STRAIN ARC GAUGE (BLUE → GREEN → AMBER SWEEP + NEEDLE)
-       ========================================================================= */
-    .strain-gauge-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: border-color 0.25s, box-shadow 0.25s;
-    }
-    .strain-gauge-card:hover {
-      border-color: var(--primary);
-    }
-    .gauge-svg-wrap {
-      position: relative;
-      width: 240px;
-      height: 135px;
-      margin: 8px auto 0;
-    }
-    .gauge-svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-    .gauge-needle {
-      transform-origin: 120px 120px;
-      transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
-    }
-    .gauge-needle-hub {
-      fill: var(--text-heading);
-      stroke: var(--card);
-      stroke-width: 3;
-    }
-    .gauge-readout-hub {
-      text-align: center;
-      margin-top: -4px;
-    }
-    .gauge-val-big {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--text-heading);
-      letter-spacing: -0.5px;
-      line-height: 1;
-    }
-    .gauge-scale-ticks {
-      display: flex;
-      justify-content: space-between;
-      width: 220px;
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .gauge-zone-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      margin-top: 6px;
-      text-transform: uppercase;
-      background: var(--primary-dim);
-      color: var(--primary);
-      border: 1px solid var(--primary-border);
-    }
-
-    /* Sparklines vs Typical Day - Precision 3-Column Grid Alignment */
-    .sparklines-card {
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px 16px;
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .sparkline-row {
-      display: grid;
-      grid-template-columns: 190px 1fr 115px;
-      align-items: center;
-      gap: 14px;
-      padding: 6px 0;
-      font-size: 11.5px;
-      border-bottom: 1px solid var(--line-subtle);
-    }
-    .sparkline-row:last-child {
-      border-bottom: none;
-    }
-    .sparkline-metric-name {
-      font-weight: 800;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      white-space: nowrap;
-    }
-    .spark-bar-track {
-      width: 100%;
-      height: 8px;
-      border-radius: 8px;
-      background: var(--input-bg);
-      border: 1px solid var(--line-subtle);
-      position: relative;
-      overflow: hidden;
-    }
-    .spark-bar-fill {
-      height: 100%;
-      border-radius: 8px;
-      transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .spark-delta {
-      font-size: 11px;
-      font-weight: 900;
-      text-align: right;
-      white-space: nowrap;
-      font-family: monospace;
-      letter-spacing: -0.2px;
-    }
-    @media (max-width: 680px) {
-      .sparkline-row {
-        grid-template-columns: 145px 1fr 90px;
-        gap: 8px;
-        font-size: 10.5px;
-      }
-      .spark-delta {
-        font-size: 10px;
-      }
-    }
-
-    /* Smooth Trajectory SVG & Interactive Tooltip */
-    .trajectory-smooth-svg {
-      width: 100%;
-      height: 250px;
-      overflow: visible;
-      cursor: crosshair;
-    }
-    .chart-tooltip-box {
-      position: absolute;
-      pointer-events: none;
-      background: var(--card);
-      border: 1px solid var(--primary-border);
-      border-radius: 10px;
-      padding: 8px 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      font-size: 11px;
-      z-index: 25;
-      display: none;
-      backdrop-filter: blur(12px);
-      transform: translate(-50%, -115%);
-      transition: opacity 0.15s ease;
-    }
-    .chart-crosshair-line {
-      stroke: var(--cyan);
-      stroke-width: 1.5;
-      stroke-dasharray: 3 3;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-
-    /* =========================================================================
-       AURA 18-QUESTION NATURAL VOICE & TAP CHECK-IN SUITE
-       ========================================================================= */
-    .aura-checkin-suite {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-      margin-top: 10px;
-      position: relative;
-      overflow: hidden;
-    }
-    .checkin-top-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line);
-    }
-    .cadence-toggle-group {
-      display: inline-flex;
-      background: var(--input-bg);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 3px;
-      gap: 3px;
-    }
-    .cadence-pill-btn {
-      padding: 6px 13px;
-      border-radius: 7px;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--muted);
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .cadence-pill-btn.active {
-      background: var(--card);
-      color: var(--primary);
-      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
-    }
-    .mode-switch-group {
-      display: inline-flex;
-      gap: 6px;
-    }
-    .mode-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 800;
-      background: var(--card2);
-      border: 1px solid var(--line);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .mode-pill-btn.active {
-      background: var(--primary-dim);
-      border-color: var(--primary);
-      color: var(--primary);
-      box-shadow: 0 0 14px var(--primary-dim);
-    }
-    .checkin-progress-bar-wrap {
-      width: 100%;
-      margin: 16px 0 14px;
-    }
-    .checkin-progress-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .checkin-progress-track {
-      height: 7px;
-      border-radius: 7px;
-      background: var(--card2);
-      border: 1px solid var(--line-subtle);
-      overflow: hidden;
-    }
-    .checkin-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--whoop-blue), var(--whoop-green));
-      border-radius: 7px;
-      transition: width 0.35s ease;
-    }
-
-    /* AURA Voice Stage */
-    .aura-voice-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 20px 10px;
-    }
-    .aura-orb-chamber {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 16px;
-      cursor: pointer;
-    }
-    .aura-orb-glow {
-      position: absolute;
-      inset: -12px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--primary) 0%, var(--cyan) 50%, transparent 70%);
-      opacity: 0.35;
-      filter: blur(14px);
-      animation: auraGlowPulse 2.8s infinite alternate ease-in-out;
-      pointer-events: none;
-    }
-    .aura-orb-core {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0284c7 0%, #078c66 50%, #38bdf8 100%);
-      box-shadow: 0 0 24px var(--primary-dim);
-      display: grid;
-      place-items: center;
-      color: #ffffff;
-      font-size: 36px;
-      border: 2px solid rgba(255,255,255,0.3);
-      transition: transform 0.25s ease;
-    }
-    .aura-orb-core:hover {
-      transform: scale(1.06);
-    }
-    .aura-orb-chamber.speaking .aura-orb-glow {
-      animation: auraSpeakingPulse 0.8s infinite alternate ease-in-out;
-      opacity: 0.75;
-    }
-    .aura-orb-chamber.listening .aura-orb-glow {
-      background: radial-gradient(circle, #ec4899 0%, #f59e0b 50%, transparent 70%);
-      animation: auraListeningPulse 0.6s infinite alternate ease-in-out;
-      opacity: 0.85;
-    }
-    @keyframes auraGlowPulse {
-      0% { transform: scale(0.95); opacity: 0.3; }
-      100% { transform: scale(1.15); opacity: 0.55; }
-    }
-    @keyframes auraSpeakingPulse {
-      0% { transform: scale(1.0); opacity: 0.45; }
-      100% { transform: scale(1.35); opacity: 0.85; filter: blur(18px); }
-    }
-    @keyframes auraListeningPulse {
-      0% { transform: scale(1.05); opacity: 0.5; }
-      100% { transform: scale(1.4); opacity: 0.95; filter: blur(20px); }
-    }
-    .aura-transcript-bubble {
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px 18px;
-      max-width: 620px;
-      margin: 12px auto 0;
-      font-size: 13px;
-      line-height: 1.55;
-      color: var(--text);
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .aura-question-display {
-      font-size: 16.5px;
-      font-weight: 900;
-      color: var(--text-heading);
-      margin: 6px auto 10px;
-      line-height: 1.45;
-      max-width: 680px;
-    }
-    .aura-pillar-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    /* Tap Mode Options Grid */
-    .tap-options-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin-top: 16px;
-      width: 100%;
-    }
-    @media (max-width: 700px) {
-      .tap-options-grid { grid-template-columns: 1fr; }
-    }
-    .tap-option-card {
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px 8px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .tap-option-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-    }
-    .tap-option-card.selected {
-      background: var(--primary-dim);
-      border-color: var(--primary);
-      color: var(--primary);
-      box-shadow: 0 0 16px var(--primary-dim);
-    }
-    .tap-option-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--card);
-      border: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      font-size: 11px;
-      font-weight: 900;
-    }
-    .tap-option-label {
-      font-size: 11.5px;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-    .tap-option-desc {
-      font-size: 9.5px;
-      color: var(--muted);
-    }
-
-    /* Checkin Footer Controls */
-    .checkin-footer-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line-subtle);
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    /* Checkin Result Card */
-    .checkin-result-card {
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
-      margin-top: 14px;
-      display: none;
-      animation: slideUp 0.35s ease;
-    }
-    .checkin-score-hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--line);
-    }
-    .checkin-big-score {
-      font-size: 44px;
-      font-weight: 900;
-      color: var(--text-heading);
-      letter-spacing: -1px;
-      line-height: 1;
-    }
-    .checkin-pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 16px 0;
-    }
-    @media (max-width: 650px) {
-      .checkin-pillars-grid { grid-template-columns: 1fr; }
-    }
-    .checkin-pillar-tile {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
-    .checkin-ai-summary-box {
-      background: color-mix(in srgb, var(--cyan-dim) 50%, var(--card));
-      border: 1px solid color-mix(in srgb, var(--cyan) 35%, var(--line));
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-size: 12.5px;
-      line-height: 1.65;
-      color: var(--text);
-      margin-top: 12px;
-    }
-
-</style>
+  </style>
 </head>
 <body data-theme="dark">
 
@@ -4586,12 +3940,11 @@
       </div>
 
       <!-- TAB 2: USERNAME & PASSWORD -->
-            <!-- TAB 2: USERNAME & PASSWORD (ACCOUNT DETERMINES ROLE) -->
       <div id="passAuthBox" class="auth-tab-content hidden">
         <form onsubmit="handlePasswordLogin(event)" style="display:flex;flex-direction:column;gap:12px;">
           <div class="form-group">
-            <label class="form-label" for="loginUsername">Force ID / Service Number</label>
-            <input id="loginUsername" class="auth-input" type="text" placeholder="e.g. KV-101 or KV-207" value="KV-101" required autocomplete="username">
+            <label class="form-label" for="loginUsername">Username / Force ID</label>
+            <input id="loginUsername" class="auth-input" type="text" placeholder="officer or jawan" value="officer" required autocomplete="username">
           </div>
 
           <div class="form-group">
@@ -4602,34 +3955,36 @@
             </div>
           </div>
 
-          <button type="submit" class="btn primary auth-submit-btn" style="margin-top:4px;">
-            <svg class="icon"><use href="#shield"/></svg> Authenticate &amp; Access Console
+          <div class="form-group">
+            <label class="form-label">Duty Console Target</label>
+            <div class="role-selector-row">
+              <label class="role-radio-label">
+                <input type="radio" name="loginRole" value="commander" checked>
+                <span>◈ Commander</span>
+              </label>
+              <label class="role-radio-label">
+                <input type="radio" name="loginRole" value="jawan">
+                <span>◉ Jawan View</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn primary auth-submit-btn" style="margin-top:6px;">
+            <svg class="icon"><use href="#shield"/></svg> Verify Password &amp; Enter Console
           </button>
         </form>
+      </div>
 
-        <!-- DEMO ACCOUNTS CARD FOR HACKATHON JUDGES -->
-        <div class="judge-demo-card">
-          <div class="judge-demo-title">
-            <svg class="icon" style="width:13px;height:13px;"><use href="#zap"/></svg>
-            <span>Demo Accounts for Hackathon Judges (Tap to Fill):</span>
-          </div>
-          <div class="judge-account-row" onclick="fillJudgeDemo('commander')" title="Click to fill Commander credentials">
-            <div>
-              <div class="judge-badge-cmd">◈ Commander Console</div>
-              <small style="color:var(--muted)">ID: <b style="color:var(--text)">KV-101</b> (Major Prafull)</small>
-            </div>
-            <span class="judge-pw-pill">kavach2026</span>
-          </div>
-          <div class="judge-account-row" onclick="fillJudgeDemo('jawan')" title="Click to fill Jawan credentials">
-            <div>
-              <div class="judge-badge-jwn">◉ Jawan Self-Care &amp; Check-In</div>
-              <small style="color:var(--muted)">ID: <b style="color:var(--text)">KV-207</b> (Sepoy Pradeep)</small>
-            </div>
-            <span class="judge-pw-pill">aura2026</span>
-          </div>
-          <div style="font-size:10px;color:var(--muted);margin-top:6px;line-height:1.4;">
-            * Role is determined strictly by the account credentials. No arbitrary role switcher.
-          </div>
+      <!-- 1-CLICK QUICK ACCESS DEMO BUTTONS -->
+      <div class="auth-quick-logins">
+        <div class="quick-title">⚡ 1-Click Instant Demo Login:</div>
+        <div class="quick-buttons">
+          <button class="btn quick-btn" onclick="quickLogin('commander')">
+            <b>◈ Officer Login</b><br><small style="color:var(--muted)">Unit Force Console</small>
+          </button>
+          <button class="btn quick-btn cyan" onclick="quickLogin('jawan')">
+            <b>◉ Jawan Login</b><br><small style="color:var(--muted)">Private Self-Care</small>
+          </button>
         </div>
       </div>
 
@@ -4656,11 +4011,17 @@
       </button>
     </div>
 
-    <!-- Active Account Badge (Role-Locked) -->
+    <!-- Central Role Switcher (Desktop & Tablet) -->
     <div class="header-role-center">
-      <div id="activeUserBadge" class="active-user-badge">
-        <span class="active-user-dot"></span>
-        <span id="activeUserBadgeText">◈ Commander: Major Prafull (KV-101)</span>
+      <div class="view-switch-box">
+        <button id="commanderNav" class="nav active" onclick="showView('commander')" title="Switch to Commander Force Intelligence view">
+          <span data-i18n="nav_commander">◈ Commander</span>
+          <span class="role-badge" data-i18n="role_force_data">Force Data</span>
+        </button>
+        <button id="jawanNav" class="nav" onclick="showView('jawan')" title="Switch to Private Jawan Self-Care view">
+          <span data-i18n="nav_jawan">◉ Jawan</span>
+          <span class="role-badge" data-i18n="role_self_care">Self-Care &amp; WHOOP</span>
+        </button>
       </div>
     </div>
 
@@ -4921,14 +4282,11 @@
 
   <!-- SPEC 1: UNIT RESILIENCE TRAJECTORY (IMAGE_0 RECREATION WITH 3D TRIGGER) -->
   <section class="grid" id="secTrajectory">
-    <article class="panel" id="trajectoryPanel" style="position:relative;">
+    <article class="panel" id="trajectoryPanel">
       <header class="head">
         <div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <h2>Unit Resilience Trajectory</h2>
-            <span class="tag green" style="font-size:9.5px;padding:2px 8px;">WHOOP-Style Curves</span>
-          </div>
-          <p>Smooth gradient cohort trend &amp; interactive hover readouts · Shared light/dark palette</p>
+          <h2>Unit Resilience Trajectory</h2>
+          <p>Anonymized cohort 7-day moving baseline · Switch to full 365-day annual heatmap</p>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <span class="tag cyan"><svg class="icon" style="width:13px"><use href="#chart"/></svg> 7-Day View</span>
@@ -4937,104 +4295,55 @@
           </button>
         </div>
       </header>
-      <div class="chartpad" style="position:relative;">
+      <div class="chartpad">
         <div class="key">
-          <span><i class="dot" style="background:var(--whoop-amber)"></i>Fatigue Signal</span>
-          <span><i class="dot" style="background:var(--whoop-green)"></i>Duty Workload</span>
-          <span><i class="dot" style="background:var(--whoop-blue)"></i>Recovery Baseline</span>
+          <span><i class="dot" style="background:#b45309"></i>Fatigue Signal</span>
+          <span><i class="dot" style="background:#078c66"></i>Duty Workload</span>
         </div>
-
-        <!-- Dynamic Hover Tooltip -->
-        <div id="chartTooltip" class="chart-tooltip-box">
-          <div id="tooltipDate" style="font-weight:900;color:var(--text-heading);margin-bottom:4px;">Day</div>
-          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="color:var(--whoop-amber)">Fatigue:</span><b id="tooltipFatigue" style="color:var(--text)">--</b></div>
-          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="color:var(--whoop-green)">Workload:</span><b id="tooltipWorkload" style="color:var(--text)">--</b></div>
-          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="color:var(--whoop-blue)">Recovery:</span><b id="tooltipRecovery" style="color:var(--text)">--</b></div>
-        </div>
-
-        <!-- Smooth Curved Bézier SVG Chart with Soft Glow -->
-        <svg id="trajectorySvg" viewBox="0 0 720 250" class="trajectory-smooth-svg" role="img" aria-label="Unit Resilience Trajectory">
+        
+        <!-- Exact SVG matching image_0.png -->
+        <svg viewBox="0 0 720 250" width="100%" role="img" aria-label="Unit Resilience Trajectory">
           <defs>
-            <!-- Workload Green Gradient -->
-            <linearGradient id="smoothWorkloadGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="var(--whoop-green)" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="var(--whoop-green)" stop-opacity="0.01"/>
+            <linearGradient id="yellowFill" x1="0" y1="0" x2="0" y2="1">
+              <stop stop-color="#fef3c7" stop-opacity="0.85"/>
+              <stop offset="1" stop-color="#fef3c7" stop-opacity="0.1"/>
             </linearGradient>
-            <!-- Fatigue Amber Gradient -->
-            <linearGradient id="smoothFatigueGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="var(--whoop-amber)" stop-opacity="0.32"/>
-              <stop offset="100%" stop-color="var(--whoop-amber)" stop-opacity="0.01"/>
+            <linearGradient id="fatigueGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b45309" stop-opacity="0.32"/>
+              <stop offset="100%" stop-color="#b45309" stop-opacity="0.0"/>
             </linearGradient>
-            <!-- Soft Glow Filter -->
-            <filter id="softChartGlow" x="-10%" y="-10%" width="120%" height="120%">
-              <feGaussianBlur stdDeviation="3" result="glow" />
-              <feMerge>
-                <feMergeNode in="glow" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
+            <linearGradient id="dutyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#078c66" stop-opacity="0.32"/>
+              <stop offset="100%" stop-color="#078c66" stop-opacity="0.0"/>
+            </linearGradient>
           </defs>
-
-          <!-- Horizontal Grid Lines -->
-          <g stroke="var(--line-subtle)" stroke-dasharray="3 4">
+          <g stroke="var(--line)" stroke-dasharray="4 6">
             <line x1="40" x2="690" y1="180" y2="180"/>
             <line x1="40" x2="690" y1="110" y2="110"/>
             <line x1="40" x2="690" y1="40" y2="40"/>
           </g>
-
           <g class="axis">
             <text x="10" y="184">20</text>
             <text x="10" y="114">40</text>
             <text x="10" y="44">60</text>
           </g>
-
-          <!-- Interactive Vertical Crosshair -->
-          <line id="chartCrosshair" x1="0" y1="20" x2="0" y2="210" class="chart-crosshair-line" />
-
-          <!-- Fatigue Area Fill (Smooth Curve) -->
-          <path id="fatigueAreaPath" d="M40,152 C94,144 100,136 148,136 C196,136 208,120 256,120 C304,120 317,132 365,132 C413,132 425,108 473,108 C521,108 533,116 581,116 C629,116 642,96 690,96 L690,210 L40,210 Z" fill="url(#smoothFatigueGrad)"/>
-
-          <!-- Workload Area Fill (Smooth Curve) -->
-          <path id="workloadAreaPath" d="M40,136 C94,130 100,126 148,126 C196,126 208,110 256,110 C304,110 317,118 365,118 C413,118 425,96 473,96 C521,96 533,102 581,102 C629,102 642,92 690,92 L690,210 L40,210 Z" fill="url(#smoothWorkloadGrad)"/>
-
-          <!-- Workload Line (Smooth Curve) -->
-          <path id="workloadCurveLine" d="M40,136 C94,130 100,126 148,126 C196,126 208,110 256,110 C304,110 317,118 365,118 C413,118 425,96 473,96 C521,96 533,102 581,102 C629,102 642,92 690,92" fill="none" stroke="var(--whoop-green)" stroke-width="3" stroke-linecap="round" filter="url(#softChartGlow)"/>
-
-          <!-- Fatigue Line (Smooth Curve) -->
-          <path id="fatigueCurveLine" d="M40,152 C94,144 100,136 148,136 C196,136 208,120 256,120 C304,120 317,132 365,132 C413,132 425,108 473,108 C521,108 533,116 581,116 C629,116 642,96 690,96" fill="none" stroke="var(--whoop-amber)" stroke-width="3" stroke-linecap="round" filter="url(#softChartGlow)"/>
-
-          <!-- Interactive Data Nodes -->
-          <g id="chartNodesGroup">
-            <!-- Monday -->
-            <circle cx="40" cy="152" r="5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Monday (Day 1)" data-fatigue="36 pts" data-workload="48 pts" data-recovery="84%"/>
-            <circle cx="40" cy="136" r="4.5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Monday (Day 1)" data-fatigue="36 pts" data-workload="48 pts" data-recovery="84%"/>
-
-            <!-- Tuesday -->
-            <circle cx="148" cy="136" r="5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Tuesday (Day 2)" data-fatigue="42 pts" data-workload="54 pts" data-recovery="80%"/>
-            <circle cx="148" cy="126" r="4.5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Tuesday (Day 2)" data-fatigue="42 pts" data-workload="54 pts" data-recovery="80%"/>
-
-            <!-- Wednesday -->
-            <circle cx="256" cy="120" r="5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Wednesday (Day 3)" data-fatigue="50 pts" data-workload="62 pts" data-recovery="78%"/>
-            <circle cx="256" cy="110" r="4.5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Wednesday (Day 3)" data-fatigue="50 pts" data-workload="62 pts" data-recovery="78%"/>
-
-            <!-- Thursday -->
-            <circle cx="365" cy="132" r="5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Thursday (Day 4)" data-fatigue="44 pts" data-workload="58 pts" data-recovery="81%"/>
-            <circle cx="365" cy="118" r="4.5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Thursday (Day 4)" data-fatigue="44 pts" data-workload="58 pts" data-recovery="81%"/>
-
-            <!-- Friday -->
-            <circle cx="473" cy="108" r="5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Friday (Day 5)" data-fatigue="56 pts" data-workload="68 pts" data-recovery="75%"/>
-            <circle cx="473" cy="96" r="4.5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Friday (Day 5)" data-fatigue="56 pts" data-workload="68 pts" data-recovery="75%"/>
-
-            <!-- Saturday -->
-            <circle cx="581" cy="116" r="5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Saturday (Day 6)" data-fatigue="52 pts" data-workload="65 pts" data-recovery="76%"/>
-            <circle cx="581" cy="102" r="4.5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Saturday (Day 6)" data-fatigue="52 pts" data-workload="65 pts" data-recovery="76%"/>
-
-            <!-- Sunday -->
-            <circle cx="690" cy="96" r="5.5" fill="var(--whoop-amber)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Sunday (Today)" data-fatigue="62 pts" data-workload="72 pts" data-recovery="74%"/>
-            <circle cx="690" cy="92" r="5" fill="var(--whoop-green)" stroke="var(--card)" stroke-width="2" class="chart-node" data-day="Sunday (Today)" data-fatigue="62 pts" data-workload="72 pts" data-recovery="74%"/>
+          <!-- Shaded Area -->
+          <path d="M40,150 L148,138 L256,122 L365,133 L473,110 L581,118 L690,98 L690,210 L40,210 Z" fill="url(#yellowFill)"/>
+          <!-- Workload Green Line -->
+          <polyline points="40,138 148,128 256,112 365,120 473,98 581,104 690,96" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Fatigue Yellow Line -->
+          <polyline points="40,150 148,138 256,122 365,133 473,110 581,118 690,98" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Points -->
+          <g fill="#f59e0b" stroke="#ffffff" stroke-width="2.5">
+            <circle cx="40" cy="150" r="5"/>
+            <circle cx="148" cy="138" r="5"/>
+            <circle cx="256" cy="122" r="5"/>
+            <circle cx="365" cy="133" r="5"/>
+            <circle cx="473" cy="110" r="5"/>
+            <circle cx="581" cy="118" r="5"/>
+            <circle cx="690" cy="98" r="5"/>
           </g>
-
-          <!-- Day Labels -->
+          <!-- Days Labels -->
           <g class="axis" text-anchor="middle" font-weight="900" fill="var(--text-heading)">
             <text x="40" y="238">MON</text>
             <text x="148" y="238">TUE</text>
@@ -5045,179 +4354,66 @@
             <text x="690" y="238">SUN</text>
           </g>
         </svg>
-
-        <!-- Sparkline 'vs. Typical Day' Baseline Comparison Bars -->
-        <div class="sparklines-card">
-          <div style="font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:2px;">
-            Cohort Vitals vs. 30-Day Typical Baseline:
-          </div>
-          
-          <div class="sparkline-row">
-            <span class="sparkline-metric-name">
-              <span class="dot" style="background:var(--whoop-green);"></span> Recovery Score
-            </span>
-            <div class="spark-bar-track">
-              <div class="spark-bar-fill" style="width:76%;background:var(--whoop-green);"></div>
-            </div>
-            <span class="spark-delta" style="color:var(--whoop-green);">+4% (76%)</span>
-          </div>
-
-          <div class="sparkline-row">
-            <span class="sparkline-metric-name">
-              <span class="dot" style="background:var(--whoop-blue);"></span> Resting HRV
-            </span>
-            <div class="spark-bar-track">
-              <div class="spark-bar-fill" style="width:68%;background:var(--whoop-blue);"></div>
-            </div>
-            <span class="spark-delta" style="color:var(--whoop-blue);">+3 ms (64ms)</span>
-          </div>
-
-          <div class="sparkline-row">
-            <span class="sparkline-metric-name">
-              <span class="dot" style="background:var(--whoop-purple);"></span> Sleep Need vs Target
-            </span>
-            <div class="spark-bar-track">
-              <div class="spark-bar-fill" style="width:82%;background:var(--whoop-purple);"></div>
-            </div>
-            <span class="spark-delta" style="color:var(--whoop-purple);">7.1h / 7.5h</span>
-          </div>
-
-          <div class="sparkline-row">
-            <span class="sparkline-metric-name">
-              <span class="dot" style="background:var(--whoop-amber);"></span> Day Cardiovascular Strain
-            </span>
-            <div class="spark-bar-track">
-              <div class="spark-bar-fill" style="width:58%;background:var(--whoop-amber);"></div>
-            </div>
-            <span class="spark-delta" style="color:var(--whoop-amber);">11.2 / 21</span>
-          </div>
-        </div>
       </div>
     </article>
 
-    <!-- RIGHT COLUMN: WHOOP LIVE STRESS/STRAIN ARC GAUGE + 3D DOUGHNUT -->
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <!-- LIVE STRESS / STRAIN ARC GAUGE (BLUE → GREEN → AMBER SWEEP + NEEDLE) -->
-      <article class="panel strain-gauge-card" id="stressStrainGaugePanel" onclick="cycleStrainGauge()" title="Click to test strain needle animation">
-        <div style="width:100%;display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;">
-            LIVE STRAIN &amp; STRESS GAUGE
-          </div>
-          <span class="tag green" id="gaugeStatusTag">Optimal Workload</span>
+    <!-- SPEC 5: 3D MULTI-MATERIAL DOUGHNUT CHART (IMAGE_4) -->
+    <article class="panel" id="secDonut">
+      <header class="head">
+        <div>
+          <h2>Operational Stress-Risk Distribution</h2>
+          <p>3D Segmented Doughnut · Click to separate</p>
         </div>
-
-        <div class="gauge-svg-wrap">
-          <svg viewBox="0 0 240 135" class="gauge-svg">
-            <defs>
-              <!-- Arc Sweep Gradient: Blue -> Green -> Amber -> Rose -->
-              <linearGradient id="gaugeSweepGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="var(--whoop-blue)" />
-                <stop offset="35%" stop-color="var(--whoop-green)" />
-                <stop offset="70%" stop-color="var(--whoop-amber)" />
-                <stop offset="100%" stop-color="var(--whoop-rose)" />
-              </linearGradient>
-            </defs>
-
-            <!-- Background Track (180 deg semi-circle arc) -->
-            <path d="M 20,120 A 100,100 0 0,1 220,120" fill="none" stroke="var(--gauge-track)" stroke-width="16" stroke-linecap="round"/>
-
-            <!-- Colored Gradient Sweep Arc -->
-            <path d="M 20,120 A 100,100 0 0,1 220,120" fill="none" stroke="url(#gaugeSweepGrad)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
-
-            <!-- Major Scale Ticks: 0, 7, 14, 21 -->
-            <line x1="20" y1="120" x2="30" y2="120" stroke="var(--card)" stroke-width="2"/>
-            <line x1="62" y1="52" x2="69" y2="58" stroke="var(--card)" stroke-width="2"/>
-            <line x1="178" y1="52" x2="171" y2="58" stroke="var(--card)" stroke-width="2"/>
-            <line x1="220" y1="120" x2="210" y2="120" stroke="var(--card)" stroke-width="2"/>
-
-            <!-- Animated Needle Indicator (Center Pivot at 120, 120) -->
-            <!-- -90deg = 0 strain, 0deg = 10.5 strain, +90deg = 21 strain -->
-            <g id="gaugeNeedleGroup" class="gauge-needle" style="transform: rotate(6deg);">
-              <!-- Needle Pointer -->
-              <path d="M 117,120 L 119,30 L 121,30 L 123,120 Z" fill="var(--text-heading)"/>
-              <polygon points="120,24 116,32 124,32" fill="var(--whoop-amber)"/>
-              <!-- Needle Center Hub -->
-              <circle cx="120" cy="120" r="10" class="gauge-needle-hub"/>
-              <circle cx="120" cy="120" r="4" fill="var(--primary)"/>
-            </g>
-          </svg>
-        </div>
-
-        <div class="gauge-readout-hub">
-          <div class="gauge-val-big" id="gaugeValueDisplay">
-            <span id="gaugeNumber">11.2</span> <small style="font-size:13px;color:var(--muted);font-weight:800;">/ 21</small>
-          </div>
-          <div class="gauge-scale-ticks">
-            <span>0 LOW</span>
-            <span>7</span>
-            <span>14 OPTIMAL</span>
-            <span>21 ALL-OUT</span>
-          </div>
-          <div class="gauge-zone-pill" id="gaugeZonePill">
-            <span class="status-pulse-dot" style="width:6px;height:6px;"></span>
-            <span id="gaugeZoneLabel">Zone 2: Target Cardiovascular Load</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- SPEC 5: 3D MULTI-MATERIAL DOUGHNUT CHART (IMAGE_4) -->
-      <article class="panel" id="secDonut">
-        <header class="head">
+        <button class="btn" style="padding:4px 8px;font-size:10px;" onclick="toggleDoughnutSeparation()">Separate Segments</button>
+      </header>
+      <div class="dist">
+        <div id="doughnutCard" class="donut" onclick="toggleDoughnutSeparation()" title="Click to extrude text and separate segments in 3D">
           <div>
-            <h2>Operational Stress-Risk Distribution</h2>
-            <p>3D Segmented Doughnut · Click to separate</p>
-          </div>
-          <button class="btn" style="padding:4px 8px;font-size:10px;" onclick="toggleDoughnutSeparation()">Separate Segments</button>
-        </header>
-        <div class="dist">
-          <div id="doughnutCard" class="donut" onclick="toggleDoughnutSeparation()" title="Click to extrude text and separate segments in 3D">
-            <div>
-              <b id="donutValue">76.2</b>
-              <small>READINESS</small>
-            </div>
-          </div>
-          <div class="risklist">
-            <button class="riskrow selected">
-              <span><i class="dot" style="background:var(--whoop-green)"></i>Optimal (75.0%)</span>
-              <b id="donutOptimalVal">30 Personnel</b>
-            </button>
-            <button class="riskrow">
-              <span><i class="dot" style="background:var(--whoop-amber)"></i>Moderate Strain (15.0%)</span>
-              <b id="donutModerateVal">6 Personnel</b>
-            </button>
-            <button class="riskrow">
-              <span><i class="dot" style="background:var(--whoop-rose)"></i>Elevated Alert (10.0%)</span>
-              <b id="donutAlertVal">4 Personnel</b>
-            </button>
+            <b id="donutValue">74.9</b>
+            <small>READINESS</small>
           </div>
         </div>
+        <div class="risklist">
+          <button class="riskrow selected">
+            <span><i class="dot" style="background:#078c66"></i>Optimal (Matte)</span>
+            <b id="donutOptimalVal">5 (50.0%)</b>
+          </button>
+          <button class="riskrow">
+            <span><i class="dot" style="background:#b45309"></i>Moderate Strain (Frosted)</span>
+            <b id="donutModerateVal">3 (30.0%)</b>
+          </button>
+          <button class="riskrow">
+            <span><i class="dot" style="background:#be123c"></i>Elevated Alert (Emissive)</span>
+            <b id="donutAlertVal">2 (20.0%)</b>
+          </button>
+        </div>
+      </div>
 
-        <!-- Live Force Breakdown & Tactical Advice -->
-        <div class="donut-footer-box">
-          <div class="donut-metric-row">
-            <div class="donut-metric-item">
-              <span class="d-label">Unit Avg HRV</span>
-              <b class="d-val" style="color:var(--primary)">66.4 ms</b>
-              <small style="color:var(--muted)">+3.4ms vs baseline</small>
-            </div>
-            <div class="donut-metric-item">
-              <span class="d-label">Sleep Deficit</span>
-              <b class="d-val" style="color:var(--amber)">10% (4/40)</b>
-              <small style="color:var(--muted)">KV-120 &amp; KV-118</small>
-            </div>
-            <div class="donut-metric-item">
-              <span class="d-label">Deployability</span>
-              <b class="d-val" style="color:var(--cyan)">75% Force</b>
-              <small style="color:var(--muted)">30 Tier 1 Cleared</small>
-            </div>
+      <!-- Live Force Breakdown & Tactical Advice (Eliminates Empty Space) -->
+      <div class="donut-footer-box">
+        <div class="donut-metric-row">
+          <div class="donut-metric-item">
+            <span class="d-label">Unit Avg HRV</span>
+            <b class="d-val" style="color:var(--primary)">54.2 ms</b>
+            <small style="color:var(--muted)">+3.1ms vs baseline</small>
           </div>
-          <div class="donut-advice-tag">
-            <svg class="icon" style="width:14px;height:14px;color:var(--amber);flex:none;"><use href="#spark"/></svg>
-            <span><b>Command Advisory:</b> Retain 4 fatigue-exempt personnel in active recovery. Sortie readiness cleared at 75.0%.</span>
+          <div class="donut-metric-item">
+            <span class="d-label">Sleep Deficit</span>
+            <b class="d-val" style="color:var(--amber)">20% (2/10)</b>
+            <small style="color:var(--muted)">KV-107 &amp; KV-103</small>
+          </div>
+          <div class="donut-metric-item">
+            <span class="d-label">Deployability</span>
+            <b class="d-val" style="color:var(--cyan)">80% Force</b>
+            <small style="color:var(--muted)">8 Active / 2 Rest</small>
           </div>
         </div>
-      </article>
-    </div>
+        <div class="donut-advice-tag">
+          <svg class="icon" style="width:14px;height:14px;color:var(--amber);flex:none;"><use href="#spark"/></svg>
+          <span><b>Command Advisory:</b> Retain KV-107 &amp; KV-103 in active recovery shift for 24h before high-intensity duty.</span>
+        </div>
+      </div>
+    </article>
   </section>
 
   <!-- AI Factors & Pathway -->
@@ -5462,58 +4658,12 @@
     <article class="panel">
       <header class="head">
         <div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
-            <h2>Personal Recovery &amp; Vitals</h2>
-            <span class="tag green" style="font-size:9.5px;padding:2px 8px;">✓ WHOOP 4.0 Live</span>
-          </div>
-          <p>Continuous Autonomic Telemetry, Strain Gauge &amp; 30-Day Physiological Baseline</p>
+          <h2>Personal Recovery &amp; Vitals</h2>
+          <p>Hover cards to pop forward (translateZ: 25px)</p>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="tag cyan" style="font-size:10px;">💓 74 BPM</span>
-          <button class="tag green" onclick="toggleDeckFold()" title="Toggle deck view style" style="cursor:pointer;">200vh Unfold State</button>
-        </div>
+        <button class="tag green" onclick="toggleDeckFold()">200vh Unfold State</button>
       </header>
 
-      <!-- HERO SECTION: JAWAN LIVE STRESS & STRAIN ARC GAUGE -->
-      <div class="jawan-strain-gauge-box" onclick="cycleStrainGauge()" title="Click to test strain gauge animation">
-        <div style="flex:1;min-width:200px;">
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-            <span class="tag amber" style="font-size:9px;font-weight:900;">LIVE WHOOP STRAIN</span>
-            <span style="font-size:10px;color:var(--muted);font-weight:800;">ZONE 2 WORKLOAD</span>
-          </div>
-          <div style="font-size:24px;font-weight:900;color:var(--text-heading);line-height:1.1;">
-            <span id="jawanStrainScore">12.4</span> <small style="font-size:13px;color:var(--muted);font-weight:800;">/ 21 Daily Strain</small>
-          </div>
-          <div style="font-size:11px;color:var(--text);margin-top:4px;line-height:1.4;">
-            <b>Moderate Tactical Exertion:</b> Optimal cardiovascular strain for physiological conditioning. Autonomic restoration scheduled post-shift.
-          </div>
-        </div>
-
-        <!-- Semi-Circular Arc Gauge Mini -->
-        <div style="width:170px;height:95px;position:relative;flex:none;">
-          <svg viewBox="0 0 240 135" class="gauge-svg">
-            <path d="M 20,120 A 100,100 0 0,1 220,120" fill="none" stroke="var(--gauge-track)" stroke-width="16" stroke-linecap="round"/>
-            <path d="M 20,120 A 100,100 0 0,1 220,120" fill="none" stroke="url(#gaugeSweepGrad)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
-            <line x1="20" y1="120" x2="30" y2="120" stroke="var(--card)" stroke-width="2"/>
-            <line x1="62" y1="52" x2="69" y2="58" stroke="var(--card)" stroke-width="2"/>
-            <line x1="178" y1="52" x2="171" y2="58" stroke="var(--card)" stroke-width="2"/>
-            <line x1="220" y1="120" x2="210" y2="120" stroke="var(--card)" stroke-width="2"/>
-            <g id="jawanGaugeNeedle" class="gauge-needle" style="transform: rotate(16deg);">
-              <path d="M 117,120 L 119,30 L 121,30 L 123,120 Z" fill="var(--text-heading)"/>
-              <polygon points="120,24 116,32 124,32" fill="var(--whoop-amber)"/>
-              <circle cx="120" cy="120" r="10" class="gauge-needle-hub"/>
-              <circle cx="120" cy="120" r="4" fill="var(--primary)"/>
-            </g>
-          </svg>
-          <div style="display:flex;justify-content:space-between;font-size:9px;font-weight:900;color:var(--muted);margin-top:-6px;padding:0 6px;">
-            <span>0 LOW</span>
-            <span>14 OPTIMAL</span>
-            <span>21 MAX</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 PRIMARY METRIC CARDS DECK (UNCHARTED 3D POP) -->
       <div id="metricDeck" class="deck-container">
         <!-- Card 1: Recovery (Image 2) -->
         <div class="deck-card">
@@ -5554,93 +4704,7 @@
         </div>
       </div>
 
-      <!-- WHOOP CLINICAL VITALS MATRIX (5 KEY BIOMARKERS) -->
-      <div class="jawan-vitals-matrix-grid">
-        <div class="jawan-matrix-tile">
-          <div class="jawan-matrix-tile-head">🫁 RESPIRATORY RATE</div>
-          <div class="jawan-matrix-tile-val">17.6 <small style="font-size:10px;color:var(--muted);font-weight:700;">rpm</small></div>
-          <div class="jawan-matrix-tile-sub">✓ Normal range (14–19)</div>
-        </div>
-
-        <div class="jawan-matrix-tile">
-          <div class="jawan-matrix-tile-head">💧 BLOOD OXYGEN (SpO2)</div>
-          <div class="jawan-matrix-tile-val" style="color:var(--whoop-blue)">98%</div>
-          <div class="jawan-matrix-tile-sub">✓ Hypoxia protected</div>
-        </div>
-
-        <div class="jawan-matrix-tile">
-          <div class="jawan-matrix-tile-head">💓 RESTING HEART RATE</div>
-          <div class="jawan-matrix-tile-val" style="color:var(--whoop-green)">56 <small style="font-size:10px;color:var(--muted);font-weight:700;">bpm</small></div>
-          <div class="jawan-matrix-tile-sub">✓ Strong cardiac tone</div>
-        </div>
-
-        <div class="jawan-matrix-tile">
-          <div class="jawan-matrix-tile-head">🌡️ SKIN TEMPERATURE</div>
-          <div class="jawan-matrix-tile-val">+0.2 <small style="font-size:10px;color:var(--muted);font-weight:700;">°C</small></div>
-          <div class="jawan-matrix-tile-sub">✓ Baseline fluctuation</div>
-        </div>
-
-        <div class="jawan-matrix-tile">
-          <div class="jawan-matrix-tile-head">⚡ AUTONOMIC BALANCE</div>
-          <div class="jawan-matrix-tile-val" style="color:var(--whoop-green)">58% <small style="font-size:10px;color:var(--muted);font-weight:700;">Parasympathetic</small></div>
-          <div class="jawan-matrix-tile-sub">✓ Restored homeostasis</div>
-        </div>
-
-        <div class="jawan-matrix-tile">
-          <div class="jawan-matrix-tile-head">🔋 BAND BATTERY HEALTH</div>
-          <div class="jawan-matrix-tile-val" style="color:var(--whoop-green)">83%</div>
-          <div class="jawan-matrix-tile-sub">✓ 3.2 days remaining</div>
-        </div>
-      </div>
-
-      <!-- SPARKLINE 'VS. TYPICAL DAY' COMPARISON BARS -->
-      <div class="sparklines-card" style="margin-top:2px;">
-        <div style="font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:2px;">
-          Personal Telemetry vs. 30-Day Moving Baseline:
-        </div>
-        
-        <div class="sparkline-row">
-          <span class="sparkline-metric-name">
-            <span class="dot" style="background:var(--whoop-green);"></span> Recovery Score
-          </span>
-          <div class="spark-bar-track">
-            <div class="spark-bar-fill" style="width:64%;background:var(--whoop-green);"></div>
-          </div>
-          <span class="spark-delta" style="color:var(--whoop-green);">+14% (64%)</span>
-        </div>
-
-        <div class="sparkline-row">
-          <span class="sparkline-metric-name">
-            <span class="dot" style="background:var(--whoop-blue);"></span> Resting HRV
-          </span>
-          <div class="spark-bar-track">
-            <div class="spark-bar-fill" style="width:72%;background:var(--whoop-blue);"></div>
-          </div>
-          <span class="spark-delta" style="color:var(--whoop-blue);">+2 ms (57ms)</span>
-        </div>
-
-        <div class="sparkline-row">
-          <span class="sparkline-metric-name">
-            <span class="dot" style="background:var(--whoop-purple);"></span> Sleep Need vs Target
-          </span>
-          <div class="spark-bar-track">
-            <div class="spark-bar-fill" style="width:85%;background:var(--whoop-purple);"></div>
-          </div>
-          <span class="spark-delta" style="color:var(--whoop-purple);">6.8h / 8.0h</span>
-        </div>
-
-        <div class="sparkline-row">
-          <span class="sparkline-metric-name">
-            <span class="dot" style="background:var(--whoop-amber);"></span> Daily Cardiovascular Strain
-          </span>
-          <div class="spark-bar-track">
-            <div class="spark-bar-fill" style="width:62%;background:var(--whoop-amber);"></div>
-          </div>
-          <span class="spark-delta" style="color:var(--whoop-amber);">12.4 / 21</span>
-        </div>
-      </div>
-
-      <!-- PERSONAL VITALS SYNTHESIS & RECOVERY GUIDANCE FOOTER -->
+      <!-- Personal Vitals Synthesis & Recovery Guidance (Eliminates Empty Space) -->
       <div class="vitals-footer-deck">
         <div class="vitals-summary-chips">
           <span class="v-chip green">
@@ -5651,256 +4715,315 @@
             <svg class="icon" style="width:12px;height:12px;"><use href="#calendar"/></svg>
             Sleep Debt: 1h 12m (Recoverable in 48h)
           </span>
-          <span class="v-chip cyan" style="background:var(--cyan-dim);border-color:color-mix(in srgb, var(--cyan) 35%, var(--line));color:var(--cyan);">
-            💧 Hydration: Optimal (Electrolytes Balanced)
-          </span>
         </div>
         <div class="vitals-guidance-card">
           <div class="vitals-guidance-head">
             <svg class="icon" style="width:14px;height:14px;color:var(--primary);flex:none;"><use href="#spark"/></svg>
-            <span><b>Tactical Recovery Action:</b> Baseline recovery steady at 64%. HRV is tracking 2 ms above 30-day baseline. Autonomic nervous balance is restored following last night's 6.8h sleep. Maintain standard tactical duties, hydrate with electrolytes, and target 7.5h sleep tonight.</span>
+            <span><b>Tactical Recovery Action:</b> Baseline recovery steady at 64%. HRV is tracking 2 ms above 30-day baseline. Maintain standard tactical duties, hydrate with electrolytes, and target 7.5h sleep tonight.</span>
           </div>
         </div>
       </div>
     </article>
 
-    <article class="panel aura-checkin-suite" id="secMicrocheck">
-      <!-- Header with Zero-PII Badge & Aggregate Index -->
-      <header class="checkin-top-toolbar">
+        <!-- SPEC 2: VOLUNTARY 18-VECTOR PSYCHOLOGICAL BATTERY (SELF-REFLECTION, PERSPECTIVE, SOCIAL DYNAMICS) -->
+    <article class="panel" id="secMicrocheck">
+      <header class="head" style="align-items:flex-start;flex-wrap:wrap;gap:12px;">
         <div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
-            <span class="tag green"><svg class="icon" style="width:12px;height:12px;"><use href="#shield"/></svg> 100% Confidential (Zero-PII)</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <span class="tag green"><svg class="icon" style="width:12px;height:12px;"><use href="#shield"/></svg> 100% Confidential</span>
             <span class="tag cyan"><svg class="icon" style="width:12px;height:12px;"><use href="#spark"/></svg> 18 Psychological Vectors</span>
-            <span class="tag" style="background:var(--card2);border:1px solid var(--line);font-size:10px;" id="cadenceActiveBadge">Weekly Routine Cadence</span>
           </div>
-          <h2 style="margin:0;font-size:18px;color:var(--text-heading);">18-Question Mental Health Check-In</h2>
-          <p style="margin:2px 0 0;font-size:11.5px;color:var(--muted);">Private self-reflection. Talk to AURA in natural conversational voice or tap answers.</p>
+          <h2>Voluntary Psychological Battery &amp; Self-Reflection</h2>
+          <p>Confidential multidimensional assessment across Self-Reflection &amp; Identity, Perspective &amp; Mindset, and Social Dynamics. Computed 100% on this device with zero network telemetry.</p>
         </div>
-
-        <!-- Cadence Selector & Mode Toggle -->
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <!-- Cadence Pill -->
-          <div class="cadence-toggle-group">
-            <button class="cadence-pill-btn active" id="cadenceWeeklyBtn" onclick="setCheckinCadence('weekly', this)" title="Weekly routine check-in">Weekly (18)</button>
-            <button class="cadence-pill-btn" id="cadenceMonthlyBtn" onclick="setCheckinCadence('monthly', this)" title="Monthly in-depth assessment">Monthly In-Depth</button>
-          </div>
-
-          <!-- Dual Pathway Mode: Voice vs Tap -->
-          <div class="mode-switch-group">
-            <button class="mode-pill-btn active" id="modeVoiceBtn" onclick="setCheckinMode('voice', this)" title="Talk to AURA using warm human voice">
-              <span>🎙️ Talk to AURA</span>
-            </button>
-            <button class="mode-pill-btn" id="modeTapBtn" onclick="setCheckinMode('tap', this)" title="Fast tap options (works 100% offline)">
-              <span>👆 Tap Mode</span>
-            </button>
-          </div>
+        <div class="psych-score-live-pill" id="psychLivePill" title="Current Aggregate Psychological Readiness">
+          <div style="font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;">Readiness Index</div>
+          <div style="font-size:20px;font-weight:900;color:var(--primary);" id="psychOverallScoreLive">82%</div>
         </div>
       </header>
 
-      <!-- Progress Bar & Question Counter -->
-      <div class="checkin-progress-bar-wrap">
-        <div class="checkin-progress-info">
-          <span><b id="checkinPillarTag" class="aura-pillar-badge" style="background:var(--cyan-dim);color:var(--cyan);border:1px solid color-mix(in srgb, var(--cyan) 40%, var(--line));">✦ Pillar 1: Sleep &amp; Fatigue</b> · <span id="checkinCategoryName">Sleep Quality &amp; Restfulness</span></span>
-          <span>Question <b id="checkinCurrentNum" style="color:var(--text-heading);">1</b> of <b>18</b> (<span id="checkinPctText">6%</span>)</span>
-        </div>
-        <div class="checkin-progress-track">
-          <div id="checkinProgressBar" class="checkin-progress-fill" style="width: 5.5%;"></div>
-        </div>
-      </div>
-
-      <!-- STAGE 1: VOICE MODE (TALK TO AURA WITH NATURAL HUMAN SPEECH) -->
-      <div id="checkinVoiceStage" class="aura-voice-stage">
-        <!-- Animated Glowing AURA AI Orb (Click to speak/listen) -->
-        <div class="aura-orb-chamber" id="auraOrbChamber" onclick="toggleAuraVoiceInteraction()" title="Click to speak with AURA or repeat question">
-          <div class="aura-orb-glow"></div>
-          <div class="aura-orb-core">
-            <span id="auraOrbIcon">✦</span>
-          </div>
-        </div>
-
-        <div style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;" id="auraStatusBadge">
-          AURA AI ASSISTANT · READY TO LISTEN
-        </div>
-
-        <!-- Conversational Question Heading -->
-        <div class="aura-question-display" id="auraVoiceQuestion">
-          "How restful and uninterrupted has your sleep been over the past few nights?"
-        </div>
-
-        <!-- Audio Action Controls Bar -->
-        <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;justify-content:center;">
-          <button class="btn" style="padding:5px 12px;font-size:11px;" onclick="speakCurrentQuestion()" title="Replay question in warm natural voice">
-            🔊 <span id="speakBtnLabel">Hear Question</span>
-          </button>
-          <button class="btn primary" style="padding:5px 14px;font-size:11.5px;" onclick="startAuraListening()" id="auraMicBtn">
-            🎙️ <span id="auraMicLabel">Speak Answer Now</span>
-          </button>
-          <button class="btn" style="padding:5px 10px;font-size:11px;" onclick="skipCheckinQuestion()" title="Skip this question">
-            Skip ↷
-          </button>
-          <button class="btn" style="padding:5px 10px;font-size:11px;" onclick="setCheckinMode('tap')" title="Switch to Tap Mode">
-            👆 Switch to Tap
-          </button>
-        </div>
-
-        <!-- Real-time Spoken Answer Transcript & Semantic NLP Feedback -->
-        <div class="aura-transcript-bubble" id="auraTranscriptBubble">
-          <span style="color:var(--muted);" id="auraTranscriptText">
-            💡 Say anything naturally (e.g. <i>"I barely slept, maybe two hours"</i>, <i>"Feeling pretty good"</i>, or <i>"A bit tired"</i>). AURA maps free speech to scores automatically.
-          </span>
-        </div>
-
-        <!-- Quick Hint Tags -->
-        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;justify-content:center;">
-          <span class="tag" style="font-size:10px;cursor:pointer;" onclick="simulateVoiceResponse('I slept really well, felt completely rested.')">"Slept really well" (5/5)</span>
-          <span class="tag" style="font-size:10px;cursor:pointer;" onclick="simulateVoiceResponse('Pretty decent, about seven hours.')">"Pretty decent" (4/5)</span>
-          <span class="tag" style="font-size:10px;cursor:pointer;" onclick="simulateVoiceResponse('Not really, maybe two nights this week.')">"Not really, maybe two nights" (2/5)</span>
-          <span class="tag" style="font-size:10px;cursor:pointer;" onclick="simulateVoiceResponse('I barely slept, maybe two hours a night.')">"Barely two hours a night" (1/5)</span>
-        </div>
-      </div>
-
-      <!-- STAGE 2: TAP MODE (FAST 5-OPTION CARDS, WORKS 100% OFFLINE) -->
-      <div id="checkinTapStage" style="display:none;padding:6px 0;">
-        <div style="text-align:center;margin-bottom:12px;">
-          <div class="aura-question-display" id="auraTapQuestion" style="font-size:16px;">
-            "How restful and uninterrupted has your sleep been over the past few nights?"
-          </div>
-          <div style="font-size:11.5px;color:var(--muted);" id="auraTapDesc">
-            Evaluate your physical sleep recovery and sleep architecture stability.
-          </div>
-        </div>
-
-        <!-- 5 Responsive Touch Pill Cards -->
-        <div class="tap-options-grid" id="tapOptionsGrid">
-          <div class="tap-option-card" onclick="selectTapOption(1)" id="tapOpt1">
-            <div class="tap-option-num" style="color:var(--rose)">1</div>
-            <div class="tap-option-label" id="optLabel1">Very Poor / Exhausted</div>
-            <div class="tap-option-desc" id="optDesc1">Severe disruption or insomnia</div>
-          </div>
-          <div class="tap-option-card" onclick="selectTapOption(2)" id="tapOpt2">
-            <div class="tap-option-num" style="color:var(--amber)">2</div>
-            <div class="tap-option-label" id="optLabel2">Below Baseline</div>
-            <div class="tap-option-desc" id="optDesc2">Restless, waking up tired</div>
-          </div>
-          <div class="tap-option-card" onclick="selectTapOption(3)" id="tapOpt3">
-            <div class="tap-option-num" style="color:var(--text)">3</div>
-            <div class="tap-option-label" id="optLabel3">Moderate / Neutral</div>
-            <div class="tap-option-desc" id="optDesc3">Adequate, manageable rest</div>
-          </div>
-          <div class="tap-option-card" onclick="selectTapOption(4)" id="tapOpt4">
-            <div class="tap-option-num" style="color:var(--cyan)">4</div>
-            <div class="tap-option-label" id="optLabel4">Good / Steady</div>
-            <div class="tap-option-desc" id="optDesc4">Solid restful sleep</div>
-          </div>
-          <div class="tap-option-card" onclick="selectTapOption(5)" id="tapOpt5">
-            <div class="tap-option-num" style="color:var(--primary)">5</div>
-            <div class="tap-option-label" id="optLabel5">Optimal / Refreshed</div>
-            <div class="tap-option-desc" id="optDesc5">Deep, restorative sleep</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Navigation & Step Controls -->
-      <div class="checkin-footer-controls">
-        <button class="btn" onclick="prevCheckinQuestion()" id="checkinPrevBtn" style="visibility:hidden;">
-          ◀ Previous
+      <!-- Tri-Pillar Quick Navigation & Filter Tabs -->
+      <div class="psych-tabs-bar" role="tablist">
+        <button class="psych-tab-btn active" id="tabPsychAll" onclick="switchPsychTab('all')">
+          <span>All Vectors</span> <span class="tab-badge">18</span>
         </button>
-
-        <div style="display:flex;align-items:center;gap:8px;">
-          <button class="btn" onclick="skipCheckinQuestion()">
-            Skip Question ↷
-          </button>
-          <button class="btn primary" onclick="nextCheckinQuestion()" id="checkinNextBtn">
-            Next Question ▶
-          </button>
-        </div>
+        <button class="psych-tab-btn" id="tabPsychIdentity" onclick="switchPsychTab('identity')">
+          <span style="color:var(--cyan)">✦</span> <span>Self-Reflection &amp; Identity</span> <span class="tab-badge">6</span>
+        </button>
+        <button class="psych-tab-btn" id="tabPsychMindset" onclick="switchPsychTab('mindset')">
+          <span style="color:var(--amber)">⚡</span> <span>Perspective &amp; Mindset</span> <span class="tab-badge">6</span>
+        </button>
+        <button class="psych-tab-btn" id="tabPsychSocial" onclick="switchPsychTab('social')">
+          <span style="color:var(--primary)">◉</span> <span>Social Dynamics</span> <span class="tab-badge">6</span>
+        </button>
       </div>
 
-      <!-- RESULTS PANEL (DYNAMIC SCORE GAUGE, BANDS & AI WELFARE SUMMARY) -->
-      <div id="checkinResultCard" class="checkin-result-card">
-        <div class="checkin-score-hero">
-          <div>
+      <!-- Real-time Pillar Summary Meters -->
+      <div class="psych-pillars-overview">
+        <div class="pillar-meter-card" onclick="switchPsychTab('identity')" title="Filter Self-Reflection &amp; Identity vectors">
+          <div class="pillar-meter-header">
+            <span><b style="color:var(--cyan)">✦</b> Self-Reflection &amp; Identity</span>
+            <span id="scoreIdentityVal" style="color:var(--cyan);font-weight:900;">25/30</span>
+          </div>
+          <div class="pillar-bar-track"><div class="pillar-bar-fill fill-cyan" id="barIdentity" style="width:83%;"></div></div>
+          <div class="pillar-status" id="statusIdentity">High Self-Awareness &amp; Clarity</div>
+        </div>
+
+        <div class="pillar-meter-card" onclick="switchPsychTab('mindset')" title="Filter Perspective &amp; Mindset vectors">
+          <div class="pillar-meter-header">
+            <span><b style="color:var(--amber)">⚡</b> Perspective &amp; Mindset</span>
+            <span id="scoreMindsetVal" style="color:var(--amber);font-weight:900;">24/30</span>
+          </div>
+          <div class="pillar-bar-track"><div class="pillar-bar-fill fill-amber" id="barMindset" style="width:80%;"></div></div>
+          <div class="pillar-status" id="statusMindset">Adaptive &amp; Grounded Agency</div>
+        </div>
+
+        <div class="pillar-meter-card" onclick="switchPsychTab('social')" title="Filter Social Dynamics vectors">
+          <div class="pillar-meter-header">
+            <span><b style="color:var(--primary)">◉</b> Social Dynamics</span>
+            <span id="scoreSocialVal" style="color:var(--primary);font-weight:900;">26/30</span>
+          </div>
+          <div class="pillar-bar-track"><div class="pillar-bar-fill fill-primary" id="barSocial" style="width:87%;"></div></div>
+          <div class="pillar-status" id="statusSocial">Strong Unit Cohesion &amp; Trust</div>
+        </div>
+      </div>
+      
+      <div class="check-3d-wrap" id="microCheckWrapper">
+        <div class="check-3d-board" id="microCheckBoard">
+
+          <!-- ✦ Pillar 1 Header -->
+          <div class="psych-group-header" data-pillar="identity">
             <div style="display:flex;align-items:center;gap:8px;">
-              <span class="tag green" id="resultBandBadge">🟢 STABLE &amp; RESILIENT</span>
-              <span class="tag" style="background:var(--card);border:1px solid var(--line);font-size:10px;">Zero-PII Cryptographic Enclave</span>
+              <span class="tag cyan">✦ Pillar 1</span>
+              <h3 style="margin:0;font-size:13px;font-weight:800;color:var(--text-heading);">Self-Reflection &amp; Identity</h3>
             </div>
-            <div style="font-size:13px;font-weight:900;color:var(--text-heading);margin-top:8px;">
-              Confidential Psychological Check-In Results
-            </div>
-            <div style="font-size:11.5px;color:var(--muted);margin-top:2px;" id="resultCadenceLabel">
-              Weekly Routine Cadence · Saved to private on-device history
-            </div>
+            <span class="psych-group-desc">Introspection, moral alignment, personal calling, and self-compassion under strain</span>
           </div>
 
-          <!-- Big Dynamic Score -->
-          <div style="text-align:right;">
-            <div class="checkin-big-score" id="resultBigScore">
-              <span id="resultScoreNum" style="color:var(--primary);">84</span><small style="font-size:20px;color:var(--muted);">%</small>
+          <!-- Question 1: Emotional Self-Awareness -->
+          <div class="slider-3d-card" data-pillar="identity">
+            <div class="qhead">
+              <span class="qtitle"><b>1.</b> Emotional Self-Awareness</span>
+              <span class="qvalue" id="qSpin1">4/5</span>
             </div>
-            <div style="font-size:10.5px;font-weight:800;color:var(--muted);text-transform:uppercase;">Overall Resilience Index</div>
-          </div>
-        </div>
-
-        <!-- 3 Pillar Breakdown Meters -->
-        <div class="checkin-pillars-grid">
-          <div class="checkin-pillar-tile">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;font-weight:900;color:var(--whoop-blue);">✦ Sleep &amp; Vitality</span>
-              <b style="font-size:14px;color:var(--whoop-blue);" id="resPillar1Score">25/30</b>
-            </div>
-            <div class="spark-bar-track" style="width:100%;">
-              <div class="spark-bar-fill" id="resPillar1Bar" style="width:83%;background:var(--whoop-blue);"></div>
-            </div>
-            <div style="font-size:10px;color:var(--muted);margin-top:4px;" id="resPillar1Status">Deep recovery &amp; restored energy</div>
+            <div class="qdesc">I can clearly identify and understand my emotional triggers and inner state in high-pressure moments.</div>
+            <input class="range-3d-input" id="psychQ1" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(1, this.value)">
+            <div class="ends"><span>Clouded / Unclear</span><span>Crystal Clear</span></div>
           </div>
 
-          <div class="checkin-pillar-tile">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;font-weight:900;color:var(--whoop-amber);">⚡ Mood &amp; Stress</span>
-              <b style="font-size:14px;color:var(--whoop-amber);" id="resPillar2Score">24/30</b>
+          <!-- Question 2: Core Values & Honor Alignment -->
+          <div class="slider-3d-card" data-pillar="identity">
+            <div class="qhead">
+              <span class="qtitle"><b>2.</b> Core Values & Honor Alignment</span>
+              <span class="qvalue" id="qSpin2">5/5</span>
             </div>
-            <div class="spark-bar-track" style="width:100%;">
-              <div class="spark-bar-fill" id="resPillar2Bar" style="width:80%;background:var(--whoop-amber);"></div>
-            </div>
-            <div style="font-size:10px;color:var(--muted);margin-top:4px;" id="resPillar2Status">Steady focus under pressure</div>
+            <div class="qdesc">My daily actions and operational decisions reflect my personal core values and integrity.</div>
+            <input class="range-3d-input" id="psychQ2" type="range" min="1" max="5" value="5" oninput="updatePsychSlider(2, this.value)">
+            <div class="ends"><span>Misaligned</span><span>Fully Aligned</span></div>
           </div>
 
-          <div class="checkin-pillar-tile">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-              <span style="font-size:11px;font-weight:900;color:var(--whoop-green);">◉ Social &amp; Morale</span>
-              <b style="font-size:14px;color:var(--whoop-green);" id="resPillar3Score">27/30</b>
+          <!-- Question 3: Self-Compassion & Acceptance -->
+          <div class="slider-3d-card" data-pillar="identity">
+            <div class="qhead">
+              <span class="qtitle"><b>3.</b> Self-Compassion & Acceptance</span>
+              <span class="qvalue" id="qSpin3">4/5</span>
             </div>
-            <div class="spark-bar-track" style="width:100%;">
-              <div class="spark-bar-fill" id="resPillar3Bar" style="width:90%;background:var(--whoop-green);"></div>
+            <div class="qdesc">I treat myself with constructive patience during setbacks rather than harsh self-punishment.</div>
+            <input class="range-3d-input" id="psychQ3" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(3, this.value)">
+            <div class="ends"><span>Self-Critical</span><span>Self-Accepting</span></div>
+          </div>
+
+          <!-- Question 4: Purpose & Operational Calling -->
+          <div class="slider-3d-card" data-pillar="identity">
+            <div class="qhead">
+              <span class="qtitle"><b>4.</b> Purpose & Operational Calling</span>
+              <span class="qvalue" id="qSpin4">4/5</span>
             </div>
-            <div style="font-size:10px;color:var(--muted);margin-top:4px;" id="resPillar3Status">High unit cohesion &amp; comradeship</div>
+            <div class="qdesc">I experience a deep sense of personal purpose, direction, and meaning in my duties.</div>
+            <input class="range-3d-input" id="psychQ4" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(4, this.value)">
+            <div class="ends"><span>Aimless</span><span>Deeply Grounded</span></div>
           </div>
-        </div>
 
-        <!-- AI Clinical Welfare Summary -->
-        <div class="checkin-ai-summary-box">
-          <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:900;color:var(--cyan);text-transform:uppercase;margin-bottom:4px;">
-            <svg class="icon" style="width:13px;height:13px;"><use href="#spark"/></svg>
-            <span>AURA Welfare Assessment &amp; Dignity Guidance:</span>
+          <!-- Question 5: Resilience & Growth Narrative -->
+          <div class="slider-3d-card" data-pillar="identity">
+            <div class="qhead">
+              <span class="qtitle"><b>5.</b> Resilience & Growth Narrative</span>
+              <span class="qvalue" id="qSpin5">4/5</span>
+            </div>
+            <div class="qdesc">I view past hardships and stress as experiences that fortified my inner resilience.</div>
+            <input class="range-3d-input" id="psychQ5" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(5, this.value)">
+            <div class="ends"><span>Overwhelmed</span><span>Fortified</span></div>
           </div>
-          <div id="resultAiSummaryText" style="line-height:1.6;">
-            <b>Strong psychological resilience.</b> Your autonomic nervous balance and sleep architecture indicate solid adaptation to operational duties. Maintaining connection with unit buddies and your nightly 4-4-4-4 box breathing will preserve cognitive sharpness.
-          </div>
-        </div>
 
-        <!-- Action Buttons Row -->
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;">
-          <div style="display:flex;gap:8px;">
-            <button class="btn primary" onclick="jumpToSection('secBreathing', 'jawan')">
-              🧘 Launch 4-4-4-4 Box Breathing
-            </button>
-            <button class="btn" onclick="openCallModal()">
-              📞 Confidential Support (14416)
-            </button>
+          <!-- Question 6: Identity Stability Under Pressure -->
+          <div class="slider-3d-card" data-pillar="identity">
+            <div class="qhead">
+              <span class="qtitle"><b>6.</b> Identity Stability Under Pressure</span>
+              <span class="qvalue" id="qSpin6">4/5</span>
+            </div>
+            <div class="qdesc">I maintain an unshakable sense of who I am even when high-stress situations challenge me.</div>
+            <input class="range-3d-input" id="psychQ6" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(6, this.value)">
+            <div class="ends"><span>Unsteady</span><span>Steadfast</span></div>
           </div>
-          <button class="btn" onclick="restartCheckin()">
-            ↻ Retake Check-In
+
+          <!-- ⚡ Pillar 2 Header -->
+          <div class="psych-group-header" data-pillar="mindset">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="tag amber">⚡ Pillar 2</span>
+              <h3 style="margin:0;font-size:13px;font-weight:800;color:var(--text-heading);">Perspective &amp; Mindset</h3>
+            </div>
+            <span class="psych-group-desc">Cognitive agility, problem reframing, mindful grounding, and proactive locus of control</span>
+          </div>
+
+          <!-- Question 7: Cognitive Flexibility -->
+          <div class="slider-3d-card" data-pillar="mindset">
+            <div class="qhead">
+              <span class="qtitle"><b>7.</b> Cognitive Flexibility</span>
+              <span class="qvalue" id="qSpin7">4/5</span>
+            </div>
+            <div class="qdesc">I readily adapt my thinking, strategy, and habits when unexpected battlefield or life changes occur.</div>
+            <input class="range-3d-input" id="psychQ7" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(7, this.value)">
+            <div class="ends"><span>Rigid</span><span>Highly Adaptable</span></div>
+          </div>
+
+          <!-- Question 8: Constructive Problem-Framing -->
+          <div class="slider-3d-card" data-pillar="mindset">
+            <div class="qhead">
+              <span class="qtitle"><b>8.</b> Constructive Problem-Framing</span>
+              <span class="qvalue" id="qSpin8">4/5</span>
+            </div>
+            <div class="qdesc">I interpret obstacles as solvable tactical puzzles rather than insurmountable threats.</div>
+            <input class="range-3d-input" id="psychQ8" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(8, this.value)">
+            <div class="ends"><span>Threat-Oriented</span><span>Solution-Oriented</span></div>
+          </div>
+
+          <!-- Question 9: Realistic Optimism & Hope -->
+          <div class="slider-3d-card" data-pillar="mindset">
+            <div class="qhead">
+              <span class="qtitle"><b>9.</b> Realistic Optimism & Hope</span>
+              <span class="qvalue" id="qSpin9">4/5</span>
+            </div>
+            <div class="qdesc">I maintain an active, grounded belief that proactive effort leads to positive outcomes.</div>
+            <input class="range-3d-input" id="psychQ9" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(9, this.value)">
+            <div class="ends"><span>Pessimistic</span><span>High Hope</span></div>
+          </div>
+
+          <!-- Question 10: Growth & Mastery Orientation -->
+          <div class="slider-3d-card" data-pillar="mindset">
+            <div class="qhead">
+              <span class="qtitle"><b>10.</b> Growth & Mastery Orientation</span>
+              <span class="qvalue" id="qSpin10">4/5</span>
+            </div>
+            <div class="qdesc">I believe my emotional discipline, mental toughness, and focus expand with consistent practice.</div>
+            <input class="range-3d-input" id="psychQ10" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(10, this.value)">
+            <div class="ends"><span>Fixed Limitations</span><span>Continuous Growth</span></div>
+          </div>
+
+          <!-- Question 11: Mindful Presence & Grounding -->
+          <div class="slider-3d-card" data-pillar="mindset">
+            <div class="qhead">
+              <span class="qtitle"><b>11.</b> Mindful Presence & Grounding</span>
+              <span class="qvalue" id="qSpin11">4/5</span>
+            </div>
+            <div class="qdesc">I can rapidly anchor my focus in the present moment without spiraling into anticipatory stress.</div>
+            <input class="range-3d-input" id="psychQ11" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(11, this.value)">
+            <div class="ends"><span>Scattered</span><span>Deeply Centered</span></div>
+          </div>
+
+          <!-- Question 12: Internal Locus of Control -->
+          <div class="slider-3d-card" data-pillar="mindset">
+            <div class="qhead">
+              <span class="qtitle"><b>12.</b> Internal Locus of Control</span>
+              <span class="qvalue" id="qSpin12">4/5</span>
+            </div>
+            <div class="qdesc">I channel my mental energy into what is within my control rather than worrying about what is not.</div>
+            <input class="range-3d-input" id="psychQ12" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(12, this.value)">
+            <div class="ends"><span>Reactive</span><span>Proactive Control</span></div>
+          </div>
+
+          <!-- ◉ Pillar 3 Header -->
+          <div class="psych-group-header" data-pillar="social">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="tag green">◉ Pillar 3</span>
+              <h3 style="margin:0;font-size:13px;font-weight:800;color:var(--text-heading);">Social Dynamics &amp; Interpersonal Cohesion</h3>
+            </div>
+            <span class="psych-group-desc">Peer attunement, psychological safety, unit solidarity, and healthy interpersonal boundaries</span>
+          </div>
+
+          <!-- Question 13: Empathetic Attunement -->
+          <div class="slider-3d-card" data-pillar="social">
+            <div class="qhead">
+              <span class="qtitle"><b>13.</b> Empathetic Attunement</span>
+              <span class="qvalue" id="qSpin13">4/5</span>
+            </div>
+            <div class="qdesc">I actively listen and notice when comrades or teammates are under silent strain or burden.</div>
+            <input class="range-3d-input" id="psychQ13" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(13, this.value)">
+            <div class="ends"><span>Detached</span><span>Deeply Attuned</span></div>
+          </div>
+
+          <!-- Question 14: Psychological Safety & Peer Trust -->
+          <div class="slider-3d-card" data-pillar="social">
+            <div class="qhead">
+              <span class="qtitle"><b>14.</b> Psychological Safety & Peer Trust</span>
+              <span class="qvalue" id="qSpin14">4/5</span>
+            </div>
+            <div class="qdesc">I feel comfortable confiding in or seeking support from trusted comrades when strained.</div>
+            <input class="range-3d-input" id="psychQ14" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(14, this.value)">
+            <div class="ends"><span>Guarded / Isolated</span><span>High Trust</span></div>
+          </div>
+
+          <!-- Question 15: Interpersonal Composure & Tact -->
+          <div class="slider-3d-card" data-pillar="social">
+            <div class="qhead">
+              <span class="qtitle"><b>15.</b> Interpersonal Composure & Tact</span>
+              <span class="qvalue" id="qSpin15">4/5</span>
+            </div>
+            <div class="qdesc">During friction or disagreement, I remain composed and work toward respectful resolution.</div>
+            <input class="range-3d-input" id="psychQ15" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(15, this.value)">
+            <div class="ends"><span>Combative</span><span>Diplomatic & Calm</span></div>
+          </div>
+
+          <!-- Question 16: Camaraderie & Unit Cohesion -->
+          <div class="slider-3d-card" data-pillar="social">
+            <div class="qhead">
+              <span class="qtitle"><b>16.</b> Camaraderie & Unit Cohesion</span>
+              <span class="qvalue" id="qSpin16">5/5</span>
+            </div>
+            <div class="qdesc">I feel a strong sense of mutual belonging, brotherhood, and shared purpose with my peers.</div>
+            <input class="range-3d-input" id="psychQ16" type="range" min="1" max="5" value="5" oninput="updatePsychSlider(16, this.value)">
+            <div class="ends"><span>Alienated</span><span>Deeply Connected</span></div>
+          </div>
+
+          <!-- Question 17: Healthy Boundaries -->
+          <div class="slider-3d-card" data-pillar="social">
+            <div class="qhead">
+              <span class="qtitle"><b>17.</b> Healthy Boundaries</span>
+              <span class="qvalue" id="qSpin17">4/5</span>
+            </div>
+            <div class="qdesc">I can assert healthy personal and operational boundaries firmly without aggression or guilt.</div>
+            <input class="range-3d-input" id="psychQ17" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(17, this.value)">
+            <div class="ends"><span>Compromised</span><span>Firm & Respectful</span></div>
+          </div>
+
+          <!-- Question 18: Collective Morale Uplift -->
+          <div class="slider-3d-card" data-pillar="social">
+            <div class="qhead">
+              <span class="qtitle"><b>18.</b> Collective Morale Uplift</span>
+              <span class="qvalue" id="qSpin18">4/5</span>
+            </div>
+            <div class="qdesc">I intentionally bring constructive energy, solidarity, and encouragement that uplifts team morale.</div>
+            <input class="range-3d-input" id="psychQ18" type="range" min="1" max="5" value="4" oninput="updatePsychSlider(18, this.value)">
+            <div class="ends"><span>Depleting</span><span>Inspiring Catalyst</span></div>
+          </div>
+
+          <!-- 3D Micro-interaction Button with Depress & Morph -->
+          <button id="calcBadgeBtn" class="badge-3d-btn" style="margin-top:14px;" onclick="executeBadgeMorph()">
+            <svg class="icon" style="width:16px;height:16px;"><use href="#spark"/></svg>
+            <span id="badgeBtnLabel">Calculate My Local Wellness Badge</span>
           </button>
+
+          <!-- Result Diagnostic Display Panel (populated on calculation) -->
+          <div id="psychResultPanel" class="psych-result-panel hidden"></div>
         </div>
       </div>
     </article>
@@ -7168,37 +6291,24 @@ async function triggerDeviceBiometric() {
   }
 }
 
-function fillJudgeDemo(role) {
-  switchAuthTab('pass');
-  if (role === 'commander') {
-    if ($('loginUsername')) $('loginUsername').value = 'KV-101';
-    if ($('loginPassword')) $('loginPassword').value = 'kavach2026';
-    notify('Demo Credentials loaded: KV-101 / kavach2026 (Commander)');
+function handlePasswordLogin(e) {
+  if (e) e.preventDefault();
+  const u = ($('loginUsername')?.value || '').trim().toLowerCase();
+  const p = ($('loginPassword')?.value || '').trim();
+  const selectedRole = document.querySelector('input[name="loginRole"]:checked')?.value || 'commander';
+
+  if ((u === 'officer' && p === 'kavach2026') || (u === 'jawan' && p === 'aura2026') || (u.length > 0 && p.length >= 3)) {
+    const role = (u === 'jawan') ? 'jawan' : selectedRole;
+    unlockApp(role);
   } else {
-    if ($('loginUsername')) $('loginUsername').value = 'KV-207';
-    if ($('loginPassword')) $('loginPassword').value = 'aura2026';
-    notify('Demo Credentials loaded: KV-207 / aura2026 (Jawan)');
+    notify('Authentication error: Invalid credentials. Use officer / kavach2026 or jawan / aura2026.');
   }
 }
 
 function quickLogin(role) {
-  fillJudgeDemo(role);
-  handlePasswordLogin();
-}
-
-function handlePasswordLogin(e) {
-  if (e) e.preventDefault();
-  const u = ($('loginUsername')?.value || '').trim().toUpperCase();
-  const p = ($('loginPassword')?.value || '').trim();
-
-  // Role comes strictly from the account credentials
-  if ((u === 'KV-101' || u === 'OFFICER' || u === 'PRAFULL') && p === 'kavach2026') {
-    unlockApp('commander', 'KV-101');
-  } else if ((u === 'KV-207' || u === 'JAWAN' || u === 'PRADEEP') && p === 'aura2026') {
-    unlockApp('jawan', 'KV-207');
-  } else {
-    notify('Access Denied: Invalid Force ID or Password. For hackathon evaluation, use KV-101 / kavach2026 or KV-207 / aura2026.');
-  }
+  if ($('loginUsername')) $('loginUsername').value = role === 'jawan' ? 'jawan' : 'officer';
+  if ($('loginPassword')) $('loginPassword').value = role === 'jawan' ? 'aura2026' : 'kavach2026';
+  unlockApp(role);
 }
 
 function togglePasswordVisibility() {
@@ -7400,1205 +6510,299 @@ function escapeHtml(str) {
 }
 
 
-
 /* =========================================================================
-   WHOOP LIVE STRESS/STRAIN ARC GAUGE (BLUE → GREEN → AMBER SWEEP + NEEDLE)
+   SPEC 2: 18-VECTOR PSYCHOLOGICAL BATTERY LOGIC & BADGE COMPUTATION
+   - Real-time aggregation across 3 Pillars (Self-Reflection, Perspective, Social Dynamics)
+   - Dynamic 360° spin on slider value changes
+   - Pillar tab filtering & summary bar updates
+   - 3D physical button depress, celebration particles & local badge calculation
    ========================================================================= */
-function updateStressStrainGauge(strainVal) {
-  const needle = $('gaugeNeedleGroup');
-  const numDisplay = $('gaugeNumber');
-  const zonePill = $('gaugeZonePill');
-  const zoneLabel = $('gaugeZoneLabel');
-  const statusTag = $('gaugeStatusTag');
 
-  const s = parseFloat(strainVal) || 11.2;
-  // Arc angle from -90deg (0 strain) to +90deg (21 strain)
-  const angle = Math.max(-90, Math.min(90, ((s / 21) * 180) - 90));
+let psychCurrentTab = 'all';
 
-  if (needle) {
-    needle.style.transform = `rotate(${angle.toFixed(1)}deg)`;
-  }
-  if (numDisplay) {
-    numDisplay.textContent = s.toFixed(1);
-  }
-  const jawanNeedle = $('jawanGaugeNeedle');
-  const jawanScore = $('jawanStrainScore');
-  if (jawanNeedle) {
-    jawanNeedle.style.transform = `rotate(${angle.toFixed(1)}deg)`;
-  }
-  if (jawanScore) {
-    jawanScore.textContent = s.toFixed(1);
-  }
+// Idle isometric wobble
+const board = $('microCheckBoard');
+const wrapper = $('microCheckWrapper');
 
-  // Zone classification
-  if (s < 10.0) {
-    if (statusTag) { statusTag.textContent = 'Low Strain / Recovery'; statusTag.className = 'tag cyan'; }
-    if (zonePill) { zonePill.style.color = 'var(--whoop-blue)'; zonePill.style.borderColor = 'var(--whoop-blue)'; zonePill.style.background = 'var(--cyan-dim)'; }
-    if (zoneLabel) zoneLabel.textContent = 'Zone 1: Active Recovery (<10.0)';
-  } else if (s < 15.0) {
-    if (statusTag) { statusTag.textContent = 'Optimal Workload'; statusTag.className = 'tag green'; }
-    if (zonePill) { zonePill.style.color = 'var(--whoop-green)'; zonePill.style.borderColor = 'var(--whoop-green)'; zonePill.style.background = 'var(--primary-dim)'; }
-    if (zoneLabel) zoneLabel.textContent = 'Zone 2: Target Cardiovascular Load (10.0 - 14.9)';
-  } else if (s < 18.0) {
-    if (statusTag) { statusTag.textContent = 'High Tactical Strain'; statusTag.className = 'tag amber'; }
-    if (zonePill) { zonePill.style.color = 'var(--whoop-amber)'; zonePill.style.borderColor = 'var(--whoop-amber)'; zonePill.style.background = 'var(--amber-dim)'; }
-    if (zoneLabel) zoneLabel.textContent = 'Zone 3: Elevated Operational Load (15.0 - 17.9)';
-  } else {
-    if (statusTag) { statusTag.textContent = 'Overreaching Strain'; statusTag.className = 'tag rose'; }
-    if (zonePill) { zonePill.style.color = 'var(--whoop-rose)'; zonePill.style.borderColor = 'var(--whoop-rose)'; zonePill.style.background = 'var(--rose-dim)'; }
-    if (zoneLabel) zoneLabel.textContent = 'Zone 4: Maximum Exertion Threshold (18.0+)';
-  }
-}
+if (wrapper && board) {
+  wrapper.addEventListener('mousemove', e => {
+    const rect = wrapper.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;  // ±4deg
+    const y = -((e.clientY - rect.top) / rect.height - 0.5) * 4; // ±2deg
+    board.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+  });
 
-function initStressStrainGauge() {
-  updateStressStrainGauge(11.2);
-}
-
-function cycleStrainGauge() {
-  const presets = [8.4, 11.2, 14.5, 17.1, 19.4];
-  const cur = parseFloat($('gaugeNumber')?.textContent || '11.2');
-  let nextIdx = 0;
-  for (let i = 0; i < presets.length; i++) {
-    if (Math.abs(presets[i] - cur) < 0.5) {
-      nextIdx = (i + 1) % presets.length;
-      break;
-    }
-  }
-  updateStressStrainGauge(presets[nextIdx]);
-  notify(`Strain Needle swept to ${presets[nextIdx]} / 21`);
-}
-
-/* =========================================================================
-   SMOOTH GRADIENT TRAJECTORY HOVER TOOLTIP & CROSSHAIR ENGINE
-   ========================================================================= */
-function initSmoothTrajectoryChart() {
-  const svg = $('trajectorySvg');
-  const tooltip = $('chartTooltip');
-  const crosshair = $('chartCrosshair');
-  if (!svg || !tooltip) return;
-
-  const nodes = document.querySelectorAll('.chart-node');
-  nodes.forEach(node => {
-    node.addEventListener('mouseenter', (e) => {
-      const day = node.getAttribute('data-day');
-      const fat = node.getAttribute('data-fatigue');
-      const wrk = node.getAttribute('data-workload');
-      const rec = node.getAttribute('data-recovery');
-      const cx = parseFloat(node.getAttribute('cx'));
-      const cy = parseFloat(node.getAttribute('cy'));
-
-      $('tooltipDate').textContent = day;
-      $('tooltipFatigue').textContent = fat;
-      $('tooltipWorkload').textContent = wrk;
-      $('tooltipRecovery').textContent = rec;
-
-      const rect = svg.getBoundingClientRect();
-      const scaleX = rect.width / 720;
-      const scaleY = rect.height / 250;
-
-      tooltip.style.display = 'block';
-      tooltip.style.left = `${cx * scaleX}px`;
-      tooltip.style.top = `${cy * scaleY}px`;
-
-      if (crosshair) {
-        crosshair.setAttribute('x1', cx);
-        crosshair.setAttribute('x2', cx);
-        crosshair.style.opacity = '1';
-      }
-    });
-
-    node.addEventListener('mouseleave', () => {
-      tooltip.style.display = 'none';
-      if (crosshair) crosshair.style.opacity = '0';
-    });
+  wrapper.addEventListener('mouseleave', () => {
+    board.style.transform = 'rotateX(0deg) rotateY(0deg)';
   });
 }
 
-/* =========================================================================
-   AURA 18-QUESTION NATURAL VOICE & TAP CHECK-IN ENGINE
-   - 18 Clinical & Operational Vectors (Sleep, Stress, Mood, Comradeship, Family, etc.)
-   - Dual-Mode: Talk to AURA (Natural Human Voice + STT) & Tap Mode (Fast Offline)
-   - Real Speech Synthesis with Warm Cadence & Natural NLP Free Speech Interpretation
-   - Full 4-Language Localization (English, Hindi, Telugu, Kannada)
-   - Zero-PII Encrypted Local Scoring & Trend Persistence
-   ========================================================================= */
-
-const AURA_CHECKIN_QUESTIONS = [
-  // Pillar 1: Sleep, Physical Vitality & Somatic Stress (Questions 1 to 6)
-  {
-    id: 1,
-    pillar: 1,
-    category: "Sleep Quality & Restfulness",
-    pillarLabel: "✦ Pillar 1: Sleep & Physical Fatigue",
-    en: {
-      question: "How restful and uninterrupted has your sleep been over the past few nights?",
-      conversational: "Namaste jawan. Let's start with your rest. How has your sleep been lately? Have you been sleeping through the night or waking up restless?",
-      options: ["Severe disruption / <3 hours", "Restless / waking often", "Moderate / 5 to 6 hours", "Good / restful 7 hours", "Deep & fully restorative"],
-      descs: ["Critical sleep deficit", "Persistent wakefulness", "Manageable baseline", "Solid physical recovery", "Peak autonomic restoration"]
-    },
-    hi: {
-      question: "पिछले कुछ दिनों में आपकी नींद कितनी गहरी और आरामदायक रही है?",
-      conversational: "जय हिंद साथी। सबसे पहले आपकी नींद के बारे में बात करते हैं। हाल के दिनों में आपकी नींद कैसी रही? क्या आप बिना किसी रुकावट के सो पा रहे हैं?",
-      options: ["बहुत खराब / 3 घंटे से कम", "बेचैन / बार-बार टूटने वाली", "सामान्य / 5-6 घंटे", "अच्छी / 7 घंटे आरामदायक", "गहरी और पूरी तरोताजा करने वाली"],
-      descs: ["गंभीर नींद की कमी", "लगातार बेचैनी", "कामचलाऊ नींद", "संतोषजनक आराम", "पूर्ण शारीरिक रिकवरी"]
-    },
-    te: {
-      question: "గత కొన్ని రాత్రులలో మీ నిద్ర ఎంత ప్రశాంతంగా మరియు అంతరాయం లేకుండా ఉంది?",
-      conversational: "జై హింద్ జవాన్. ముందుగా మీ విశ్రాంతి గురించి చెప్పుకుందాం. గత కొన్ని రోజులుగా మీ నిద్ర ఎలా ఉంది? ప్రశాంతంగా నిద్రపోతున్నారా?",
-      options: ["చాలా ఘోరంగా / 3 గంటల కంటే తక్కువ", "అశాంతిగా / తరచూ మెలకువ", "సాధారణంగా / 5 నుండి 6 గంటలు", "మంచి నిద్ర / 7 గంటలు", "గాఢమైన & పరిపూర్ణ విశ్రాంతి"],
-      descs: ["తీవ్రమైన నిద్రలేమి", "నిరంతర అలసట", "సరిపడా నిద్ర", "మంచి రికవరీ", "సంపూర్ణ శక్తి పునరుద్ధరణ"]
-    },
-    kn: {
-      question: "ಕಳೆದ ಕೆಲವು ರಾತ್ರಿಗಳಲ್ಲಿ ನಿಮ್ಮ ನಿದ್ರೆ ಎಷ್ಟು ಶಾಂತಿಯುತ ಮತ್ತು ತಡೆರಹಿತವಾಗಿತ್ತು?",
-      conversational: "ಜೈ ಹಿಂದ್ ಯೋಧರೆ. ಮೊದಲು ನಿಮ್ಮ ನಿದ್ರೆಯ ಬಗ್ಗೆ ತಿಳಿಯೋಣ. ಇತ್ತೀಚೆಗೆ ನಿದ್ರೆ ಹೇಗಿದೆ? ನೆಮ್ಮದಿಯಾಗಿ ನಿದ್ರೆ ಮಾಡುತ್ತಿದ್ದೀರಾ?",
-      options: ["ತುಂಬಾ ಕೆಟ್ಟದಾಗಿದೆ / 3 ಗಂಟೆಗಿಂತ ಕಡಿಮೆ", "ಅಶಾಂತಿ / ಆಗಾಗ ಎಚ್ಚರ", "ಸಾಧಾರಣ / 5-6 ಗಂಟೆ", "ಉತ್ತಮ ನಿದ್ರೆ / 7 ಗಂಟೆ", "ಗಾಢ ಮತ್ತು ಪೂರ್ಣ ವಿಶ್ರಾಂತಿ"],
-      descs: ["ತೀವ್ರ ನಿದ್ರಾಹೀನತೆ", "ಆಯಾಸದ ಸ್ಥಿತಿ", "ಸಾಧಾರಣ ಮಟ್ಟ", "ಉತ್ತಮ ವಿಶ್ರಾಂತಿ", "ಸಂಪೂರ್ಣ ಚೇತರಿಕೆ"]
-    }
-  },
-  {
-    id: 2,
-    pillar: 1,
-    category: "Physical Exhaustion & Muscle Fatigue",
-    pillarLabel: "✦ Pillar 1: Sleep & Physical Fatigue",
-    en: {
-      question: "Are you carrying heavy physical fatigue or waking up drained before your shift begins?",
-      conversational: "When your shift starts, do you feel physically energetic and ready, or is your body carrying heavy fatigue?",
-      options: ["Completely drained / heavy exhaustion", "Noticeable fatigue / aching", "Moderate tiredness / manageable", "Physically ready / light fatigue", "High physical vitality & power"],
-      descs: ["Near physical exhaustion", "Requires recovery effort", "Standard field exertion", "Strong physical reserve", "Optimal tactical readiness"]
-    },
-    hi: {
-      question: "क्या आप ड्यूटी शुरू होने से पहले ही भारी शारीरिक थकान महसूस कर रहे हैं?",
-      conversational: "जब आपकी ड्यूटी शुरू होती है, तो क्या आप शरीर में ताकत महसूस करते हैं या फिर भारी थकान बनी रहती है?",
-      options: ["पूरी तरह थके हुए / भारी कमजोरी", "काफी थकान / बदन दर्द", "मध्यम थकान / संभाल सकने योग्य", "शारीरिक रूप से तैयार", "उच्च शारीरिक ऊर्जा और फुर्ती"],
-      descs: ["अत्यधिक शारीरिक थकान", "आराम की सख्त जरूरत", "सामान्य थकान", "अच्छी ताकत", "सर्वोत्तम परिचालन क्षमता"]
-    },
-    te: {
-      question: "డ్యూటీ ప్రారంభానికి ముందే మీ శరీరం తీవ్రమైన అలసటతో లేదా నిస్సత్తువతో ఉంటోందా?",
-      conversational: "షిఫ్ట్ మొదలయ్యే సమయానికి మీ శరీరం ఉత్సాహంగా ఉంటోందా లేక విపరీతమైన అలసటగా అనిపిస్తోందా?",
-      options: ["తీవ్రమైన అలసట / నిస్సత్తువ", "గమనించదగ్గ అలసట / నొప్పులు", "మధ్యస్థ అలసట / తట్టుకోగలము", "శారీరకంగా సిద్ధం", "పూర్తి శారీరక బలం & ఉత్సాహం"],
-      descs: ["అధిక శారీరక శ్రమ", "విశ్రాంతి అవసరం", "సాధారణ పరిస్థితి", "మంచి బలం", "సంపూర్ణ యుద్ధ సన్నద్ధత"]
-    },
-    kn: {
-      question: "ಕರ್ತವ್ಯ ಆರಂಭವಾಗುವ ಮೊದಲೇ ನೀವು ತೀವ್ರ ದೈಹಿಕ ಆಯಾಸವನ್ನು ಅನುಭವಿಸುತ್ತಿದ್ದೀರಾ?",
-      conversational: "ಡ್ಯೂಟಿ ಆರಂಭವಾಗುವಾಗ ನೀವು ಚೈತನ್ಯದಿಂದ ಇರುತ್ತೀರಾ ಅಥವಾ ಮೈಕೈ ಆಯಾಸದಿಂದ ಬಳಲುತ್ತಿದ್ದೀರಾ?",
-      options: ["ಸಂಪೂರ್ಣ ದಣಿದಿದೆ / ತೀವ್ರ ಆಯಾಸ", "ಗಮನಾರ್ಹ ಆಯಾಸ / ನೋವು", "ಮಧ್ಯಮ ಆಯಾಸ / ತಡೆದುಕೊಳ್ಳಬಹುದು", "ದೈಹಿಕವಾಗಿ ಸಿದ್ಧ", "ಉನ್ನತ ದೈಹಿಕ ಸಾಮರ್ಥ್ಯ"],
-      descs: ["ತೀವ್ರ ಆಯಾಸದ ಸ್ಥಿತಿ", "ವಿಶ್ರಾಂತಿ ಅಗತ್ಯ", "ಸಾಧಾರಣ ಮಟ್ಟ", "ಉತ್ತಮ ಬಲ", "ಉತ್ತಮ ಕಾರ್ಯಾಚರಣೆ ಸನ್ನದ್ಧತೆ"]
-    }
-  },
-  {
-    id: 3,
-    pillar: 1,
-    category: "Morning Wakefulness & Alertness",
-    pillarLabel: "✦ Pillar 1: Sleep & Physical Fatigue",
-    en: {
-      question: "How quickly does your alertness and reaction speed sharpen after waking up?",
-      conversational: "In the morning, does your mind take a long time to clear the fog, or do you feel awake and alert right away?",
-      options: ["Persistent brain fog / groggy for hours", "Slow to wake / sluggish", "Takes 20–30 minutes to wake", "Awake & alert fairly quickly", "Instantly clear & razor sharp"],
-      descs: ["High cognitive sleep inertia", "Sluggish morning response", "Normal gradual alertness", "Quick reflex restoration", "Instant cognitive clarity"]
-    },
-    hi: {
-      question: "सुबह उठने के बाद आपकी सतर्कता और सोचने की गति कितनी जल्दी सामान्य होती है?",
-      conversational: "सुबह उठने के बाद क्या काफी देर तक आलस्य और भारीपन रहता है, या आप तुरंत सतर्क हो जाते हैं?",
-      options: ["लगातार सिर भारी / घंटों तक आलस्य", "धीमी गति / सुस्ती", "20-30 मिनट में सामान्य", "जल्दी चुस्त और सतर्क", "तुरंत पूरी तरह सतर्क व तेज"],
-      descs: ["गंभीर आलस्य", "सुस्त प्रतिक्रिया", "सामान्य जागृति", "तेज सजगता", "तुरंत स्पष्ट सोच"]
-    },
-    te: {
-      question: "ఉదయం నిద్రలేవగానే మీ ఆలోచనలు మరియు చురుకుదనం ఎంత త్వరగా స్పష్టంగా మారుతున్నాయి?",
-      conversational: "ఉదయం లేచిన వెంటనే చాలా సేపు మగతగా ఉంటోందా లేక వెంటనే చురుగ్గా ఆలోచించగలుగుతున్నారా?",
-      options: ["గంటల తరబడి మత్తు / మగత", "నెమ్మదిగా మేల్కొనడం / బద్దకం", "20-30 నిమిషాల్లో సాధారణం", "త్వరగా చురుకుదనం", "వెంటనే అత్యంత చురుకుదనం"],
-      descs: ["తీవ్రమైన మగత", "నెమ్మది ప్రతిస్పందన", "సాధారణ మేల్కొలుపు", "మంచి చురుకుదనం", "తక్షణ మానసిక స్పష్టత"]
-    },
-    kn: {
-      question: "ಬೆಳಿಗ್ಗೆ ಎದ್ದ ನಂತರ ನಿಮ್ಮ ಜಾಗರೂಕತೆ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆ ವೇಗ ಎಷ್ಟು ಬೇಗನೆ ಚುರುಕಾಗುತ್ತದೆ?",
-      conversational: "ಬೆಳಿಗ್ಗೆ ಎದ್ದಾಗ ತುಂಬಾ ಹೊತ್ತು ಮಂಪರು ಇರುತ್ತದೆಯೇ ಅಥವಾ ತಕ್ಷಣವೇ ಚುರುಕಾಗುತ್ತೀರಾ?",
-      options: ["ಗಂಟೆಗಳ ಕಾಲ ಮಂಪರು / ಆಲಸ್ಯ", "ನಿಧಾನವಾಗಿ ಎಚ್ಚರ / ಜಡತೆ", "20-30 ನಿಮಿಷಗಳಲ್ಲಿ ಸಹಜ", "ಬೇಗನೆ ಚುರುಕು", "ತಕ್ಷಣವೇ ಸಂಪೂರ್ಣ ಜಾಗರೂಕ"],
-      descs: ["ತೀವ್ರ ಮಂಪರು", "ನಿಧಾನ ಪ್ರತಿಕ್ರಿಯೆ", "ಸಾಧಾರಣ ಸ್ಥಿತಿ", "ಉತ್ತಮ ಜಾಗರೂಕತೆ", "ತಕ್ಷಣದ ಸ್ಪಷ್ಟತೆ"]
-    }
-  },
-  {
-    id: 4,
-    pillar: 1,
-    category: "Somatic Tension & Physical Pain",
-    pillarLabel: "✦ Pillar 1: Sleep & Physical Fatigue",
-    en: {
-      question: "Have you noticed recurring tension headaches, back stiffness, or body aches unrelated to training?",
-      conversational: "Has your body been holding stress in the form of headaches, neck tension, or backaches?",
-      options: ["Frequent debilitating aches / tension", "Persistent stiffness & discomfort", "Occasional mild strain / knots", "Minimal soreness / stretching helps", "Pain-free, relaxed & fluid body"],
-      descs: ["High somatic stress manifestation", "Restricted ease of movement", "Standard operational stiffness", "Quick recovery from tension", "Zero somatic distress"]
-    },
-    hi: {
-      question: "क्या आपको बिना किसी चोट के सिरदर्द, गर्दन में जकड़न या शरीर में दर्द महसूस हो रहा है?",
-      conversational: "क्या तनाव के कारण आपके सिर, गर्दन या पीठ में लगातार जकड़न और दर्द बना रहता है?",
-      options: ["लगातार तेज दर्द और जकड़न", "लगातार तनाव और असुविधा", "कभी-कभी हल्का खिंचाव", "हल्का दर्द / खिंचाव से राहत", "शरीर दर्द-मुक्त और पूरी तरह हल्का"],
-      descs: ["शारीरिक तनाव के लक्षण", "गतिशीलता में परेशानी", "सामान्य परिचालन तनाव", "आसानी से सामान्य", "पूरी तरह तनाव-मुक्त"]
-    },
-    te: {
-      question: "కారణం లేకుండా తలనొప్పి, మెడ బిగుతు లేదా శరీర నొప్పులు వస్తున్నాయా?",
-      conversational: "ఒత్తిడి వల్ల తలనొప్పి లేదా మెడ, వీపు నొప్పులు తరచూ ఇబ్బంది పెడుతున్నాయా?",
-      options: ["తీవ్రమైన నొప్పులు / అలసట", "నిరంతర బిగుతు & అసౌకర్యం", "అప్పుడప్పుడు స్వల్ప నొప్పి", "తేలికపాటి నొప్పి / వ్యాయామంతో నయం", "నొప్పులు లేని తేలికైన శరీరం"],
-      descs: ["తీవ్ర శారీరక ఒత్తిడి", "కదలికలో ఇబ్బంది", "సాధారణ అలసట", "త్వరగా ఉపశమనం", "సంపూర్ణ శారీరక స్వస్థత"]
-    },
-    kn: {
-      question: "ಯಾವುದೇ ಕಾರಣವಿಲ್ಲದೆ ತಲೆನೋವು, ಕುತ್ತಿಗೆ ಬಿಗಿತ ಅಥವಾ ಮೈಕೈ ನೋವು ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತಿದೆಯೇ?",
-      conversational: "ಒತ್ತಡದಿಂದಾಗಿ ತಲೆನೋವು ಅಥವಾ ಕುತ್ತಿಗೆ, ಬೆನ್ನು ನೋವು ಹೆಚ್ಚಾಗಿ ಕಾಡುತ್ತಿದೆಯೇ?",
-      options: ["ತೀವ್ರ ತಲೆನೋವು ಮತ್ತು ಮೈಕೈ ನೋವು", "ನಿರಂತರ ಬಿಗಿತ ಮತ್ತು ಕಿರಿಕಿರಿ", "ಅಪರೂಪಕ್ಕೆ ಸಣ್ಣ ನೋವು", "ಸ್ವಲ್ಪ ನೋವು / ವಿಶ್ರಾಂತಿಯಿಂದ ಸರಿ", "ನೋವಿಲ್ಲದ ಹಗುರ ದೇಹ"],
-      descs: ["ಶಾರೀರಿಕ ಒತ್ತಡದ ಲಕ್ಷಣ", "ಚಲನವಲನದಲ್ಲಿ ಕಷ್ಟ", "ಸಾಧಾರಣ ನೋವು", "ಬೇಗನೆ ಸರಿಹೋಗುತ್ತದೆ", "ಸಂಪೂರ್ಣ ನೋವು ಮುಕ್ತ"]
-    }
-  },
-  {
-    id: 5,
-    pillar: 1,
-    category: "Appetite & Nutritional Vitality",
-    pillarLabel: "✦ Pillar 1: Sleep & Physical Fatigue",
-    en: {
-      question: "How has your appetite, hydration, and nutritional energy been over the past week?",
-      conversational: "How is your appetite in the mess? Are you eating properly and drinking enough water, or skipping meals?",
-      options: ["Severely suppressed / skipping meals", "Poor appetite / forcing food down", "Moderate / eating out of routine", "Good appetite & steady hydration", "Excellent nourishment & strong energy"],
-      descs: ["Critical nutritional depletion", "Stress-induced digestive disruption", "Fair baseline intake", "Balanced metabolic nourishment", "Optimal nutritional power"]
-    },
-    hi: {
-      question: "पिछले एक सप्ताह में आपकी भूख, पानी की मात्रा और खान-पान की ऊर्जा कैसी रही है?",
-      conversational: "मेस में खाना कैसा खा रहे हैं? क्या भूख ठीक लग रही है और पर्याप्त पानी पी रहे हैं?",
-      options: ["भूख बिल्कुल नहीं / भोजन छोड़ना", "कम भूख / जबरदस्ती खाना", "मध्यम / आदत के अनुसार खाना", "अच्छी भूख और नियमित पानी", "उत्कृष्ट आहार और भरपूर ऊर्जा"],
-      descs: ["पोषण की भारी कमी", "तनाव से पाचन प्रभावित", "सामान्य आहार", "संतुलित खान-पान", "पूर्ण ऊर्जा"]
-    },
-    te: {
-      question: "గత వారంలో మీ ఆకలి, ఆహారం మరియు నీరు త్రాగే విధానం ఎలా ఉంది?",
-      conversational: "మెస్ లో భోజనం సరిగ్గా చేస్తున్నారా? ఆకలి వేస్తోందా లేదా తిండి తప్పిస్తున్నారా?",
-      options: ["ఆకలి అసలే లేదు / భోజనం మానడం", "తక్కువ ఆకలి / బలవంతంగా తినడం", "మధ్యస్థం / అలవాటుగా తినడం", "మంచి ఆకలి & సమయానికి నీరు", "అద్భుతమైన ఆహారం & పూర్తి శక్తి"],
-      descs: ["తీవ్ర పోషకాహార లోపం", "ఒత్తిడి వల్ల జీర్ణ సమస్యలు", "సాధారణ ఆహారం", "సమతుల్య ఆహారం", "సంపూర్ణ శక్తి"]
-    },
-    kn: {
-      question: "ಕಳೆದ ವಾರದಲ್ಲಿ ನಿಮ್ಮ ಹಸಿವು, ಆಹಾರ ಸೇವನೆ ಮತ್ತು ನೀರಿನ ಪ್ರಮಾಣ ಹೇಗಿತ್ತು?",
-      conversational: "ಮೆಸ್‌ನಲ್ಲಿ ಊಟ ಸರಿಯಾಗಿ ಮಾಡುತ್ತಿದ್ದೀರಾ? ಹಸಿವಾಗುತ್ತಿದೆಯೇ ಅಥವಾ ಊಟ ಬಿಡುತ್ತಿದ್ದೀರಾ?",
-      options: ["ಹಸಿವೇ ಇಲ್ಲ / ಊಟ ಬಿಡುವುದು", "ಕಡಿಮೆ ಹಸಿವು / ಬಲವಂತದ ಊಟ", "ಸಾಧಾರಣ / ದಿನಚರಿಯಂತೆ ಊಟ", "ಉತ್ತಮ ಹಸಿವು ಮತ್ತು ನೀರಿನ ಸೇವನೆ", "ಅತ್ಯುತ್ತಮ ಪೋಷಣೆ & ಚೈತನ್ಯ"],
-      descs: ["ಪೋಷಣೆಯ ಕೊರತೆ", "ಒತ್ತಡದ ಪರಿಣಾಮ", "ಸಾಧಾರಣ ಆಹಾರ", "ಸಮತೋಲನ ಆಹಾರ", "ಪೂರ್ಣ ಶಕ್ತಿ"]
-    }
-  },
-  {
-    id: 6,
-    pillar: 1,
-    category: "Motor Reflexes & Tactical Coordination",
-    pillarLabel: "✦ Pillar 1: Sleep & Physical Fatigue",
-    en: {
-      question: "Do your hands, reflexes, and weapon coordination feel steady and precise?",
-      conversational: "During drills or weapon handling, do your hands feel steady and your reflexes sharp?",
-      options: ["Noticeable shaking / delayed reaction", "Sluggish coordination / fumble-prone", "Fairly steady / standard control", "Very steady & responsive reflexes", "Rock solid grip & lightning reflexes"],
-      descs: ["Neuromuscular fatigue hazard", "Mild motor latency", "Safe operational handling", "High tactical dexterity", "Elite neuromuscular precision"]
-    },
-    hi: {
-      question: "क्या हथियार संचालन और शारीरिक अभ्यास के दौरान आपके हाथ स्थिर और सजग रहते हैं?",
-      conversational: "ड्रिल या हथियार संचालन के दौरान क्या आपके हाथ स्थिर रहते हैं और आपकी प्रतिक्रिया तेज है?",
-      options: ["हाथों में कंपन / धीमी प्रतिक्रिया", "सुस्त समन्वय / चूक की संभावना", "काफी हद तक स्थिर व सामान्य", "बहुत स्थिर और त्वरित प्रतिक्रिया", "अत्यंत स्थिर पकड़ और बिजली जैसी फुर्ती"],
-      descs: ["मांसपेशियों में भारी थकान", "धीमी प्रतिक्रिया", "सुरक्षित नियंत्रण", "तेज फुर्ती", "अचूक सटीकता"]
-    },
-    te: {
-      question: "ఆయుధ నిర్వహణ మరియు డ్రిల్స్ సమయంలో మీ చేతులు స్థిరంగా మరియు చురుగ్గా ఉంటున్నాయా?",
-      conversational: "డ్రిల్స్ లో మీ చేతులు వణకడం లాంటివి ఉన్నాయా లేక ప్రతిస్పందన చాలా చురుగ్గా ఉందా?",
-      options: ["చేతులు వణకడం / నెమ్మది ప్రతిస్పందన", "మందగించిన సమన్వయం", "స్థిరమైన & సాధారణ నియంత్రణ", "చాలా స్థిరంగా & చురుగ్గా", "అత్యంత బలమైన పట్టు & వేగవంతమైన ప్రతిచర్య"],
-      descs: ["నరాల అలసట ప్రమాదం", "స్వల్ప మందగింపు", "సురక్షిత నిర్వహణ", "మంచి చురుకుదనం", "ఖచ్చితమైన నైపుణ్యం"]
-    },
-    kn: {
-      question: "ಶಸ್ತ್ರಾಸ್ತ್ರ ನಿರ್ವಹಣೆ ಮತ್ತು ಅಭ್ಯಾಸದ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ ಕೈಗಳು ಸ್ಥಿರವಾಗಿ ಮತ್ತು ಚುರುಕಾಗಿವೆಯೇ?",
-      conversational: "ಡ್ರಿಲ್ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ ಕೈಗಳು ನಡುಗುತ್ತವೆಯೇ ಅಥವಾ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆ ಚುರುಕಾಗಿದೆಯೇ?",
-      options: ["ಕೈ ನಡುಗುವುದು / ನಿಧಾನ ಪ್ರತಿಕ್ರಿಯೆ", "ಜಡ ಚಲನವಲನ", "ಸಾಕಷ್ಟು ಸ್ಥಿರ ಮತ್ತು ನಿಯಂತ್ರಣ", "ತುಂಬಾ ಸ್ಥಿರ ಮತ್ತು ಚುರುಕಾದ ಪ್ರತಿಕ್ರಿಯೆ", "ಬಲವಾದ ಹಿಡಿತ ಮತ್ತು ಮಿಂಚಿನ ವೇಗ"],
-      descs: ["ಸ್ನಾಯುಗಳ ಆಯಾಸ", "ಸ್ವಲ್ಪ ಜಡತೆ", "ಸುರಕ್ಷಿತ ನಿಯಂತ್ರಣ", "ಉತ್ತಮ ಚುರುಕು", "ನಿಖರ ಕಾರ್ಯಕ್ಷಮತೆ"]
-    }
-  },
-
-  // Pillar 2: Mood, Emotional State & Operational Stress (Questions 7 to 12)
-  {
-    id: 7,
-    pillar: 2,
-    category: "Emotional Calm Under Pressure",
-    pillarLabel: "⚡ Pillar 2: Mood & Operational Stress",
-    en: {
-      question: "How calm and emotionally steady do you feel when sudden unexpected tasks or orders arrive?",
-      conversational: "When plans suddenly change or unexpected orders come in, are you able to remain calm and composed inside?",
-      options: ["Overwhelmed / rising panic or anger", "On edge / tense and uneasy", "Somewhat stressed but manageable", "Calm, adaptable & focused", "Unshakeable composure & mental clarity"],
-      descs: ["High sympathetic overload", "Vulnerable to stress escalation", "Functional operational composure", "Resilient emotional regulation", "Steely battlefield composure"]
-    },
-    hi: {
-      question: "अचानक अप्रत्याशित आदेश या कठिन परिस्थितियां आने पर आप अंदर से कितने शांत रहते हैं?",
-      conversational: "जब अचानक कोई कठिन आदेश या आपात स्थिति आती है, तो क्या आप अंदर से शांत रहकर निर्णय ले पाते हैं?",
-      options: ["घबराहट / अत्यधिक गुस्सा या तनाव", "बेचैन / असहज और चिंतित", "थोड़ा तनाव लेकिन संभाल सकने योग्य", "शांत, लचीले और केंद्रित", "अटूट शांति और अडिग मानसिक स्थिरता"],
-      descs: ["भारी मानसिक दबाव", "तनाव बढ़ने का जोखिम", "सामान्य संयम", "मजबूत भावनात्मक नियंत्रण", "उत्कृष्ट युद्ध शांति"]
-    },
-    te: {
-      question: "అనుకోని ఆకస్మిక ఆదేశాలు లేదా కష్టమైన పరిస్థితులు ఎదురైనప్పుడు మీరు మానసికంగా ఎంత ప్రశాంతంగా ఉంటారు?",
-      conversational: "అకస్మాత్తుగా ప్లాన్లు మారినప్పుడు లేదా ఒత్తిడి పెరిగినప్పుడు మీరు ప్రశాంతంగా ఉండగలుగుతున్నారా?",
-      options: ["కంగారు / విపరీతమైన ఆందోళన", "ఆందోళన / బిగుతుగా ఉండటం", "కొంత ఒత్తిడి కానీ భరించగలం", "ప్రశాంతంగా, ఏకాగ్రతతో", "అచంచలమైన ప్రశాంతత & మనోస్థైర్యం"],
-      descs: ["తీవ్ర భావోద్వేగ భారం", "ఒత్తిడికి గురయ్యే అవకాశం", "సహజమైన సంయమనం", "మంచి మానసిక స్థిరత్వం", "సంపూర్ణ పోరాట స్థైర్యం"]
-    },
-    kn: {
-      question: "ಹಠಾತ್ ಆದೇಶಗಳು ಅಥವಾ ಕಠಿಣ ಪರಿಸ್ಥಿತಿಗಳು ಎದುರಾದಾಗ ನೀವು ಮಾನಸಿಕವಾಗಿ ಎಷ್ಟು ಶಾಂತರಾಗಿರುತ್ತೀರಿ?",
-      conversational: "ಯೋಜನೆಗಳು ಇದ್ದಕ್ಕಿದ್ದಂತೆ ಬದಲಾದಾಗ ಅಥವಾ ಒತ್ತಡ ಬಂದಾಗ ನೀವು ಶಾಂತರಾಗಿರುತ್ತೀರಾ?",
-      options: ["ಗಲಿಬಿಲಿ / ತೀವ್ರ ಆತಂಕ ಅಥವಾ ಕೋಪ", "ಆತಂಕ / ಅಸಹಜ ಸ್ಥಿತಿ", "ಸ್ವಲ್ಪ ಒತ್ತಡ ಆದರೆ ನಿಭಾಯಿಸಬಹುದು", "ಶಾಂತ, ಹೊಂದಿಕೊಳ್ಳುವ ಮತ್ತು ಗಮನವಿಡುವ", "ಅಚಲ ಶಾಂತಿ ಮತ್ತು ಮಾನಸಿಕ ಸ್ಥೈರ್ಯ"],
-      descs: ["ತೀವ್ರ ಮಾನಸಿಕ ಒತ್ತಡ", "ಒತ್ತಡದ ಅಪಾಯ", "ಸಾಧಾರಣ ಸಂಯಮ", "ಉತ್ತಮ ಮಾನಸಿಕ ನಿಯಂತ್ರಣ", "ದೃಢವಾದ ಯುದ್ಧ ನೈಪುಣ್ಯ"]
-    }
-  },
-  {
-    id: 8,
-    pillar: 2,
-    category: "Operational Pressure & Burden",
-    pillarLabel: "⚡ Pillar 2: Mood & Operational Stress",
-    en: {
-      question: "How manageable has the cumulative day-to-day operational pressure felt over recent weeks?",
-      conversational: "Thinking about the continuous operational demands lately, does the weight feel manageable, or is it getting overwhelming?",
-      options: ["Crushing pressure / burning out", "Heavy strain / hard to sustain", "Moderate load / routine friction", "Smooth & well-handled pace", "Thriving under tactical challenge"],
-      descs: ["Critical burnout risk threshold", "Unsustainable load accumulation", "Typical military friction", "Effective task mastery", "High operational self-efficacy"]
-    },
-    hi: {
-      question: "हाल के हफ्तों में लगातार परिचालन और ड्यूटी का दबाव आपके लिए कितना सहनीय रहा है?",
-      conversational: "लगातार चल रही ड्यूटी और जिम्मेदारियों के बारे में सोचें, क्या यह दबाव भारी लग रहा है या आप इसे सहजता से संभाल रहे हैं?",
-      options: ["असहनीय दबाव / मानसिक थकावट", "भारी बोझ / संभालना बहुत मुश्किल", "मध्यम भार / सामान्य परिचालन", "सहज और अच्छी तरह संभाला हुआ", "चुनौतियों में निखरता आत्मविश्वास"],
-      descs: ["बर्नआउट का गंभीर खतरा", "अत्यधिक थकान संचय", "सामान्य सैन्य दिनचर्या", "मजबूत कार्य कुशलता", "उच्च परिचालन सामर्थ्य"]
-    },
-    te: {
-      question: "ఇటీవలి వారాల్లో రోజువారీ విధి నిర్వహణ మరియు బాధ్యతల ఒత్తిడి మీకు ఎంతవరకు భరించదగినదిగా ఉంది?",
-      conversational: "వరుస డ్యూటీలు మరియు పని ఒత్తిడిని మీరు తట్టుకోగలుగుతున్నారా లేక చాలా భారంగా అనిపిస్తోందా?",
-      options: ["భరించలేని ఒత్తిడి / అలసట", "భారీ భారం / కొనసాగించడం కష్టం", "మధ్యస్థ ఒత్తిడి / సాధారణం", "సులభంగా నిర్వహించగల వేగం", "సవాళ్లను ఎదుర్కొనే పూర్తి ఆత్మవిశ్వాసం"],
-      descs: ["తీవ్రమైన అలసట ప్రమాదం", "అధిక పని భారం", "సాధారణ సైనిక బాధ్యత", "సమర్థవంతమైన నిర్వహణ", "ఉన్నత కార్యాచరణ నైపుణ్యం"]
-    },
-    kn: {
-      question: "ಇತ್ತೀಚಿನ ವಾರಗಳಲ್ಲಿ ನಿರಂತರ ಕರ್ತವ್ಯದ ಒತ್ತಡವನ್ನು ನೀವು ಎಷ್ಟು ನಿಭಾಯಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿದೆ?",
-      conversational: "ನಿರಂತರ ಡ್ಯೂಟಿ ಮತ್ತು ಜವಾಬ್ದಾರಿಗಳ ಬಗ್ಗೆ ಯೋಚಿಸಿ, ಇದು ತುಂಬಾ ಭಾರವೆನಿಸುತ್ತಿದೆಯೇ ಅಥವಾ ಸಹಜವಾಗಿದೆಯೇ?",
-      options: ["ತಾಳಲಾರದ ಒತ್ತಡ / ಆಯಾಸ", "ಭಾರವಾದ ಹೊರೆ / ನಿಭಾಯಿಸುವುದು ಕಷ್ಟ", "ಮಧ್ಯಮ ಒತ್ತಡ / ಸಾಮಾನ್ಯ", "ಸುಲಭವಾಗಿ ನಿಭಾಯಿಸಬಲ್ಲ ವೇಗ", "ಸವಾಲುಗಳನ್ನು ಎದುರಿಸುವ ಸಾಮರ್ಥ್ಯ"],
-      descs: ["ತೀವ್ರ ಆಯಾಸದ ಅಪಾಯ", "ಅತಿಯಾದ ಕೆಲಸದ ಹೊರೆ", "ಸಾಮಾನ್ಯ ಸೇನಾ ಕರ್ತವ್ಯ", "ಸಮರ್ಥ ನಿರ್ವಹಣೆ", "ಉನ್ನತ ಕಾರ್ಯಾಚರಣೆ ನೈಪುಣ್ಯ"]
-    }
-  },
-  {
-    id: 9,
-    pillar: 2,
-    category: "Mental Focus & Concentration",
-    pillarLabel: "⚡ Pillar 2: Mood & Operational Stress",
-    en: {
-      question: "Are you able to maintain sharp focus and concentration during briefings, guard, or patrol?",
-      conversational: "During long watches or briefings, can you keep your attention razor sharp, or does your mind wander off?",
-      options: ["Severe concentration loss / zoning out", "Frequent distraction / hard to focus", "Occasional wandering / generally OK", "Strong, consistent attention span", "Locked-in laser focus throughout"],
-      descs: ["Vigilance lapse vulnerability", "Attention deficit under load", "Standard guard attentiveness", "Reliable target awareness", "Superior tactical focus"]
-    },
-    hi: {
-      question: "ब्रीफिंग, गार्ड ड्यूटी या गश्त के दौरान क्या आप पूरा ध्यान और एकाग्रता बनाए रख पाते हैं?",
-      conversational: "लंबी ड्यूटी या गश्त के दौरान, क्या आपका ध्यान पूरी तरह केंद्रित रहता है या मन इधर-उधर भटकता है?",
-      options: ["गंभीर ध्यान हानि / बिल्कुल खो जाना", "बार-बार ध्यान भटकना", "कभी-कभी भटकाव / आमतौर पर ठीक", "मजबूत और लगातार एकाग्रता", "पूरी तरह केंद्रित और पैनी नजर"],
-      descs: ["सतर्कता में चूक का खतरा", "तनाव से ध्यान की कमी", "सामान्य गार्ड सतर्कता", "विश्वसनीय लक्ष्य ध्यान", "सर्वश्रेष्ठ रणनीतिक एकाग्रता"]
-    },
-    te: {
-      question: "బ్రీఫింగ్‌లు, గార్డ్ డ్యూటీ లేదా పెట్రోలింగ్ సమయంలో మీరు పూర్తి ఏకాగ్రతను నిలుపుకోగలుగుతున్నారా?",
-      conversational: "లాంగ్ డ్యూటీల్లో మీ దృష్టి లక్ష్యంపై స్థిరంగా ఉంటోందా లేక ఆలోచనలు పక్కకు మళ్లుతున్నాయా?",
-      options: ["తీవ్ర ఏకాగ్రత లోపం / పరధ్యానం", "తరచూ దృష్టి మరలడం", "అప్పుడప్పుడు ఆలోచనలు / సాధారణంగా ఓకే", "బలమైన, స్థిరమైన ఏకాగ్రత", "లక్ష్యంపై సంపూర్ణ దృష్టి & అప్రమత్తత"],
-      descs: ["ఏమరుపాటు ప్రమాదం", "ఒత్తిడి వల్ల ఏకాగ్రత లేమి", "సాధారణ అప్రమత్తత", "విశ్వసనీయ లక్ష్య దృష్టి", "అత్యుత్తమ వ్యూహాత్మక ఏకాగ్రత"]
-    },
-    kn: {
-      question: "ಬ್ರೀಫಿಂಗ್, ಗಾರ್ಡ್ ಕರ್ತವ್ಯ ಅಥವಾ ಗಸ್ತು ಸಮಯದಲ್ಲಿ ನೀವು ಪೂರ್ಣ ಗಮನ ಮತ್ತು ಏಕಾಗ್ರತೆ ಕಾಪಾಡಿಕೊಳ್ಳಲು ಸಾಧ್ಯವೇ?",
-      conversational: "ದೀರ್ಘ ಡ್ಯೂಟಿ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ ಗಮನ ಸಂಪೂರ್ಣವಾಗಿ ಕೇಂದ್ರಿಕೃತವಾಗಿರುತ್ತದೆಯೇ ಅಥವಾ ಗಮನ ಬೇರೆಡೆ ಸೆಳೆಯುತ್ತದೆಯೇ?",
-      options: ["ತೀವ್ರ ಏಕಾಗ್ರತೆ ಕೊರತೆ / ಗಮನ ತಪ್ಪುವುದು", "ಆಗಾಗ ಗಮನ ಬೇರೆಡೆ / ಕಷ್ಟ", "ಅಪರೂಪಕ್ಕೆ ಆಲೋಚನೆ / ಸಾಮಾನ್ಯವಾಗಿ ಸರಿ", "ದೃಢವಾದ ನಿರಂತರ ಏಕಾಗ್ರತೆ", "ಗುರಿಯ ಮೇಲೆ ಸಂಪೂರ್ಣ ಗಮನ"],
-      descs: ["ಎಚ್ಚರ ತಪ್ಪುವ ಅಪಾಯ", "ಒತ್ತಡದಿಂದ ಗಮನ ಕೊರತೆ", "ಸಾಮಾನ್ಯ ಗಾರ್ಡ್ ಜಾಗರೂಕತೆ", "ವಿಶ್ವಾಸಾರ್ಹ ಗುರಿ ಗಮನ", "ಉತ್ತಮ ಕಾರ್ಯತಂತ್ರ ಏಕಾಗ್ರತೆ"]
-    }
-  },
-  {
-    id: 10,
-    pillar: 2,
-    category: "Irritability & Frustration Threshold",
-    pillarLabel: "⚡ Pillar 2: Mood & Operational Stress",
-    en: {
-      question: "Have you noticed feeling unusually irritable, short-tempered, or snappy with buddies?",
-      conversational: "Lately, have you felt quick to anger or frustrated over minor issues with comrades or equipment?",
-      options: ["Frequent explosive anger / short fuse", "Easily annoyed / irritable daily", "Occasional mild frustration", "Patient, calm & understanding", "Exceptionally tolerant & composed"],
-      descs: ["Elevated interpersonal friction", "Underlying tension build-up", "Normal barrack friction", "Good emotional regulation", "Mature, stabilizing peer presence"]
-    },
-    hi: {
-      question: "क्या आप हाल ही में साथियों या उपकरणों को लेकर असामान्य रूप से चिड़चिड़े या जल्दी गुस्से में आ रहे हैं?",
-      conversational: "क्या छोटी-छोटी बातों पर साथियों पर गुस्सा आ रहा है या आप धैर्य से काम ले पा रहे हैं?",
-      options: ["अत्यधिक गुस्सा / बहुत जल्दी भड़कना", "आसानी से चिड़चिड़ाना / रोजाना गुस्सा", "कभी-कभी हल्का गुस्सा / सामान्य", "धैर्यवान, शांत और समझदार", "अत्यंत सहनशील और परिपक्व"],
-      descs: ["आपसी टकराव का खतरा", "भीतरी तनाव का असर", "सामान्य बैरक बातचीत", "अच्छा भावनात्मक नियंत्रण", "शांत और परिपक्व आचरण"]
-    },
-    te: {
-      question: "ఇటీవల సహచరులతో లేదా చిన్న విషయాలకే మీరు అసహనానికి, తీవ్ర కోపానికి గురవుతున్నారా?",
-      conversational: "చిన్న విషయాలకు సహచరులపై కోపం రావడం లేదా చిరాకు పడటం లాంటివి జరుగుతున్నాయా?",
-      options: ["తీవ్ర కోపం / త్వరగా సహనం కోల్పోవడం", "సులభంగా చిరాకు పడటం", "అప్పుడప్పుడు స్వల్ప అసహనం", "ఓపిక, ప్రశాంతత & అవగాహన", "అత్యంత సహనశీలి & సంయమనం"],
-      descs: ["పరస్పర ఘర్షణ ప్రమాదం", "అంతర్గత ఒత్తిడి ప్రభావం", "సాధారణ సంభాషణ", "మంచి భావోద్వేగ నియంత్రణ", "పరిణతి చెందిన ప్రశాంతత"]
-    },
-    kn: {
-      question: "ಇತ್ತೀಚೆಗೆ ನೀವು ಸಹೋದ್ಯೋಗಿಗಳೊಂದಿಗೆ ಸಣ್ಣ ವಿಷಯಗಳಿಗೂ ಅತಿಯಾದ ಸಿಟ್ಟು ಅಥವಾ ಕಿರಿಕಿರಿ ಅನುಭವಿಸುತ್ತಿದ್ದೀರಾ?",
-      conversational: "ಸಣ್ಣಪುಟ್ಟ ವಿಷಯಗಳಿಗೂ ಬೇಗನೆ ಕೋಪ ಬರುವುದು ಅಥವಾ ಸಿಡುಕುವುದು ಆಗುತ್ತಿದೆಯೇ?",
-      options: ["ತೀವ್ರ ಕೋಪ / ಬೇಗನೆ ತಾಳ್ಮೆ ಕಳೆದುಕೊಳ್ಳುವುದು", "ಸುಲಭವಾಗಿ ಕಿರಿಕಿರಿ / ಪ್ರತಿದಿನ ಸಿಟ್ಟು", "ಅಪರೂಪಕ್ಕೆ ಸಣ್ಣ ಅಸಮಾಧಾನ", "ತಾಳ್ಮೆ, ಶಾಂತ ಮತ್ತು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವಿಕೆ", "ಅತ್ಯಂತ ಸಹನಶೀಲ & ಸಂಯಮ"],
-      descs: ["ಪರಸ್ಪರ ಸಂಘರ್ಷದ ಅಪಾಯ", "ಒಳಗಿನ ಒತ್ತಡದ ಪರಿಣಾಮ", "ಸಾಮಾನ್ಯ ಬ್ಯಾರಕ್ ಮಾತುಕತೆ", "ಉತ್ತಮ ಭಾವನಾತ್ಮಕ ನಿಯಂತ್ರಣ", "ಪ್ರಬುದ್ಧ ಶಾಂತ ನಡವಳಿಕೆ"]
-    }
-  },
-  {
-    id: 11,
-    pillar: 2,
-    category: "Nervous Tension & Anxiety",
-    pillarLabel: "⚡ Pillar 2: Mood & Operational Stress",
-    en: {
-      question: "Have you felt restless, anxious, or unable to sit still without an internal sense of dread?",
-      conversational: "Do you experience moments where your heart races or an unexplainable anxiety creeps in during quiet hours?",
-      options: ["Severe acute anxiety / panic feeling", "Persistent uneasy nervousness", "Mild periodic restlessness", "Generally relaxed & peaceful", "Deeply grounded & anxiety-free"],
-      descs: ["High sympathetic anxiety tone", "Sub-acute chronic worry", "Transient operational concern", "Resilient central nervous calm", "Optimal vagal parasympathetic tone"]
-    },
-    hi: {
-      question: "क्या आपको बिना किसी स्पष्ट कारण के बेचैनी, घबराहट या दिल की धड़कन तेज होने का अनुभव होता है?",
-      conversational: "शांत पलों में क्या अचानक कोई अनजाना डर या दिल की धड़कन बढ़ना महसूस होता है?",
-      options: ["गंभीर घबराहट / डर का अहसास", "लगातार बेचैनी और चिंता", "कभी-कभार हल्की बेचैनी", "आमतौर पर शांत और सुकून में", "पूरी तरह तनाव-मुक्त और निडर"],
-      descs: ["अत्यधिक घबराहट और चिंता", "लगातार भीतरी तनाव", "सामान्य हल्की चिंता", "मजबूत मानसिक शांति", "सर्वोत्तम आत्म-नियंत्रण"]
-    },
-    te: {
-      question: "కారణం లేకుండా మీకు ఏదైనా తెలియని భయం, గుండె దడ లేదా తీవ్ర అశాంతి కలుగుతోందా?",
-      conversational: "ఖాళీ సమయాల్లో ఉన్నట్టుండి గుండె వేగంగా కొట్టుకోవడం లేదా తెలియని ఆందోళన వస్తోందా?",
-      options: ["తీవ్ర భయం / ఆందోళన భావన", "నిరంతర అసహనం & ఆందోళన", "స్వల్ప అశాంతి / అప్పుడప్పుడు", "సాధారణంగా ప్రశాంతంగా & హాయిగా", "సంపూర్ణ ప్రశాంతత & నిర్భయత్వం"],
-      descs: ["తీవ్ర ఆందోళన లక్షణం", "నిరంతర అంతర్గత భయం", "సాధారణ స్వల్ప ఆందోళన", "మంచి మానసిక స్థిరత్వం", "సంపూర్ణ నరాల ప్రశాంతత"]
-    },
-    kn: {
-      question: "ಯಾವುದೇ ಕಾರಣವಿಲ್ಲದೆ ನಿಮಗೆ ಗಾಬರಿ, ಆತಂಕ ಅಥವಾ ಅತಿಯಾದ ಅಶಾಂತಿಯ ಭಾವನೆ ಉಂಟಾಗುತ್ತಿದೆಯೇ?",
-      conversational: "ಏಕಾಂತ ಸಮಯದಲ್ಲಿ ಇದ್ದಕ್ಕಿದ್ದಂತೆ ಎದೆಬಡಿತ ಹೆಚ್ಚುವುದು ಅಥವಾ ತಿಳಿಯದ ಆತಂಕ ಕಾಡುತ್ತದೆಯೇ?",
-      options: ["ತೀವ್ರ ಆತಂಕ / ಭಯದ ಭಾವನೆ", "ನಿರಂತರ ಅಸಹನೆ ಮತ್ತು ಗಾಬರಿ", "ಸ್ವಲ್ಪ ಅಶಾಂತಿ / ಅಪರೂಪಕ್ಕೆ", "ಸಾಮಾನ್ಯವಾಗಿ ಶಾಂತ ಮತ್ತು ನೆಮ್ಮದಿ", "ಸಂಪೂರ್ಣ ಆತಂಕ ಮುಕ್ತ & ಧೈರ್ಯ"],
-      descs: ["ತೀವ್ರ ಆತಂಕದ ಸ್ಥಿತಿ", "ನಿರಂತರ ಒಳಗಿನ ಭಯ", "ಸಾಧಾರಣ ಸಣ್ಣ ಆತಂಕ", "ದೃಢವಾದ ಮಾನಸಿಕ ಶಾಂತಿ", "ಸಂಪೂರ್ಣ ನರವ್ಯೂಹದ ಪ್ರಶಾಂತತೆ"]
-    }
-  },
-  {
-    id: 12,
-    pillar: 2,
-    category: "Ability to Disengage & Relax Off-Duty",
-    pillarLabel: "⚡ Pillar 2: Mood & Operational Stress",
-    en: {
-      question: "When you have downtime or liberty, are you genuinely able to switch off tactical mode and relax?",
-      conversational: "In your free time or barracks downtime, can you truly relax your mind and detach from duty concerns?",
-      options: ["Never / constantly scanning & hypervigilant", "Very difficult / thoughts remain on duty", "Takes deliberate effort to unwind", "Able to relax & enjoy leisure easily", "Effortless, deep mental rejuvenation"],
-      descs: ["Chronic hypervigilance lock", "Slow psychological unwinding", "Normal off-duty transition", "Healthy mental detachment", "Superior rest recovery ability"]
-    },
-    hi: {
-      question: "जब आपकी ड्यूटी खत्म होती है, तो क्या आप मानसिक रूप से पूरी तरह तनावमुक्त होकर आराम कर पाते हैं?",
-      conversational: "खाली समय में क्या आप ड्यूटी की बातों को भुलाकर पूरी तरह से आराम कर पाते हैं?",
-      options: ["कभी नहीं / हमेशा सतर्क व बेचैन", "बहुत कठिन / दिमाग ड्यूटी पर ही रहना", "आराम करने में थोड़ा समय लगना", "आसानी से आराम व मनोरंजन करना", "पूरी तरह तनाव-मुक्त और तरोताजा होना"],
-      descs: ["लगातार अत्यधिक सतर्कता", "मानसिक आराम में कठिनाई", "सामान्य विश्राम प्रक्रिया", "अच्छा मानसिक संतुलन", "उत्कृष्ट मानसिक नवीनीकरण"]
-    },
-    te: {
-      question: "డ్యూటీ లేని సమయంలో మీరు మనసును పూర్తిగా ప్రశాంతంగా ఉంచుకుని విశ్రాంతి తీసుకోగలుగుతున్నారా?",
-      conversational: "ఖాళీ సమయంలో మీరు పని ఆలోచనలను వదిలిపెట్టి మనశ్శాంతిగా విశ్రాంతి తీసుకోగలుగుతున్నారా?",
-      options: ["ఎప్పటికీ కాదు / ఎప్పుడూ అప్రమత్తమైన భయం", "చాలా కష్టం / ఆలోచనలు డ్యూటీ పైనే", "రిలాక్స్ కావడానికి సమయం పడుతుంది", "సులభంగా విశ్రాంతి తీసుకోగలం", "సంపూర్ణ మానసిక ప్రశాంతత & ఉల్లాసం"],
-      descs: ["నిరంతర మానసిక ఒత్తిడి", "విశ్రాంతి పొందడంలో కష్టం", "సాధారణ విశ్రాంతి ప్రక్రియ", "మంచి మానసిక సమతుల్యత", "అత్యుత్తమ పునరుజ్జీవనం"]
-    },
-    kn: {
-      question: "ಡ್ಯೂಟಿ ಮುಗಿದ ನಂತರ ನೀವು ಮಾನಸಿಕವಾಗಿ ಕರ್ತವ್ಯದ ಚಿಂತೆಗಳನ್ನು ಬಿಟ್ಟು ಪೂರ್ಣ ವಿಶ್ರಾಂತಿ ಪಡೆಯಲು ಸಾಧ್ಯವೇ?",
-      conversational: "ವಿರಾಮದ ಸಮಯದಲ್ಲಿ ನೀವು ಕೆಲಸದ ಆಲೋಚನೆಗಳಿಂದ ದೂರವಾಗಿ ನೆಮ್ಮದಿಯಾಗಿ ಇರಲು ಸಾಧ್ಯವಾಗುತ್ತಿದೆಯೇ?",
-      options: ["ಖಂಡಿತ ಇಲ್ಲ / ಸದಾ ಆತಂಕದ ಜಾಗರೂಕತೆ", "ತುಂಬಾ ಕಷ್ಟ / ಆಲೋಚನೆಗಳು ಕೆಲಸದಲ್ಲೇ ಇರುತ್ತವೆ", "ವಿಶ್ರಾಂತಿ ಪಡೆಯಲು ಸ್ವಲ್ಪ ಸಮಯ ಬೇಕು", "ಸುಲಭವಾಗಿ ವಿಶ್ರಾಂತಿ ಮತ್ತು ಹರ್ಷ", "ಸಂಪೂರ್ಣ ಮಾನಸಿಕ ವಿಶ್ರಾಂತಿ & ಚೈತನ್ಯ"],
-      descs: ["ನಿರಂತರ ಅತಿಯಾದ ಜಾಗರೂಕತೆ", "ಮಾನಸಿಕ ವಿಶ್ರಾಂತಿಯ ಕೊರತೆ", "ಸಾಮಾನ್ಯ ವಿಶ್ರಾಂತಿ ಸ್ಥಿತಿ", "ಉತ್ತಮ ಮಾನಸಿಕ ಸಮತೋಲನ", "ಉತ್ಕೃಷ್ಟ ಮಾನಸಿಕ ಪುನಶ್ಚೇತನ"]
-    }
-  },
-
-  // Pillar 3: Social Dynamics, Family & Unit Morale (Questions 13 to 18)
-  {
-    id: 13,
-    pillar: 3,
-    category: "Unit Morale & Comradeship",
-    pillarLabel: "◉ Pillar 3: Social & Unit Dynamics",
-    en: {
-      question: "How bonded, connected, and supported do you feel by your section buddies and comrades?",
-      conversational: "How is the brotherhood in your section? Do you feel you can rely on your buddies through thick and thin?",
-      options: ["Disconnected / alien in the unit", "Friction & limited mutual trust", "Fair working relations / standard", "Close comradeship & mutual support", "Unbreakable bond / ultimate brotherhood"],
-      descs: ["Critical social isolation in unit", "Sub-optimal cohesion", "Standard professional alignment", "Strong esprit de corps", "Supreme military fellowship"]
-    },
-    hi: {
-      question: "आप अपने सेक्शन के साथियों और जवानों से कितना जुड़ाव और आपसी सहयोग महसूस करते हैं?",
-      conversational: "आपके सेक्शन में भाईचारा कैसा है? क्या आपको लगता है कि आप अपने साथियों पर पूरा भरोसा कर सकते हैं?",
-      options: ["बिल्कुल अलग-थलग / कोई जुड़ाव नहीं", "आपसी मनमुटाव व कम भरोसा", "सामान्य कामकाजी संबंध", "मजबूत भाईचारा और पूरा सहयोग", "अटूट विश्वास और सच्चा फौजी भाईचारा"],
-      descs: ["यूनिट में अकेलापन", "कमजोर आपसी तालमेल", "सामान्य कामकाजी रिश्ता", "मजबूत एकता व सहयोग", "सर्वोच्च फौजी सौहार्द"]
-    },
-    te: {
-      question: "మీ సెక్షన్ సహచరులతో మీ సంబంధాలు మరియు వారి నుండి మద్దతు ఎలా ఉంది?",
-      conversational: "మీ సెక్షన్ లో సోదరభావం ఎలా ఉంది? కష్టసుఖాల్లో తోటి జవాన్లు మీకు అండగా ఉంటున్నారా?",
-      options: ["ఒంటరితనం / ఎవరితోనూ కలవలేకపోవడం", "పరస్పర విభేదాలు & నమ్మకం లేకపోవడం", "సాధారణ వృత్తిపరమైన సంబంధాలు", "మంచి స్నేహం & పరస్పర సహకారం", "అచంచలమైన బంధం & నిజమైన సోదరభావం"],
-      descs: ["యూనిట్ లో తీవ్ర ఒంటరితనం", "పరస్పర విశ్వాస లోపం", "సాధారణ సహచర్యం", "బలమైన సైనిక ఐక్యత", "అత్యున్నత సోదరభావం"]
-    },
-    kn: {
-      question: "ನಿಮ್ಮ ಸೆಕ್ಷನ್ ಸಹೋದ್ಯೋಗಿಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಒಡನಾಟ ಮತ್ತು ಅವರ ಬೆಂಬಲ ಹೇಗಿದೆ?",
-      conversational: "ನಿಮ್ಮ ಸೆಕ್ಷನ್‌ನಲ್ಲಿ ಸೈನಿಕರ ನಡುವಿನ ಒಗ್ಗಟ್ಟು ಹೇಗಿದೆ? ಕಷ್ಟದ ಸಮಯದಲ್ಲಿ ಸಹೋದ್ಯೋಗಿಗಳು ಜೊತೆಗಿರುತ್ತಾರೆಯೇ?",
-      options: ["ಸಂಪೂರ್ಣ ಏಕಾಂಗಿ / ಯಾರೂ ಬೆಂಬಲವಿಲ್ಲ", "ಅಪನಂಬಿಕೆ ಮತ್ತು ಭಿನ್ನಾಭಿಪ್ರಾಯ", "ಸಾಮಾನ್ಯ ಕರ್ತವ್ಯದ ಸಂಬಂಧ", "ಉತ್ತಮ ಸ್ನೇಹ ಮತ್ತು ಪರಸ್ಪರ ಸಹಕಾರ", "ಅಚಲವಾದ ಬಾಂಧವ್ಯ ಮತ್ತು ಸೋದರತೆ"],
-      descs: ["ತೀವ್ರ ಒಂಟಿತನದ ಭಾವನೆ", "ಒಗ್ಗಟ್ಟಿನ ಕೊರತೆ", "ಸಾಧಾರಣ ಸಹಕಾರ", "ಬಲವಾದ ಸೈನ್ಯದ ಐಕ್ಯತೆ", "ಉತ್ಕೃಷ್ಟ ಸೋದರತ್ವ"]
-    }
-  },
-  {
-    id: 14,
-    pillar: 3,
-    category: "Feelings of Isolation & Loneliness",
-    pillarLabel: "◉ Pillar 3: Social & Unit Dynamics",
-    en: {
-      question: "Have you felt a deep sense of loneliness or feeling invisible even while surrounded by others?",
-      conversational: "Even when in barracks or with the platoon, do you ever feel isolated, misunderstood, or alone?",
-      options: ["Intense painful loneliness / isolated", "Often feeling alone & disconnected", "Occasional passing feelings", "Rarely lonely / socially anchored", "Fully integrated, valued & never lonely"],
-      descs: ["High depression & isolation marker", "Social disconnection risk", "Occasional transient homesickness", "Healthy peer anchoring", "Flourishing social belonging"]
-    },
-    hi: {
-      question: "क्या आपको सबके बीच रहते हुए भी अकेलेपन या अनसुना किए जाने का अहसास होता है?",
-      conversational: "क्या साथियों के बीच रहते हुए भी कभी-कभी मन में गहरा अकेलापन महसूस होता है?",
-      options: ["अत्यधिक अकेलापन / बहुत उदास", "अक्सर अकेला व अलग-थलग महसूस होना", "कभी-कभार हल्की उदासी", "शायद ही कभी / साथियों से जुड़ा हुआ", "हमेशा खुश, सम्मानित और कभी अकेला नहीं"],
-      descs: ["अकेलेपन का गहरा प्रभाव", "सामाजिक अलगाव का खतरा", "सामान्य कभी-कभार की याद", "मजबूत सामाजिक सहारा", "पूर्ण अपनत्व और सम्मान"]
-    },
-    te: {
-      question: "అందరితో కలిసి ఉన్నప్పటికీ మీరు ఎప్పుడైనా తీవ్రమైన ఒంటరితనాన్ని అనుభవిస్తున్నారా?",
-      conversational: "తోటివారితో ఉన్నప్పటికీ మీరు ఒంటరిగా ఉన్న భావన లేదా ఎవరూ అర్థం చేసుకోవడం లేదనే బాధ కలుగుతోందా?",
-      options: ["తీవ్రమైన ఒంటరితనం / నిస్సహాయత", "తరచూ ఒంటరిగా అనిపించడం", "అప్పుడప్పుడు స్వల్ప బాధ", "చాలా అరుదుగా / స్నేహితులతో ఆనందం", "ఎల్లప్పుడూ ఆదరణ & ఎప్పుడూ ఒంటరి కాదు"],
-      descs: ["తీవ్రమైన ఒంటరితనపు గుర్తు", "సామాజిక దూరం ప్రమాదం", "సాధారణ స్వల్ప బాధ", "మంచి మిత్రుల అండ", "సంపూర్ణ ఆనందం & గౌరవం"]
-    },
-    kn: {
-      question: "ಎಲ್ಲರ ಜೊತೆಯಲ್ಲಿದ್ದರೂ ನೀವು ತೀವ್ರ ಒಂಟಿತನ ಅಥವಾ ಕಡೆಗಣಿಸಲ್ಪಟ್ಟ ಭಾವನೆಯನ್ನು ಅನುಭವಿಸುತ್ತಿದ್ದೀರಾ?",
-      conversational: "ಸೈನಿಕರ ನಡುವೆಯೂ ನಿಮಗೆ ಒಂಟಿತನ ಅಥವಾ ಯಾರೂ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತಿಲ್ಲ ಎಂಬ ಭಾವನೆ ಕಾಡುತ್ತದೆಯೇ?",
-      options: ["ತೀವ್ರ ಒಂಟಿತನ / ದುಃಖದ ಸ್ಥಿತಿ", "ಹೆಚ್ಚಾಗಿ ಒಂಟಿತನದ ಅನುಭವ", "ಅಪರೂಪಕ್ಕೆ ಸಣ್ಣ ಬೇಸರ", "ವಿರಳವಾಗಿ / ಸ್ನೇಹಿತರ ಒಡನಾಟ", "ಯಾವಾಗಲೂ ಸಂತೋಷ & ಎಂದೂ ಒಂಟಿಯಲ್ಲ"],
-      descs: ["ತೀವ್ರ ಒಂಟಿತನದ ಅಪಾಯ", "ಸಾಮಾಜಿಕ ಅಂತರದ ಚಿಹ್ನೆ", "ಸಾಮಾನ್ಯ ಕ್ಷಣಿಕ ಬೇಸರ", "ಉತ್ತಮ ಸ್ನೇಹಿತರ ಸಾಮೀಪ್ಯ", "ಸಂಪೂರ್ಣ ಗೌರವ ಮತ್ತು ಪ್ರೀತಿ"]
-    }
-  },
-  {
-    id: 15,
-    pillar: 3,
-    category: "Family Stress & Distance Concerns",
-    pillarLabel: "◉ Pillar 3: Social & Unit Dynamics",
-    en: {
-      question: "How heavily are worries about home, parents, spouse, or family health weighing on your mind?",
-      conversational: "How are things back home? Is any family health issue, financial worry, or distance causing you stress?",
-      options: ["Severe crisis at home / acute worry", "Frequent heavy concern / distracting", "Moderate concern / manageable", "Family is stable / routine calls", "Peaceful home life & strong support"],
-      descs: ["Major cognitive burden from home", "Distracting personal strain", "Normal distance challenges", "Solid emotional anchor at home", "Optimal family harmony"]
-    },
-    hi: {
-      question: "घर, माता-पिता, बच्चों या परिवार के स्वास्थ्य को लेकर चिंताएं आपके दिमाग पर कितना हावी हैं?",
-      conversational: "घर पर सब कैसा चल रहा है? क्या घर की किसी समस्या या दूरी को लेकर बहुत ज्यादा चिंता हो रही है?",
-      options: ["घर पर गंभीर परेशानी / अत्यधिक चिंता", "अक्सर भारी चिंता / ध्यान भटकना", "मध्यम चिंता / सामान्य बातचीत", "परिवार सुरक्षित व खुशहाल", "घर पर पूर्ण सुख-शांति व पूरा सहयोग"],
-      descs: ["घर की गंभीर चिंता का बोझ", "ध्यान भटकाने वाला तनाव", "सामान्य दूरी की चुनौतियां", "घर से मजबूत भावनात्मक सहारा", "पारिवारिक शांति व संतुलन"]
-    },
-    te: {
-      question: "ఇంటి విషయాలు, తల్లిదండ్రులు లేదా కుటుంబ సమస్యల గురించిన ఆందోళన మీ మనస్సుపై ఎంత భారం వేస్తోంది?",
-      conversational: "ఇంట్లో పరిస్థితులు ఎలా ఉన్నాయి? కుటుంబ ఆరోగ్యం లేదా ఇతర సమస్యలు మిమ్మల్ని ఎక్కువగా కలవరపెడుతున్నాయా?",
-      options: ["ఇంట్లో తీవ్ర సంక్షోభం / అధిక ఆందోళన", "తరచూ విపరీతమైన దిగులు", "మధ్యస్థ ఆందోళన / మాట్లాడి సర్దుకోవడం", "కుటుంబం సురక్షితం & బాగుంది", "ఇంట్లో సంపూర్ణ ప్రశాంతత & మద్దతు"],
-      descs: ["ఇంటి సమస్యల వల్ల తీవ్ర భారం", "దృష్టి మరల్చే వ్యక్తిగత ఒత్తిడి", "సాధారణ దూరపు బాధలు", "కుటుంబం నుండి మంచి మద్దతు", "సంపూర్ణ కుటుంబ సామరస్యం"]
-    },
-    kn: {
-      question: "ಮನೆಯ ವಿಷಯಗಳು, ಪೋಷಕರು ಅಥವಾ ಕುಟುಂಬದ ಸಮಸ್ಯೆಗಳ ಚಿಂತೆ ನಿಮ್ಮ ಮನಸ್ಸಿನಲ್ಲಿ ಎಷ್ಟು ಕಾಡುತ್ತಿದೆ?",
-      conversational: "ಮನೆಯಲ್ಲಿ ಎಲ್ಲರೂ ಹೇಗಿದ್ದಾರೆ? ಮನೆಯ ಆರ್ಥಿಕ ಅಥವಾ ಆರೋಗ್ಯದ ಸಮಸ್ಯೆಗಳು ನಿಮ್ಮನ್ನು ಹೆಚ್ಚು ಚಿಂತೆಗೀಡುಮಾಡುತ್ತಿವೆಯೇ?",
-      options: ["ಮನೆಯಲ್ಲಿ ಗಂಭೀರ ಸಮಸ್ಯೆ / ಅತಿಯಾದ ಆತಂಕ", "ಹೆಚ್ಚಾಗಿ ತೀವ್ರ ಚಿಂತೆ / ಗಮನಭಂಗ", "ಸಾಧಾರಣ ಆತಂಕ / ನಿಭಾಯಿಸಬಹುದು", "ಕುಟುಂಬ ಸುರಕ್ಷಿತ ಮತ್ತು ನೆಮ್ಮದಿ", "ಮನೆಯಲ್ಲಿ ಸಂಪೂರ್ಣ ಶಾಂತಿ ಮತ್ತು ಬೆಂಬಲ"],
-      descs: ["ಮನೆಯ ಗಂಭೀರ ಚಿಂತೆಯ ಹೊರೆ", "ಗಮನ ಭಂಗ ಮಾಡುವ ಒತ್ತಡ", "ದೂರದ ಸಾಮಾನ್ಯ ಸವಾಲುಗಳು", "ಕುಟುಂಬದ ದೃಢವಾದ ಬೆಂಬಲ", "ಉತ್ತಮ ಕೌಟುಂಬಿಕ ಸಾಮರಸ್ಯ"]
-    }
-  },
-  {
-    id: 16,
-    pillar: 3,
-    category: "Psychological Safety & Open Confiding",
-    pillarLabel: "◉ Pillar 3: Social & Unit Dynamics",
-    en: {
-      question: "If you are struggling emotionally, do you feel safe confiding in a peer, senior, or welfare counselor?",
-      conversational: "If you ever feel down or stressed, do you feel comfortable opening up to someone in the unit without fear of judgment?",
-      options: ["Never / feared judgment & stigma", "Very hesitant / keeping everything inside", "Might talk to one trusted buddy", "Comfortable seeking advice or talk", "100% open, trusted & safe environment"],
-      descs: ["High stigma fear barrier", "Internalized distress risk", "Selective safe channel", "Healthy help-seeking behavior", "Exemplary psychological safety"]
-    },
-    hi: {
-      question: "यदि आप मानसिक तनाव में हों, तो क्या आप बिना किसी डर या झिझक के किसी साथी या अधिकारी से बात कर सकते हैं?",
-      conversational: "अगर आप कभी परेशान हों, तो क्या यूनिट में किसी साथी या अधिकारी से खुलकर बात करने में सहज महसूस करते हैं?",
-      options: ["कभी नहीं / बदनामी या मजाक का डर", "बहुत संकोच / सब कुछ अंदर दबाना", "सिर्फ एक पक्के साथी से बात कर सकना", "आसानी से खुलकर बात करना", "100% सुरक्षित और विश्वासपूर्ण माहौल"],
-      descs: ["झिझक और सामाजिक डर की बाधा", "भीतर ही घुटने का जोखिम", "चुनिंदा भरोसेमंद दोस्त", "मदद मांगने का सही तरीका", "उत्कृष्ट मनोवैज्ञानिक सुरक्षा"]
-    },
-    te: {
-      question: "మీరు మానసిక సమస్యలను ఎదుర్కొంటున్నప్పుడు, తోటి జవాన్ లేదా అధికారితో స్వేచ్ఛగా పంచుకోగలరా?",
-      conversational: "ఎప్పుడైనా మీరు బాధలో ఉంటే, యూనిట్‌లో ఎవరితోనైనా నిర్భయంగా మీ భావాలను చెప్పుకోగలరా?",
-      options: ["ఎప్పటికీ చెప్పను / కించపరుస్తారనే భయం", "చాలా సంకోచం / లోపలే దాచుకోవడం", "ఒక్క నమ్మకమైన మిత్రుడికి మాత్రమే", "సహాయం కోరడంలో ఎటువంటి ఇబ్బంది లేదు", "100% నమ్మకమైన & సురక్షిత వాతావరణం"],
-      descs: ["మచ్చ పడుతుందనే తీవ్ర భయం", "లోలోపల బాధపడే ప్రమాదం", "పరిమిత నమ్మకమైన ఆధారం", "సహజంగా సహాయం కోరే తత్వం", "అత్యుత్తమ మానసిక భద్రత"]
-    },
-    kn: {
-      question: "ನೀವು ಮಾನಸಿಕವಾಗಿ ನೊಂದಾಗ, ಯಾವುದೇ ಭಯವಿಲ್ಲದೆ ಸಹೋದ್ಯೋಗಿ ಅಥವಾ ಅಧಿಕಾರಿಯೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಲು ಸಾಧ್ಯವೇ?",
-      conversational: "ಯಾವುದಾದರೂ ವಿಷಯಕ್ಕೆ ಬೇಸರವಾದಾಗ, ಯಾರ ಬಳಿಯಾದರೂ ಯಾವುದೇ ಹಿಂಜರಿಕೆಯಿಲ್ಲದೆ ಮುಕ್ತವಾಗಿ ಮಾತನಾಡಬಹುದೇ?",
-      options: ["ಖಂಡಿತ ಇಲ್ಲ / ಕೀಳಾಗಿ ಕಾಣುವರೆಂಬ ಭಯ", "ತುಂಬಾ ಹಿಂಜರಿಕೆ / ಎಲ್ಲವನ್ನೂ ಒಳಗೇ ಇಟ್ಟುಕೊಳ್ಳುವುದು", "ಕೇವಲ ಒಬ್ಬ ವಿಶ್ವಾಸಾರ್ಹ ಸ್ನೇಹಿತನೊಂದಿಗೆ ಮಾತ್ರ", "ಸಹಾಯ ಕೇಳಲು ಯಾವುದೇ ಹಿಂಜರಿಕೆಯಿಲ್ಲ", "100% ವಿಶ್ವಾಸಾರ್ಹ & ಸುರಕ್ಷಿತ ವಾತಾವರಣ"],
-      descs: ["ಅವಮಾನದ ಭಯದ ಗೋಡೆ", "ಒಳಗೇ ಕೊರಗುವ ಅಪಾಯ", "ಆಯ್ದ ಸ್ನೇಹಿತನ ಬೆಂಬಲ", "ಮುಕ್ತವಾಗಿ ಸಹಾಯ ಪಡೆಯುವ ಗುಣ", "ಉತ್ತಮ ಮಾನಸಿಕ ಸುರಕ್ಷತೆ"]
-    }
-  },
-  {
-    id: 17,
-    pillar: 3,
-    category: "Coping with Tactical Uncertainty",
-    pillarLabel: "◉ Pillar 3: Social & Unit Dynamics",
-    en: {
-      question: "How resilient and adaptable do you feel when plans change unexpectedly or mission parameters shift?",
-      conversational: "In combat or field deployments, when things don't go according to plan, how adaptable does your mind remain?",
-      options: ["Paralyzed by doubt / high confusion", "Struggles with changes / anxious", "Takes time to adjust / functional", "Adaptable, steady & resourceful", "Flourishes in ambiguity & high chaos"],
-      descs: ["Cognitive rigidity under surprise", "Tactical friction vulnerability", "Standard military adaptability", "High tactical flexibility", "Elite battlefield agility"]
-    },
-    hi: {
-      question: "मिशन या योजनाओं में अचानक बदलाव आने पर आप कितने लचीले और दृढ़ बने रहते हैं?",
-      conversational: "अभियान के दौरान जब योजना अचानक बदल जाती है, तो क्या आप तेजी से ढलकर सटीक निर्णय ले पाते हैं?",
-      options: ["घबराहट / अत्यधिक भ्रम", "बदलाव से परेशानी / चिंतित", "ढलने में थोड़ा समय / सामान्य", "लचीले, स्थिर और साधन संपन्न", "कठिन से कठिन परिस्थिति में भी अडिग"],
-      descs: ["अप्रत्याशित बदलाव में उलझन", "रणनीतिक असमंजस का खतरा", "सामान्य सैन्य अनुकूलता", "मजबूत रणनीतिक लचीलापन", "अचूक युद्ध कौशल"]
-    },
-    te: {
-      question: "ప్రణాళికలు లేదా పరిస్థితులు అకస్మాత్తుగా మారినప్పుడు మీరు ఎంత దృఢంగా మరియు సమర్థవంతంగా ఉంటారు?",
-      conversational: "యుద్ధంలో లేదా ఫీల్డ్ లో ప్లాన్లు హఠాత్తుగా మారినప్పుడు, మీరు ఎంత వేగంగా అలవాటుపడగలుగుతున్నారు?",
-      options: ["అయోమయం / తీవ్ర భయం", "మార్పులకు సర్దుబాటు కష్టం", "సర్దుబాటు కావడానికి కొద్ది సమయం", "లక్ష్యానికి అనుగుణంగా మారే నైపుణ్యం", "ఎలాంటి గందరగోళంలోనైనా సంపూర్ణ విజయం"],
-      descs: ["ఆకస్మిక మార్పుతో గందరగోళం", "వ్యూహాత్మక ఇబ్బంది", "సాధారణ సైనిక అనుకూలత", "మంచి వ్యూహాత్మక స్థైర్యం", "అత్యున్నత పోరాట నైపుణ్యం"]
-    },
-    kn: {
-      question: "ಯೋಜನೆಗಳು ಅಥವಾ ಕಾರ್ಯಾಚರಣೆಗಳು ಇದ್ದಕ್ಕಿದ್ದಂತೆ ಬದಲಾದಾಗ ನೀವು ಎಷ್ಟು ಧೈರ್ಯದಿಂದ ಹೊಂದಿಕೊಳ್ಳುತ್ತೀರಿ?",
-      conversational: "ಕಾರ್ಯಾಚರಣೆಯ ಸಮಯದಲ್ಲಿ ಯೋಜನೆಗಳು ಬದಲಾದಾಗ, ನಿಮ್ಮ ಮನಸ್ಸು ಎಷ್ಟು ಬೇಗನೆ ಸಿದ್ಧವಾಗುತ್ತದೆ?",
-      options: ["ತೀವ್ರ ಗೊಂದಲ / ಹೆದರಿಕೆ", "ಬದಲಾವಣೆಗೆ ಹೊಂದಿಕೊಳ್ಳುವುದು ಕಷ್ಟ", "ಹೊಂದಿಕೊಳ್ಳಲು ಸ್ವಲ್ಪ ಸಮಯ ಬೇಕು", "ಚತುರ, ಸ್ಥಿರ ಮತ್ತು ಹೊಂದಿಕೊಳ್ಳುವ", "ಯಾವುದೇ ಅನಿಶ್ಚಿತತೆಯಲ್ಲೂ ಅಚಲ"],
-      descs: ["ಅನಿರೀಕ್ಷಿತ ಬದಲಾವಣೆಯ ಆತಂಕ", "ಕಾರ್ಯಾಚರಣೆಯ ಸವಾಲು", "ಸಾಮಾನ್ಯ ಹೊಂದಾಣಿಕೆ", "ಉತ್ತಮ ಕಾರ್ಯತಂತ್ರ ನಮ್ಯತೆ", "ಉತ್ಕೃಷ್ಟ ರಣರಂಗದ ಚಾಕಚಕ್ಯತೆ"]
-    }
-  },
-  {
-    id: 18,
-    pillar: 3,
-    category: "Personal Pride, Hope & Inner Strength",
-    pillarLabel: "◉ Pillar 3: Social & Unit Dynamics",
-    en: {
-      question: "Looking toward the future, how confident, proud, and hopeful do you feel about your life and military service?",
-      conversational: "Looking ahead into the future, do you feel strong, hopeful, and proud of wearing the uniform and serving?",
-      options: ["Hopeless / deeply demoralized", "Pessimistic / questioning worth", "Steady / doing duty day-by-day", "Proud & hopeful about the future", "Unshakable soldierly honor & deep pride"],
-      descs: ["Demoralization warning signal", "Sub-clinical despair risk", "Dedicated professional resolve", "High morale and optimism", "Supreme military honor and purpose"]
-    },
-    hi: {
-      question: "भविष्य को देखते हुए, आप अपने जीवन और वर्दी की सेवा के प्रति कितने गौरवान्वित और आशान्वित महसूस करते हैं?",
-      conversational: "आगे के समय को देखते हुए, क्या आप अपनी सेवा और वर्दी पर पूरा गर्व और उम्मीद महसूस करते हैं?",
-      options: ["निराश / अत्यधिक मनोबल की कमी", "नकारात्मक सोच / खुद पर संदेह", "स्थिर / निष्ठा से ड्यूटी करना", "भविष्य के प्रति आशान्वित और गौरवान्वित", "अटूट फौजी सम्मान और सर्वोच्च गर्व"],
-      descs: ["मनोबल टूटने का गंभीर संकेत", "निराशा का खतरा", "कर्तव्यनिष्ठ फौजी भावना", "उच्च मनोबल और आशावाद", "सर्वोच्च सैन्य सम्मान व संकल्प"]
-    },
-    te: {
-      question: "భవిష్యత్తు వైపు చూస్తూ, మీ జీవితం మరియు సైనిక సేవల పట్ల మీరు ఎంత గర్వంగా మరియు ఆశాభావంతో ఉన్నారు?",
-      conversational: "భవిష్యత్తు గురించి ఆలోచించినప్పుడు, మీ యూనిఫామ్ మరియు దేశ సేవ పట్ల ఎంత గర్వంగా అనిపిస్తోంది?",
-      options: ["తీవ్ర నిరాశ / ఆత్మవిశ్వాసం కోల్పోవడం", "నిరాశావాదం / అనుమానం", "స్థిరంగా / బాధ్యతాయుతమైన విధి నిర్వహణ", "భవిష్యత్తుపై గర్వం & పూర్తి ఆశ", "అచంచలమైన సైనిక గౌరవం & సంపూర్ణ దేశభక్తి"],
-      descs: ["మనోధైర్యం లోపించిన ప్రమాదం", "తీవ్ర నిరాశా సంకేతం", "వృత్తిపరమైన అంకితభావం", "ఉన్నత మనోధైర్యం & ఆశావాదం", "అత్యున్నత సైనిక గౌరవం & ఆత్మగౌరవం"]
-    },
-    kn: {
-      question: "ಭವಿಷ್ಯದ ಕಡೆಗೆ ನೋಡುವಾಗ, ನಿಮ್ಮ ಜೀವನ ಮತ್ತು ದೇಶಸೇವೆಯ ಬಗ್ಗೆ ನೀವು ಎಷ್ಟು ಹೆಮ್ಮೆ ಮತ್ತು ಭರವಸೆಯನ್ನು ಹೊಂದಿದ್ದೀರಿ?",
-      conversational: "ಮುಂದಿನ ದಿನಗಳನ್ನು ನೋಡಿದಾಗ, ಸಮವಸ್ತ್ರ ಧರಿಸಿ ಸೇವೆ ಸಲ್ಲಿಸುವ ಬಗ್ಗೆ ನಿಮಗೆ ಎಷ್ಟು ಹೆಮ್ಮೆ ಮತ್ತು ಆತ್ಮವಿಶ್ವಾಸವಿದೆ?",
-      options: ["ತೀವ್ರ ನಿರಾಶೆ / ಆತ್ಮವಿಶ್ವಾಸದ ಕೊರತೆ", "ನಕಾರಾತ್ಮಕ ಭಾವನೆ / ಅನುಮಾನ", "ಸ್ಥಿರ / ನಿಷ್ಠೆಯಿಂದ ಕರ್ತವ್ಯ ನಿರ್ವಹಣೆ", "ಭವಿಷ್ಯದ ಬಗ್ಗೆ ಭರವಸೆ ಮತ್ತು ಹೆಮ್ಮೆ", "ಅಚಲವಾದ ಸೈನಿಕ ಗೌರವ ಮತ್ತು ಉನ್ನತ ಹೆಮ್ಮೆ"],
-      descs: ["ಮನೋಸ್ಥೈರ್ಯ ಕುಸಿತದ ಎಚ್ಚರಿಕೆ", "ನಿರಾಶೆಯ ಅಪಾಯ", "ಕರ್ತವ್ಯನಿಷ್ಠ ಬದ್ಧತೆ", "ಉನ್ನತ ನೈತಿಕ ಸ್ಥೈರ್ಯ ಮತ್ತು ಆಶಾಭಾವ", "ಸರ್ವೋಚ್ಚ ಸೈನ್ಯದ ಗೌರವ ಮತ್ತು ಗುರಿ"]
-    }
+function updatePsychSlider(qId, value) {
+  const labelEl = $('qSpin' + qId);
+  if (labelEl) {
+    labelEl.textContent = `${value}/5`;
+    labelEl.classList.remove('spinning');
+    void labelEl.offsetWidth; // trigger reflow
+    labelEl.classList.add('spinning');
   }
-];
-
-// Check-in State Management
-let checkinCurrentIndex = 0;
-let checkinMode = 'voice'; // 'voice' or 'tap'
-let checkinCadence = 'weekly'; // 'weekly' or 'monthly'
-let checkinScores = new Array(18).fill(4); // default baseline 4/5
-let isAuraSpeaking = false;
-let isAuraListening = false;
-let auraSpeechRecognition = null;
-
-function getLocalizedQuestion(idx) {
-  const q = AURA_CHECKIN_QUESTIONS[idx];
-  const lang = (typeof currentLanguage !== 'undefined' && currentLanguage) ? currentLanguage : 'en';
-  return q[lang] || q['en'];
+  recalculatePsychReadiness();
 }
 
-function updateCheckinUI() {
-  const qObj = AURA_CHECKIN_QUESTIONS[checkinCurrentIndex];
-  const localized = getLocalizedQuestion(checkinCurrentIndex);
+// Backward compatibility helper
+function update3DSlider(type, value) {
+  const labelEl = $(type + 'SpinText');
+  if (labelEl) {
+    labelEl.textContent = `${value}/5`;
+    labelEl.classList.remove('spinning');
+    void labelEl.offsetWidth;
+    labelEl.classList.add('spinning');
+  }
+}
 
-  // Update Progress
-  const currentNum = checkinCurrentIndex + 1;
-  const pct = Math.round((currentNum / 18) * 100);
-  if ($('checkinCurrentNum')) $('checkinCurrentNum').textContent = currentNum;
-  if ($('checkinPctText')) $('checkinPctText').textContent = `${pct}%`;
-  if ($('checkinProgressBar')) $('checkinProgressBar').style.width = `${pct}%`;
+function getPsychPillarScores() {
+  let identitySum = 0;
+  for (let i = 1; i <= 6; i++) {
+    const el = $('psychQ' + i);
+    identitySum += el ? parseInt(el.value, 10) : 4;
+  }
 
-  // Update Category and Pillar Tags
-  if ($('checkinPillarTag')) {
-    $('checkinPillarTag').textContent = qObj.pillarLabel;
-    if (qObj.pillar === 1) {
-      $('checkinPillarTag').style.color = 'var(--whoop-blue)';
-      $('checkinPillarTag').style.borderColor = 'var(--whoop-blue)';
-      $('checkinPillarTag').style.background = 'var(--cyan-dim)';
-    } else if (qObj.pillar === 2) {
-      $('checkinPillarTag').style.color = 'var(--whoop-amber)';
-      $('checkinPillarTag').style.borderColor = 'var(--whoop-amber)';
-      $('checkinPillarTag').style.background = 'var(--amber-dim)';
+  let mindsetSum = 0;
+  for (let i = 7; i <= 12; i++) {
+    const el = $('psychQ' + i);
+    mindsetSum += el ? parseInt(el.value, 10) : 4;
+  }
+
+  let socialSum = 0;
+  for (let i = 13; i <= 18; i++) {
+    const el = $('psychQ' + i);
+    socialSum += el ? parseInt(el.value, 10) : 4;
+  }
+
+  const total = identitySum + mindsetSum + socialSum;
+  const maxTotal = 90;
+  const overallPct = Math.round((total / maxTotal) * 100);
+
+  return {
+    identitySum,
+    mindsetSum,
+    socialSum,
+    total,
+    overallPct,
+    identityPct: Math.round((identitySum / 30) * 100),
+    mindsetPct: Math.round((mindsetSum / 30) * 100),
+    socialPct: Math.round((socialSum / 30) * 100)
+  };
+}
+
+function recalculatePsychReadiness() {
+  const scores = getPsychPillarScores();
+
+  // Update live score pill in header
+  if ($('psychOverallScoreLive')) {
+    $('psychOverallScoreLive').textContent = `${scores.overallPct}%`;
+  }
+
+  // Update Pillar 1: Identity
+  if ($('scoreIdentityVal')) $('scoreIdentityVal').textContent = `${scores.identitySum}/30`;
+  if ($('barIdentity')) $('barIdentity').style.width = `${scores.identityPct}%`;
+  if ($('statusIdentity')) {
+    $('statusIdentity').textContent = scores.identityPct >= 80 ? 'High Self-Awareness & Clarity' :
+      scores.identityPct >= 65 ? 'Stable Self-Reflection' : 'Introspection & Grounding Advised';
+  }
+
+  // Update Pillar 2: Mindset
+  if ($('scoreMindsetVal')) $('scoreMindsetVal').textContent = `${scores.mindsetSum}/30`;
+  if ($('barMindset')) $('barMindset').style.width = `${scores.mindsetPct}%`;
+  if ($('statusMindset')) {
+    $('statusMindset').textContent = scores.mindsetPct >= 80 ? 'Adaptive & Grounded Agency' :
+      scores.mindsetPct >= 65 ? 'Balanced Cognitive Flexibility' : 'Reframing & Focus Support Advised';
+  }
+
+  // Update Pillar 3: Social Dynamics
+  if ($('scoreSocialVal')) $('scoreSocialVal').textContent = `${scores.socialSum}/30`;
+  if ($('barSocial')) $('barSocial').style.width = `${scores.socialPct}%`;
+  if ($('statusSocial')) {
+    $('statusSocial').textContent = scores.socialPct >= 80 ? 'Strong Unit Cohesion & Trust' :
+      scores.socialPct >= 65 ? 'Healthy Interpersonal Attunement' : 'Peer Connection & Support Advised';
+  }
+}
+
+function switchPsychTab(pillarKey) {
+  psychCurrentTab = pillarKey;
+
+  // Update tab buttons
+  const tabs = {
+    'all': $('tabPsychAll'),
+    'identity': $('tabPsychIdentity'),
+    'mindset': $('tabPsychMindset'),
+    'social': $('tabPsychSocial')
+  };
+
+  Object.keys(tabs).forEach(k => {
+    if (tabs[k]) tabs[k].classList.toggle('active', k === pillarKey);
+  });
+
+  // Filter cards and headers
+  const board = $('microCheckBoard');
+  if (!board) return;
+
+  const cards = board.querySelectorAll('.slider-3d-card, .psych-group-header');
+  cards.forEach(card => {
+    const cardPillar = card.getAttribute('data-pillar');
+    if (pillarKey === 'all' || cardPillar === pillarKey) {
+      card.style.display = '';
     } else {
-      $('checkinPillarTag').style.color = 'var(--whoop-green)';
-      $('checkinPillarTag').style.borderColor = 'var(--whoop-green)';
-      $('checkinPillarTag').style.background = 'var(--primary-dim)';
+      card.style.display = 'none';
     }
-  }
-  if ($('checkinCategoryName')) $('checkinCategoryName').textContent = qObj.category;
-
-  // Voice Question Text
-  if ($('auraVoiceQuestion')) {
-    $('auraVoiceQuestion').textContent = `"${localized.conversational}"`;
-  }
-
-  // Tap Question & Description
-  if ($('auraTapQuestion')) $('auraTapQuestion').textContent = `"${localized.question}"`;
-  if ($('auraTapDesc')) $('auraTapDesc').textContent = qObj.category;
-
-  // Update Tap Option Cards
-  for (let s = 1; s <= 5; s++) {
-    const card = $('tapOpt' + s);
-    const label = $('optLabel' + s);
-    const desc = $('optDesc' + s);
-    if (label && localized.options && localized.options[s - 1]) label.textContent = localized.options[s - 1];
-    if (desc && localized.descs && localized.descs[s - 1]) desc.textContent = localized.descs[s - 1];
-
-    if (card) {
-      const isSelected = checkinScores[checkinCurrentIndex] === s;
-      card.classList.toggle('selected', isSelected);
-    }
-  }
-
-  // Prev Button visibility
-  if ($('checkinPrevBtn')) {
-    $('checkinPrevBtn').style.visibility = checkinCurrentIndex === 0 ? 'hidden' : 'visible';
-  }
-
-  // Next Button Label (Next or Finish)
-  if ($('checkinNextBtn')) {
-    $('checkinNextBtn').textContent = checkinCurrentIndex === 17 ? 'Finish & View Results ✓' : 'Next Question ▶';
-  }
+  });
 }
 
-function setCheckinMode(mode, btn) {
-  checkinMode = mode;
-  $('modeVoiceBtn')?.classList.toggle('active', mode === 'voice');
-  $('modeTapBtn')?.classList.toggle('active', mode === 'tap');
-
-  if (mode === 'voice') {
-    $('checkinVoiceStage').style.display = 'flex';
-    $('checkinTapStage').style.display = 'none';
-    notify('Switched to Voice Mode (Talk to AURA).');
-  } else {
-    $('checkinVoiceStage').style.display = 'none';
-    $('checkinTapStage').style.display = 'block';
-    stopAuraSpeech();
-    stopAuraListening();
-    notify('Switched to Tap Mode (Offline / Fast).');
-  }
-}
-
-function setCheckinCadence(cadence, btn) {
-  checkinCadence = cadence;
-  $('cadenceWeeklyBtn')?.classList.toggle('active', cadence === 'weekly');
-  $('cadenceMonthlyBtn')?.classList.toggle('active', cadence === 'monthly');
-  if ($('cadenceActiveBadge')) {
-    $('cadenceActiveBadge').textContent = cadence === 'weekly' ? 'Weekly Routine Cadence' : 'Monthly In-Depth Cadence';
-  }
-  notify(`Set Check-In Cadence to: ${cadence === 'weekly' ? 'Weekly Routine' : 'Monthly Comprehensive'}`);
-}
-
-// -------------------------------------------------------------
-// NATURAL SPEECH SYNTHESIS (TALK TO AURA VOICE ENGINE)
-// -------------------------------------------------------------
-function speakCurrentQuestion() {
-  if (!('speechSynthesis' in window)) {
-    notify('Web Speech Synthesis is not supported in this browser. Please use Tap Mode.');
-    return;
-  }
-
-  stopAuraSpeech();
-  const localized = getLocalizedQuestion(checkinCurrentIndex);
-  const textToSpeak = localized.conversational;
-
-  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+function executeBadgeMorph() {
+  const btn = $('calcBadgeBtn');
+  if (!btn) return;
   
-  // Choose voice matching current language
-  const lang = (typeof currentLanguage !== 'undefined' && currentLanguage) ? currentLanguage : 'en';
-  const langCodeMap = { 'en': 'en-IN', 'hi': 'hi-IN', 'te': 'te-IN', 'kn': 'kn-IN' };
-  utterance.lang = langCodeMap[lang] || 'en-US';
+  // Physically depress (translateZ: -5px)
+  btn.classList.add('depressed');
 
-  // Tuned parameters for warm, calm, human pacing (not robotic)
-  utterance.pitch = 1.02;
-  utterance.rate = 0.92;
-
-  const voices = window.speechSynthesis.getVoices();
-  // Prefer natural voices
-  const naturalVoice = voices.find(v => v.lang.startsWith(utterance.lang.slice(0, 2)) && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Neural')));
-  if (naturalVoice) utterance.voice = naturalVoice;
-
-  utterance.onstart = () => {
-    isAuraSpeaking = true;
-    $('auraOrbChamber')?.classList.add('speaking');
-    if ($('speakBtnLabel')) $('speakBtnLabel').textContent = 'Speaking...';
-    if ($('auraStatusBadge')) $('auraStatusBadge').textContent = 'AURA IS SPEAKING...';
-  };
-
-  utterance.onend = () => {
-    isAuraSpeaking = false;
-    $('auraOrbChamber')?.classList.remove('speaking');
-    if ($('speakBtnLabel')) $('speakBtnLabel').textContent = 'Hear Question';
-    if ($('auraStatusBadge')) $('auraStatusBadge').textContent = 'LISTENING FOR YOUR SPOKEN ANSWER';
-    // Auto-prompt mic after question finished speaking in voice mode
-    if (checkinMode === 'voice') {
-      startAuraListening();
-    }
-  };
-
-  utterance.onerror = () => {
-    isAuraSpeaking = false;
-    $('auraOrbChamber')?.classList.remove('speaking');
-    if ($('speakBtnLabel')) $('speakBtnLabel').textContent = 'Hear Question';
-  };
-
-  window.speechSynthesis.speak(utterance);
-}
-
-function stopAuraSpeech() {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-  }
-  isAuraSpeaking = false;
-  $('auraOrbChamber')?.classList.remove('speaking');
-  if ($('speakBtnLabel')) $('speakBtnLabel').textContent = 'Hear Question';
-}
-
-function toggleAuraVoiceInteraction() {
-  if (isAuraSpeaking) {
-    stopAuraSpeech();
-  } else if (isAuraListening) {
-    stopAuraListening();
-  } else {
-    speakCurrentQuestion();
-  }
-}
-
-// -------------------------------------------------------------
-// SPEECH RECOGNITION & NATURAL FREE SPEECH PARSER
-// -------------------------------------------------------------
-function initSpeechRecognition() {
-  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRec) return null;
-
-  const rec = new SpeechRec();
-  rec.continuous = false;
-  rec.interimResults = true;
-  rec.maxAlternatives = 1;
-
-  const lang = (typeof currentLanguage !== 'undefined' && currentLanguage) ? currentLanguage : 'en';
-  const langCodeMap = { 'en': 'en-IN', 'hi': 'hi-IN', 'te': 'te-IN', 'kn': 'kn-IN' };
-  rec.lang = langCodeMap[lang] || 'en-US';
-
-  return rec;
-}
-
-function startAuraListening() {
-  stopAuraSpeech();
-
-  if (isAuraListening) {
-    stopAuraListening();
-    return;
-  }
-
-  auraSpeechRecognition = initSpeechRecognition();
-  if (!auraSpeechRecognition) {
-    notify('Speech Recognition not supported in this browser. Tap options below or use Google Chrome.');
-    return;
-  }
-
-  auraSpeechRecognition.onstart = () => {
-    isAuraListening = true;
-    $('auraOrbChamber')?.classList.add('listening');
-    if ($('auraMicBtn')) {
-      $('auraMicBtn').classList.add('danger');
-      $('auraMicLabel').textContent = 'Listening... (Tap to Stop)';
-    }
-    if ($('auraStatusBadge')) $('auraStatusBadge').textContent = '🎙️ LISTENING TO YOUR VOICE (SPEAK FREELY)...';
-    if ($('auraTranscriptText')) {
-      $('auraTranscriptText').innerHTML = '<span style="color:var(--cyan);font-weight:800;">Listening... Speak naturally now.</span>';
-    }
-  };
-
-  auraSpeechRecognition.onresult = (event) => {
-    const transcript = Array.from(event.results)
-      .map(result => result[0].transcript)
-      .join('');
-
-    if ($('auraTranscriptText')) {
-      $('auraTranscriptText').innerHTML = `You said: <b>"${escapeHtml(transcript)}"</b>`;
-    }
-
-    if (event.results[0].isFinal) {
-      processSpokenCheckinAnswer(transcript);
-    }
-  };
-
-  auraSpeechRecognition.onerror = (event) => {
-    console.warn('Speech recognition error:', event.error);
-    stopAuraListening();
-    if (event.error === 'not-allowed') {
-      notify('Microphone permission needed for Voice Check-In. Click Allow in browser.');
-    }
-  };
-
-  auraSpeechRecognition.onend = () => {
-    stopAuraListening();
-  };
-
-  try {
-    auraSpeechRecognition.start();
-  } catch (err) {
-    console.warn('Speech recognition start note:', err);
-  }
-}
-
-function stopAuraListening() {
-  if (auraSpeechRecognition) {
-    try { auraSpeechRecognition.stop(); } catch(e) {}
-    auraSpeechRecognition = null;
-  }
-  isAuraListening = false;
-  $('auraOrbChamber')?.classList.remove('listening');
-  if ($('auraMicBtn')) {
-    $('auraMicBtn').classList.remove('danger');
-    $('auraMicLabel').textContent = 'Speak Answer Now';
-  }
-}
-
-// Intelligent Semantic NLP Free Speech Interpreter (Works Client-Side & Server API)
-function interpretFreeSpeechLocal(text) {
-  const t = text.toLowerCase();
-
-  // Severe strain (Score 1)
-  const severe = ['barely slept', 'two hours', '2 hours', 'no sleep', 'terrible', 'horrible', 'exhausted', 'can not focus', 'panic', 'hopeless', 'overwhelmed', 'बहुत खराब', 'बिल्कुल नींद नहीं', 'తీవ్రమైన', 'ತುಂಬಾ ಕೆಟ್ಟದಾಗಿದೆ'];
-  for (const s of severe) {
-    if (t.includes(s)) return { score: 1, feedback: 'Mapped to: High Strain (1/5)' };
-  }
-
-  // Strained (Score 2)
-  const strained = ['not really', 'maybe two nights', 'trouble sleeping', 'poor', 'bad', 'drained', 'tired', 'scattered', 'tough week', 'anxious', 'worried', 'चार घंटे', 'खराब', 'थका हुआ', 'బాధగా', 'అలసట', 'ಆಯಾಸ'];
-  for (const s of strained) {
-    if (t.includes(s)) return { score: 2, feedback: 'Mapped to: Below Baseline (2/5)' };
-  }
-
-  // Optimal (Score 5)
-  const optimal = ['really well', 'slept great', 'excellent', 'amazing', 'no issues', 'optimal', 'very calm', 'strong', 'sharp', 'refreshed', 'solid', 'बहुत अच्छा', 'शानदार', 'చాలా బాగుంది', 'ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ'];
-  for (const s of optimal) {
-    if (t.includes(s)) return { score: 5, feedback: 'Mapped to: Optimal Resilience (5/5)' };
-  }
-
-  // Good (Score 4)
-  const good = ['good', 'pretty good', 'decent', 'seven hours', '7 hours', 'fine', 'manageable', 'awake', 'normal', 'doing fine', 'बढ़िया', 'अच्छा', 'బాగుంది', 'ಉತ್ತಮವಾಗಿದೆ'];
-  for (const s of good) {
-    if (t.includes(s)) return { score: 4, feedback: 'Mapped to: Good / Steady (4/5)' };
-  }
-
-  // Moderate (Score 3)
-  const moderate = ['moderate', 'so-so', 'average', 'not bad', 'could be better', 'okay', 'fair', 'मध्यम', 'మధ్యస్థం', 'ಸಾಧಾರಣ'];
-  for (const s of moderate) {
-    if (t.includes(s)) return { score: 3, feedback: 'Mapped to: Moderate (3/5)' };
-  }
-
-  return { score: 3, feedback: 'Interpreted as: Moderate / Neutral (3/5)' };
-}
-
-async function processSpokenCheckinAnswer(transcript) {
-  // First try server endpoint /api/psych/chat if available, otherwise local NLP
-  let mappedScore = 3;
-  let feedback = 'Understood';
-
-  try {
-    const res = await fetch('/api/psych/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        questionId: checkinCurrentIndex + 1,
-        text: transcript,
-        lang: currentLanguage || 'en'
-      })
-    });
-    if (res.ok) {
-      const data = await res.json();
-      mappedScore = data.score || 3;
-      feedback = data.feedback || `Mapped to ${mappedScore}/5`;
-    } else {
-      const local = interpretFreeSpeechLocal(transcript);
-      mappedScore = local.score;
-      feedback = local.feedback;
-    }
-  } catch (err) {
-    const local = interpretFreeSpeechLocal(transcript);
-    mappedScore = local.score;
-    feedback = local.feedback;
-  }
-
-  // Visual Confirmation & Score Storage
-  checkinScores[checkinCurrentIndex] = mappedScore;
-  if ($('auraTranscriptText')) {
-    $('auraTranscriptText').innerHTML = `Heard: <b>"${escapeHtml(transcript)}"</b> &rarr; <b style="color:var(--primary);">${feedback}</b>`;
-  }
-  playChime(587, 0.2);
-
-  // Auto-advance to next question after natural pause
   setTimeout(() => {
-    if (checkinCurrentIndex < 17) {
-      checkinCurrentIndex++;
-      updateCheckinUI();
-      if (checkinMode === 'voice') {
-        speakCurrentQuestion();
-      }
+    btn.classList.remove('depressed');
+
+    const scores = getPsychPillarScores();
+    let tierTitle = 'Resilient Vanguard';
+    let tierClass = 'green';
+    let tierInsight = '';
+
+    if (scores.overallPct >= 85) {
+      tierTitle = '✦ Optimal Vanguard • High Fortitude & Team Cohesion';
+      tierClass = 'green';
+      tierInsight = 'Exceptional tri-pillar balance. Your self-reflective grounding, cognitive adaptability, and comradeship dynamics establish a gold-standard baseline for sustained mission endurance.';
+    } else if (scores.overallPct >= 70) {
+      tierTitle = '⚡ Resilient Adaptive • Solid Operational Health';
+      tierClass = 'cyan';
+      tierInsight = 'Strong operational resilience across psychological vectors. Continue routine grounding drills to maintain self-compassion balance and prevent silent cumulative friction.';
+    } else if (scores.overallPct >= 55) {
+      tierTitle = '◉ Functional Fortitude • Restoration Recommended';
+      tierClass = 'amber';
+      tierInsight = 'Sufficient cognitive reserve, but moderate drag detected in one or more vectors. Prioritize peer debriefing, box breathing grounding, and tactical rest tonight.';
     } else {
-      finalizeCheckin();
+      tierTitle = '⚠ Rest Priority • Peer Grounding Recommended';
+      tierClass = 'rose';
+      tierInsight = 'Elevated psychological strain across multiple domains. Leverage confidential buddy-support or dedicated welfare helplines (14416) for private decompressive grounding.';
     }
-  }, 1100);
-}
 
-function simulateVoiceResponse(phrase) {
-  if ($('auraTranscriptText')) {
-    $('auraTranscriptText').innerHTML = `Simulating spoken answer: <b>"${phrase}"</b>`;
-  }
-  processSpokenCheckinAnswer(phrase);
-}
+    // Morph button into celebration badge
+    btn.innerHTML = `
+      <span class="badge-symbol">✦</span>
+      <span>Psychological Resilience: ${scores.overallPct}% — Computed Confidentially</span>
+    `;
 
-// -------------------------------------------------------------
-// TAP MODE SELECTION & NAVIGATION
-// -------------------------------------------------------------
-function selectTapOption(score) {
-  checkinScores[checkinCurrentIndex] = score;
-  playChime(440 + score * 35, 0.15);
+    // Render comprehensive breakdown panel
+    const resPanel = $('psychResultPanel');
+    if (resPanel) {
+      resPanel.classList.remove('hidden');
+      resPanel.innerHTML = `
+        <div class="result-badge-top">
+          <div>
+            <div class="result-badge-title">
+              <span class="badge-symbol" style="width:28px;height:28px;font-size:16px;">✦</span>
+              <div>
+                <div>${tierTitle}</div>
+                <div style="font-size:10.5px;color:var(--muted);font-weight:700;">18-Vector Multi-Dimensional Battery • Zero-PII Client Assessment</div>
+              </div>
+            </div>
+          </div>
+          <div class="result-badge-score">${scores.overallPct}%</div>
+        </div>
 
-  // Update visual selection
-  for (let s = 1; s <= 5; s++) {
-    $('tapOpt' + s)?.classList.toggle('selected', s === score);
-  }
+        <div class="result-pillars-grid">
+          <div class="result-pillar-box">
+            <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:var(--cyan);">
+              <span>✦ Self-Reflection</span>
+              <span>${scores.identitySum}/30 (${scores.identityPct}%)</span>
+            </div>
+            <div class="pillar-bar-track"><div class="pillar-bar-fill fill-cyan" style="width:${scores.identityPct}%;"></div></div>
+            <div style="font-size:9.5px;color:var(--muted);margin-top:4px;">Identity, purpose &amp; self-acceptance</div>
+          </div>
 
-  // Smooth advance
-  setTimeout(() => {
-    if (checkinCurrentIndex < 17) {
-      checkinCurrentIndex++;
-      updateCheckinUI();
-    } else {
-      finalizeCheckin();
+          <div class="result-pillar-box">
+            <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:var(--amber);">
+              <span>⚡ Perspective</span>
+              <span>${scores.mindsetSum}/30 (${scores.mindsetPct}%)</span>
+            </div>
+            <div class="pillar-bar-track"><div class="pillar-bar-fill fill-amber" style="width:${scores.mindsetPct}%;"></div></div>
+            <div style="font-size:9.5px;color:var(--muted);margin-top:4px;">Cognitive agility &amp; locus of control</div>
+          </div>
+
+          <div class="result-pillar-box">
+            <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:var(--primary);">
+              <span>◉ Social Dynamics</span>
+              <span>${scores.socialSum}/30 (${scores.socialPct}%)</span>
+            </div>
+            <div class="pillar-bar-track"><div class="pillar-bar-fill fill-primary" style="width:${scores.socialPct}%;"></div></div>
+            <div style="font-size:9.5px;color:var(--muted);margin-top:4px;">Unit cohesion, trust &amp; boundaries</div>
+          </div>
+        </div>
+
+        <div class="result-insight-box">
+          <b><svg class="icon" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"><use href="#spark"/></svg> Tactical Psychological Insight:</b><br>
+          ${tierInsight}
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;">
+          <div style="font-size:9.5px;color:var(--muted);">
+            <svg class="icon" style="width:12px;height:12px;"><use href="#lock"/></svg> Results remain 100% private to this device session.
+          </div>
+          <button class="btn" style="padding:5px 10px;font-size:11px;" onclick="resetPsychBattery()">
+            <svg class="icon" style="width:12px;height:12px;"><use href="#activity"/></svg> Re-Take Evaluation
+          </button>
+        </div>
+      `;
+
+      resPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-  }, 250);
+
+    if (typeof createCelebrationParticles === 'function') {
+      const rect = btn.getBoundingClientRect();
+      createCelebrationParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, 36);
+    }
+    if (typeof playChime === 'function') {
+      playChime(660, 0.3);
+      setTimeout(() => playChime(880, 0.25), 120);
+    }
+    notify('18-Vector Local Wellness Badge computed with zero raw data transmission.');
+  }, 240);
 }
 
-function nextCheckinQuestion() {
-  if (checkinCurrentIndex < 17) {
-    checkinCurrentIndex++;
-    updateCheckinUI();
-    if (checkinMode === 'voice') speakCurrentQuestion();
-  } else {
-    finalizeCheckin();
+function resetPsychBattery() {
+  const defaults = [4, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 4, 4];
+  for (let i = 1; i <= 18; i++) {
+    const el = $('psychQ' + i);
+    if (el) {
+      el.value = defaults[i - 1];
+      const spin = $('qSpin' + i);
+      if (spin) spin.textContent = `${defaults[i - 1]}/5`;
+    }
   }
+  recalculatePsychReadiness();
+  const btn = $('calcBadgeBtn');
+  if (btn) {
+    btn.innerHTML = `
+      <svg class="icon" style="width:16px;height:16px;"><use href="#spark"/></svg>
+      <span id="badgeBtnLabel">Calculate My Local Wellness Badge</span>
+    `;
+  }
+  const resPanel = $('psychResultPanel');
+  if (resPanel) resPanel.classList.add('hidden');
+  notify('Psychological evaluation reset to baseline.');
 }
 
-function prevCheckinQuestion() {
-  if (checkinCurrentIndex > 0) {
-    checkinCurrentIndex--;
-    updateCheckinUI();
-    if (checkinMode === 'voice') speakCurrentQuestion();
-  }
+// Initialize on page load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', recalculatePsychReadiness);
+} else {
+  recalculatePsychReadiness();
 }
 
-function skipCheckinQuestion() {
-  checkinScores[checkinCurrentIndex] = 3; // default neutral
-  if (checkinCurrentIndex < 17) {
-    checkinCurrentIndex++;
-    updateCheckinUI();
-    if (checkinMode === 'voice') speakCurrentQuestion();
-  } else {
-    finalizeCheckin();
-  }
-}
-
-// -------------------------------------------------------------
-// CHECK-IN FINALIZATION & SCORING RESULTS
-// -------------------------------------------------------------
-function finalizeCheckin() {
-  stopAuraSpeech();
-  stopAuraListening();
-
-  // Calculate Pillar Scores
-  // Pillar 1: Questions 1 to 6 (Sleep & Physical)
-  let p1Sum = 0;
-  for (let i = 0; i < 6; i++) p1Sum += checkinScores[i];
-
-  // Pillar 2: Questions 7 to 12 (Mood & Stress)
-  let p2Sum = 0;
-  for (let i = 6; i < 12; i++) p2Sum += checkinScores[i];
-
-  // Pillar 3: Questions 13 to 18 (Social & Morale)
-  let p3Sum = 0;
-  for (let i = 12; i < 18; i++) p3Sum += checkinScores[i];
-
-  const totalSum = p1Sum + p2Sum + p3Sum; // max 90
-  const overallPct = Math.round((totalSum / 90) * 100);
-
-  // Band Determination
-  let band = 'stable';
-  let bandText = '🟢 STABLE & RESILIENT';
-  let bandClass = 'green';
-  let summary = '';
-
-  if (overallPct >= 75) {
-    band = 'stable';
-    bandText = '🟢 STABLE & RESILIENT';
-    bandClass = 'green';
-    summary = '<b>High psychological resilience and autonomic equilibrium.</b> Sleep architecture and cognitive focus remain strong under current duty loads. Continue routine off-duty grounding drills and standard tactical schedule.';
-  } else if (overallPct >= 50) {
-    band = 'watch';
-    bandText = '🟡 WATCH & RECALIBRATE';
-    bandClass = 'amber';
-    summary = '<b>Moderate operational strain detected.</b> Noticeable fatigue accumulation across sleep restfulness and daily stress. Recommend prioritizing a 90-minute circadian sleep debt recovery window and practicing 4-4-4-4 tactical box breathing tonight.';
-  } else {
-    band = 'support_needed';
-    bandText = '🔴 SUPPORT RECOMMENDED';
-    bandClass = 'rose';
-    summary = '<b>Elevated psychological burden flagged.</b> High cumulative tension across physical and emotional vectors. A temporary 48-hour tactical rest shift is advised. Confidential, zero-PII support is accessible 24/7 via Tele-MANAS (14416) or Unit Welfare Desk (1904).';
-  }
-
-  // Render Result Card
-  if ($('resultBigScore')) $('resultScoreNum').textContent = overallPct;
-  if ($('resultScoreNum')) {
-    $('resultScoreNum').style.color = overallPct >= 75 ? 'var(--primary)' : overallPct >= 50 ? 'var(--amber)' : 'var(--rose)';
-  }
-  if ($('resultBandBadge')) {
-    $('resultBandBadge').textContent = bandText;
-    $('resultBandBadge').className = `tag ${bandClass}`;
-  }
-  if ($('resultAiSummaryText')) $('resultAiSummaryText').innerHTML = summary;
-
-  // Pillar breakdown meters
-  const p1Pct = Math.round((p1Sum / 30) * 100);
-  const p2Pct = Math.round((p2Sum / 30) * 100);
-  const p3Pct = Math.round((p3Sum / 30) * 100);
-
-  if ($('resPillar1Score')) $('resPillar1Score').textContent = `${p1Sum}/30 (${p1Pct}%)`;
-  if ($('resPillar1Bar')) $('resPillar1Bar').style.width = `${p1Pct}%`;
-  if ($('resPillar1Status')) $('resPillar1Status').textContent = p1Pct >= 75 ? 'Restorative rest & strong physical energy' : p1Pct >= 50 ? 'Moderate physical tiredness' : 'Heavy sleep debt & somatic fatigue';
-
-  if ($('resPillar2Score')) $('resPillar2Score').textContent = `${p2Sum}/30 (${p2Pct}%)`;
-  if ($('resPillar2Bar')) $('resPillar2Bar').style.width = `${p2Pct}%`;
-  if ($('resPillar2Status')) $('resPillar2Status').textContent = p2Pct >= 75 ? 'Calm composure & sharp tactical focus' : p2Pct >= 50 ? 'Manageable operational stress' : 'High anxiety & focus vulnerability';
-
-  if ($('resPillar3Score')) $('resPillar3Score').textContent = `${p3Sum}/30 (${p3Pct}%)`;
-  if ($('resPillar3Bar')) $('resPillar3Bar').style.width = `${p3Pct}%`;
-  if ($('resPillar3Status')) $('resPillar3Status').textContent = p3Pct >= 75 ? 'High unit cohesion & strong comradeship' : p3Pct >= 50 ? 'Stable peer connection' : 'Isolation & family stress flagged';
-
-  // Save to private on-device history (Zero-PII)
-  const historyEntry = {
-    timestamp: new Date().toISOString(),
-    overallScore: overallPct,
-    band: band,
-    cadence: checkinCadence,
-    p1: p1Sum,
-    p2: p2Sum,
-    p3: p3Sum
-  };
-  try {
-    const existing = JSON.parse(localStorage.getItem('aura_jawan_checkin_history') || '[]');
-    existing.unshift(historyEntry);
-    localStorage.setItem('aura_jawan_checkin_history', JSON.stringify(existing.slice(0, 20)));
-  } catch(e) {}
-
-  // Reveal Result Card and hide stages
-  $('checkinVoiceStage').style.display = 'none';
-  $('checkinTapStage').style.display = 'none';
-  $('checkinResultCard').style.display = 'block';
-
-  createCelebrationParticles(window.innerWidth / 2, window.innerHeight / 2, 36);
-  playChime(660, 0.35);
-  notify(`18-Question Psychological Check-In completed! Score: ${overallPct}% (${bandText}).`);
-}
-
-function restartCheckin() {
-  checkinCurrentIndex = 0;
-  $('checkinResultCard').style.display = 'none';
-  setCheckinMode(checkinMode);
-  updateCheckinUI();
-  notify('Check-In restarted. Speak to AURA or tap your responses.');
-}
 
 /* =========================================================================
    SPEC 3: DECK UNCHARTED STACK & 4-COLUMN CARDS LAYOUT (IMAGE_2)
@@ -9184,24 +7388,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('tensor_theme') || 'dark';
   applyTheme(savedTheme);
 
-  // Check Authentication State & Restore Authenticated Persona
+  // Check Authentication State
   const authState = sessionStorage.getItem('kavach_auth_state');
-  const savedRole = sessionStorage.getItem('kavach_auth_role') || 'commander';
   if (authState === 'unlocked') {
-    unlockApp(savedRole);
+    $('authScreen')?.classList.add('hidden');
   } else {
     $('authScreen')?.classList.remove('hidden');
-  }
-
-  // Initialize Check-In UI
-  if (typeof updateCheckinUI === 'function') {
-    updateCheckinUI();
-  }
-  if (typeof initStressStrainGauge === 'function') {
-    initStressStrainGauge();
-  }
-  if (typeof initSmoothTrajectoryChart === 'function') {
-    initSmoothTrajectoryChart();
   }
 
   // Start continuous kinetic EKG path loop

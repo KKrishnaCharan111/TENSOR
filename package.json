@@ -1,12 +1,13 @@
 {
   "name": "kavach-aura-tensor",
   "version": "1.0.0",
-  "description": "KAVACH-AURA — TENSOR Ethical Welfare Intelligence, WHOOP 4.0 BLE GATT Stream, Google Gemini AI & 365-Day Roster Heatmap",
+  "description": "KAVACH-AURA \u2014 TENSOR Ethical Welfare Intelligence, WHOOP 4.0 BLE GATT Stream, Google Gemini AI & 365-Day Roster Heatmap",
   "main": "index.html",
   "scripts": {
-    "start": "python -m http.server 8000",
+    "start": "python server.py",
     "serve": "npx serve -l 8000 .",
-    "dev": "python -m http.server 8000"
+    "dev": "python server.py",
+    "http": "python -m http.server 8000"
   },
   "keywords": [
     "defense",

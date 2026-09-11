@@ -1152,31 +1152,11 @@
     }
 
     /* =========================================================================
-    /* =========================================================================
-       SPEC 4: LUMINOUS GEOMETRIC WIREFRAME PULSING HEART & EKG ANIMATION
-       ========================================================================= */
-    .kinetic-ekg-strip {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 16px;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      margin-bottom: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .kinetic-ekg-strip:hover {
-      border-color: var(--primary);
-      box-shadow: 0 8px 30px color-mix(in srgb, var(--primary) 25%, transparent);
-    }
-    /* =========================================================================
-       SPEC 4: CLINICAL CRT PHOSPHOR CARDIAC MONITOR & BEAM NODE ANIMATION (USER IMAGE SPEC)
-       - High-fidelity dark CRT phosphor tube monitor background with scanline mesh
+       SPEC 4: DYNAMIC CRT PULSE TELEMETRY MONITOR (LIGHT & DARK MODE RESPONSIVE)
+       - Automatically adapts between Dark Mode (deep cyber CRT glow) and Light Mode (crisp clinical medical card)
        - Vivid glowing multi-color EKG wave trace with P-Q-R-S-T cardiac complex
        - Real-time leading electrical pulse node with laser trail
-       - Multi-color theme synchronized with website palette (Emerald, Cyan, Rose, Amber)
+       - Synchronized with website palette (Emerald, Cyan, Rose, Amber)
        ========================================================================= */
     .kinetic-ekg-strip {
       background: #09090f;
@@ -1188,7 +1168,7 @@
       cursor: pointer;
       margin-bottom: 12px;
       box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .kinetic-ekg-strip:hover {
       border-color: var(--primary);
@@ -1197,9 +1177,15 @@
     .bpm-hero-panel {
       background: radial-gradient(ellipse at 50% 50%, #10101c 0%, #06060c 100%);
     }
+
+    /* Light Mode: Adaptive Clinical White / Crisp Slate Aesthetic */
     body[data-theme="light"] .kinetic-ekg-strip {
-      background: #0c121e; /* Keep high-contrast medical CRT dark aesthetic in light mode */
-      border-color: #1e293b;
+      background: var(--card);
+      border-color: var(--line);
+      box-shadow: 0 8px 24px rgba(22, 54, 82, 0.08);
+    }
+    body[data-theme="light"] .bpm-hero-panel {
+      background: radial-gradient(ellipse at 50% 50%, #ffffff 0%, #f4f8fc 100%);
     }
 
     .bpm-stage-container {
@@ -1213,8 +1199,16 @@
       padding: 4px 0;
       border-radius: 12px;
       background: 
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px);
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 6px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 6px);
+      transition: background 0.3s ease;
+    }
+    body[data-theme="light"] .bpm-stage-container {
+      background: 
+        repeating-linear-gradient(0deg, rgba(13, 35, 58, 0.04) 0px, rgba(13, 35, 58, 0.04) 1px, transparent 1px, transparent 8px),
+        repeating-linear-gradient(90deg, rgba(13, 35, 58, 0.04) 0px, rgba(13, 35, 58, 0.04) 1px, transparent 1px, transparent 8px),
+        #f8fbfe;
+      border: 1px solid var(--line-subtle);
     }
 
     /* CRT Phosphor Screen Scanline Overlay Effect */
@@ -1227,6 +1221,12 @@
       background-size: 100% 3px, 6px 100%;
       z-index: 2;
       opacity: 0.65;
+      transition: opacity 0.3s ease;
+    }
+    body[data-theme="light"] .bpm-stage-container::after {
+      opacity: 0.12;
+      background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.06) 50%);
+      background-size: 100% 4px;
     }
 
     /* Continuous Flowing EKG Laser Wave */
@@ -1250,8 +1250,14 @@
       stroke-linejoin: round;
       opacity: 0.45;
       filter: blur(4px);
-      transition: stroke 0.3s ease;
+      transition: stroke 0.3s ease, opacity 0.3s ease;
     }
+    body[data-theme="light"] .crt-ekg-glow-line {
+      opacity: 0.28;
+      stroke-width: 5;
+      filter: blur(3px);
+    }
+
     .crt-ekg-core-line {
       fill: none;
       stroke: #ffffff;
@@ -1259,7 +1265,12 @@
       stroke-linecap: round;
       stroke-linejoin: round;
       filter: drop-shadow(0 0 6px var(--primary));
-      transition: filter 0.3s ease;
+      transition: stroke 0.3s ease, filter 0.3s ease;
+    }
+    body[data-theme="light"] .crt-ekg-core-line {
+      stroke: var(--primary);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 1px 4px color-mix(in srgb, var(--primary) 50%, transparent));
     }
 
     /* Central Medical Pulse Indicator / Digital Cardiopulmonary Readout Hub */
@@ -1289,6 +1300,11 @@
       z-index: 1;
       pointer-events: none;
       animation: heartAuraPulse 0.82s infinite ease-in-out;
+      transition: background 0.3s ease;
+    }
+    body[data-theme="light"] .wireframe-heart-glow {
+      opacity: 0.22;
+      filter: blur(12px);
     }
 
     @keyframes heartAuraPulse {
@@ -1313,6 +1329,10 @@
       pointer-events: none;
       text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
+    body[data-theme="light"] .wireframe-bpm-readout {
+      text-shadow: none;
+    }
+
     .wireframe-bpm-val {
       font-family: monospace;
       font-size: 26px;
@@ -1321,7 +1341,13 @@
       color: #ffffff;
       letter-spacing: -0.5px;
       filter: drop-shadow(0 0 8px var(--primary));
+      transition: color 0.3s ease, filter 0.3s ease;
     }
+    body[data-theme="light"] .wireframe-bpm-val {
+      color: var(--text-heading);
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12));
+    }
+
     .wireframe-bpm-unit {
       font-size: 9px;
       font-weight: 900;
@@ -1338,6 +1364,12 @@
       border: 1px solid var(--primary-border);
       margin-top: 2px;
       letter-spacing: 0.5px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    body[data-theme="light"] .wireframe-pulse-status {
+      background: var(--card2);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     }
 
     /* Right Controls & Palette Chips */
@@ -1356,6 +1388,7 @@
       border-radius: 10px;
       padding: 6px 12px;
       text-align: right;
+      box-shadow: var(--shadow);
     }
     .bpm-palette-chips {
       display: flex;
@@ -5476,6 +5509,11 @@ function applyTheme(theme) {
   if ($('mainThemeIcon')) $('mainThemeIcon').innerHTML = `<use href="#${isLight ? 'moon' : 'sun'}"/>`;
   if ($('lockThemeIcon')) $('lockThemeIcon').innerHTML = `<use href="#${isLight ? 'moon' : 'sun'}"/>`;
   if ($('lockThemeText')) $('lockThemeText').textContent = isLight ? 'Dark' : 'Light';
+
+  // Synchronize Pulse Telemetry line and glows with the newly applied theme
+  if (typeof setBpmColorTheme === 'function' && typeof currentBpmThemeKey !== 'undefined') {
+    setBpmColorTheme(currentBpmThemeKey);
+  }
 }
 
 function toggleTheme() {
@@ -5857,30 +5895,40 @@ function setBpmColorTheme(themeKey, btn) {
   if (s3) s3.setAttribute('stop-color', theme.hex);
 
   // Update CRT Phosphor Glow Line & Traveling Tracer Node
+  const isLight = document.body && document.body.dataset.theme === 'light';
   const glowLine = $('ekgGlowLine');
   if (glowLine) {
     glowLine.style.stroke = theme.hex;
-    glowLine.style.filter = `drop-shadow(0 0 10px ${theme.hex}) blur(3px)`;
+    glowLine.style.filter = isLight ? `drop-shadow(0 2px 8px ${theme.hex}) blur(2px)` : `drop-shadow(0 0 10px ${theme.hex}) blur(3px)`;
+    glowLine.style.opacity = isLight ? '0.35' : '0.45';
   }
   const coreLine = $('ekgPathLine');
   if (coreLine) {
-    coreLine.style.filter = `drop-shadow(0 0 6px ${theme.hex})`;
+    coreLine.style.stroke = isLight ? theme.hex : '#ffffff';
+    coreLine.style.filter = isLight ? `drop-shadow(0 2px 6px ${theme.hex})` : `drop-shadow(0 0 6px ${theme.hex})`;
   }
   const tracerBeam = $('ekgTracerBeam');
   if (tracerBeam) {
-    tracerBeam.style.stroke = theme.hex;
-    tracerBeam.style.filter = `drop-shadow(0 0 10px ${theme.hex})`;
+    tracerBeam.style.fill = isLight ? theme.hex : '#ffffff';
+    tracerBeam.style.stroke = isLight ? '#ffffff' : theme.hex;
+    tracerBeam.style.filter = `drop-shadow(0 0 8px ${theme.hex})`;
   }
 
   // Update Glow Aura Pulse
   const glow = $('wireframeHeartGlow');
   if (glow) {
-    glow.style.background = `radial-gradient(circle, ${theme.hex} 0%, ${theme.glowHex} 40%, transparent 70%)`;
+    glow.style.background = isLight 
+      ? `radial-gradient(circle, ${theme.hex} 0%, color-mix(in srgb, ${theme.hex} 30%, transparent) 45%, transparent 70%)`
+      : `radial-gradient(circle, ${theme.hex} 0%, ${theme.glowHex} 40%, transparent 70%)`;
+    glow.style.opacity = isLight ? '0.22' : '0.35';
   }
 
   // Update Unit Text & Readout Color
   const readoutVal = $('wireframeBpmVal');
-  if (readoutVal) readoutVal.style.filter = `drop-shadow(0 0 10px ${theme.hex})`;
+  if (readoutVal) {
+    readoutVal.style.color = isLight ? 'var(--text-heading)' : '#ffffff';
+    readoutVal.style.filter = isLight ? `drop-shadow(0 1px 3px rgba(0,0,0,0.12))` : `drop-shadow(0 0 10px ${theme.hex})`;
+  }
 
   notify(`🎨 Switched Pulse Monitor palette to ${theme.name}.`);
 }

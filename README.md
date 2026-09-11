@@ -24,7 +24,17 @@ Biometric telemetry never crosses into disciplinary appraisal records. All predi
 - **Command & Welfare Intelligence View:** Anonymized cohort metrics, unit readiness index, 7-day fatigue trajectory, explainable AI vectors, and non-punitive intervention queue.
 - **My Confidential Self-Care (Jawan View):** Completely private to the individual device; displays personal WHOOP telemetry, HRV recovery, sleep debt, and local micro-checks. Never accessible by command.
 
-### 2. Physical & Virtual WHOOP 4.0 Bluetooth GATT Subsystem
+### 2. Live Google Sheet Force Integration
+- **Direct Source Sync:** Automatically syncs with the live [Google Sheet](https://docs.google.com/spreadsheets/d/1smmWEZE4mCpOpP9ntrwO2usq70PGo9uJuNC0neOaQfU/edit?usp=sharing).
+- **Live Force Watchlist:** Ingests live telemetry for 10 personnel:
+  - Unit Readiness Index: **74.9 / 100**
+  - Connected Strength: **90.0%** (9 synced, 1 offline)
+  - Attention Cues: **2 Elevated Alerts** (`KV-107`: Naik Gurdeep Singh with 4.2h sleep, SpO2 93% and `KV-103`: Lt. Arvind Swamy with 4.5h sleep, SpO2 94%)
+  - Moderate Strain: **3 Personnel** (`KV-105`: Havildar Manoj Kumar, `KV-108`: Lt. Tarun Verma, `KV-102`: Captain Rohit Nair)
+  - Optimal Force Base: **5 Personnel** (`KV-101`, `KV-104`, `KV-106`, `KV-109`, `KV-110`)
+- **Real-Time Synchronize Button:** Click "Sync Sheet" on the dashboard to fetch updated rows live via Google Sheets CSV/JSON endpoint.
+
+### 3. Physical & Virtual WHOOP 4.0 Bluetooth GATT Subsystem
 - **Targeted Hardware Pairing:** Dedicated pairing for `WHOOP 5B00348148` (and prefix matching `WHOOP*`) using the standard Web Bluetooth API.
 - **Real-Time GATT Telemetry:** Subscribes to GATT Service `0x180D` (Heart Rate) and Characteristic `0x2A37` (Heart Rate Measurement & RR Intervals), plus `0x180F` (Battery Level).
 - **Fallback 1Hz Stream:** Continuous 1-second packet generator simulating live sympathetic/parasympathetic biometric variation when hardware is disconnected.
